@@ -1,23 +1,27 @@
 package cursinho;
 //
 // Super classe abstrata que contem atributos comuns da classe Alunos, Diretor e Professores
+
+import java.time.YearMonth;
+
 public class Dados {
     // Declaração de atributos
     private String CPF;
     private String nome;
-    private String dataCriacao;
-    private String nascimento;
+    private YearMonth dataNascimento;
+    private int idade;
+    private char sexo;
+    
     //
     // Construtores 
     public Dados(){
         
     }
     
-    public Dados(String CPF, String nome, String dataCriacao, String nascimento){
+    public Dados(String CPF, String nome, YearMonth dataNascimento){
         this.CPF = CPF;
         this.nome = nome;
-        this.dataCriacao = dataCriacao;
-        this.nascimento = nascimento;
+        this.dataNascimento = dataNascimento;
     }
     
     // Métodos getters e setters
@@ -37,26 +41,36 @@ public class Dados {
         this.nome = nome;
     }
 
-    public String getDataCriacao() {
-        return dataCriacao;
+    public YearMonth getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setDataCriacao(String dataCriacao) {
-        this.dataCriacao = dataCriacao;
+    public void setDataNascimento(YearMonth dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public String getNascimento() {
-        return nascimento;
+    public int getIdade() {
+        return idade;
     }
 
-    public void setNascimento(String nascimento) {
-        this.nascimento = nascimento;
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+    
+    
     
     // Demais métodos
     @Override
     public String toString() {
-        return "CPF = " + CPF + "\nNome=" + nome + "\nDataCriacao = " + dataCriacao + "\nNascimento=" + nascimento + "\n";
+        return "CPF = " + CPF + "\nNome=" + nome +  "\nData de nascimento=" + dataNascimento + "\n";
     }
    
     
