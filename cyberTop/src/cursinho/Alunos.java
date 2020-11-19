@@ -5,6 +5,7 @@ public class Alunos extends Dados{
     // Declaração de atributos
     //private Turmas turma;
     private String endereco;
+    private int codigo;
     
     
     /*
