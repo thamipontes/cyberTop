@@ -8,6 +8,7 @@ public class Alunos extends Dados{
     private String CEP;
     private String endereco;
     private String corRaca;
+    private String observacao;
     
     
     
@@ -52,9 +53,15 @@ public class Alunos extends Dados{
     public void setCorRaca(String corRaca) {
         this.corRaca = corRaca;
     }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
     
     // Demais vagas
-    
-    
     
 }

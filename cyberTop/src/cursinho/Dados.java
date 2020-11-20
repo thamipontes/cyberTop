@@ -11,7 +11,7 @@ public class Dados {
     private YearMonth dataNascimento;
     private String telefone;
     private int idade;
-    private char sexo;
+    private char genero;
     
     
     // Construtores 
@@ -19,13 +19,13 @@ public class Dados {
         
     }
     
-     public Dados(String CPF, String nome, YearMonth dataNascimento, String telefone, int idade, char sexo) {
+     public Dados(String CPF, String nome, YearMonth dataNascimento, String telefone, int idade, char genero) {
         this.CPF = CPF;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
         this.idade = idade;
-        this.sexo = sexo;
+        this.genero = genero;
     }
     
     // Métodos getters e setters
