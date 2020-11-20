@@ -24,10 +24,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,56 +57,47 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblNomeAluno5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCPF5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDataAniversario5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNomeAluno5" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtNomeAluno5" min="-2" pref="179" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblCPF5" min="-2" max="-2" attributes="0"/>
                               <Component id="jFormattedTextField5" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jFormattedTextField7" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblDataAniversario5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFormattedTextField7" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBox1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="325" max="32767" attributes="0"/>
+                  <EmptySpace pref="380" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lblNomeAluno5" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCPF5" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblNomeAluno5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFormattedTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNomeAluno5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblCPF5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField5" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblDataAniversario5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblDataAniversario5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField7" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <Component id="jFormattedTextField7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -149,11 +140,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextField7ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="G&#xea;nero"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -172,6 +158,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="G&#xea;nero"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

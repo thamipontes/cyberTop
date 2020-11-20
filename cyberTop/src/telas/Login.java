@@ -39,6 +39,7 @@ public class Login extends javax.swing.JFrame {
         lblSuaSenha = new javax.swing.JLabel();
         bntLimpar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         mnbLogin = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
         mnSobre = new javax.swing.JMenu();
@@ -92,6 +93,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("CADASTRO USUARIO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
         pnlLogin.setLayout(pnlLoginLayout);
         pnlLoginLayout.setHorizontalGroup(
@@ -121,6 +129,10 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(194, 194, 194))
         );
         pnlLoginLayout.setVerticalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +149,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSuaSenha)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(16, 16, 16)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntEntrar)
                     .addComponent(bntLimpar))
@@ -227,9 +241,15 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_mnSairActionPerformed
 
     private void mntSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntSairActionPerformed
-        //Encerra a execução
+        // Encerra a execução
         System.exit(0);
     }//GEN-LAST:event_mntSairActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       // Metodo teste
+       this.setVisible(false);
+       new CadastroAluno().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,6 +290,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntEntrar;
     private javax.swing.JButton bntLimpar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblSeuUsuario;
