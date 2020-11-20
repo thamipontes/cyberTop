@@ -42,6 +42,8 @@ public class Login extends javax.swing.JFrame {
         mnbLogin = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
         mnSobre = new javax.swing.JMenu();
+        mnSair = new javax.swing.JMenu();
+        mntSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Diretor");
@@ -148,6 +150,23 @@ public class Login extends javax.swing.JFrame {
         mnSobre.setText("Sobre");
         mnbLogin.add(mnSobre);
 
+        mnSair.setText("Sair");
+        mnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnSairActionPerformed(evt);
+            }
+        });
+
+        mntSair.setText("Desejo realmente sair!");
+        mntSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntSairActionPerformed(evt);
+            }
+        });
+        mnSair.add(mntSair);
+
+        mnbLogin.add(mnSair);
+
         setJMenuBar(mnbLogin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,7 +194,18 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void bntEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEntrarActionPerformed
-        // TODO add your handling code here:
+        
+        // Verificar se o usuario e senha estao corretos
+        
+        // Oculta a pagina
+        this.setVisible(false);
+        
+        
+        // Se está tudo okay a janela X sera chamada
+       // CadastroAluno();
+        
+        
+        
     }//GEN-LAST:event_bntEntrarActionPerformed
 
     private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
@@ -183,11 +213,23 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.setText("");
         txtSenha.setText("");
         
+        // Deixar o primeiro txt em foco(cursor piscando)
+        txtUsuario.requestFocus();
+        
     }//GEN-LAST:event_bntLimparActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
+
+    private void mnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSairActionPerformed
+   
+    }//GEN-LAST:event_mnSairActionPerformed
+
+    private void mntSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntSairActionPerformed
+        //Encerra a execução
+        System.exit(0);
+    }//GEN-LAST:event_mntSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,8 +275,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblSeuUsuario;
     private javax.swing.JLabel lblSuaSenha;
     private javax.swing.JMenu mnAjuda;
+    private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnSobre;
     private javax.swing.JMenuBar mnbLogin;
+    private javax.swing.JMenuItem mntSair;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;
