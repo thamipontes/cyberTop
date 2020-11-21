@@ -4,7 +4,7 @@ package cursinho;
 
 import java.time.YearMonth;
 
-public class Dados {
+public abstract class Dados {
     // Declaração de atributos
     private String CPF;
     private String nome;
@@ -24,16 +24,50 @@ public class Dados {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
-        
         this.genero = genero;
     }
     
     // Métodos getters e setters
 
-   
-    
-    
-    
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public YearMonth getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(YearMonth dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public char getGenero() {
+        return genero;
+    }
+
+    public void setGenero(char genero) {
+        this.genero = genero;
+    }
     
     // Demais métodos
     @Override

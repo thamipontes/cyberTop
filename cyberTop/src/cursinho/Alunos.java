@@ -10,7 +10,11 @@ public class Alunos extends Dados{
     private String corRaca;
     private String observacoes;
     
+    // Construtores
     
+    public Alunos(){
+        
+    }
     
     /*
     public Turmas getTurma() {
