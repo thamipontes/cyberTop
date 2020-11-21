@@ -4,7 +4,7 @@ package cursinho;
 public class Alunos extends Dados{
     // Declaração de atributos
     //private Turmas turma;
-    private int codigo;
+    //private int codigo; desnecessario
     private String CEP;
     private String logradouro;
     private String corRaca;
@@ -26,13 +26,6 @@ public class Alunos extends Dados{
     }
     */
     // Métodos getters e setters
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
 
     public String getCEP() {
         return CEP;
