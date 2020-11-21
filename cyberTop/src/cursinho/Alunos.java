@@ -6,9 +6,9 @@ public class Alunos extends Dados{
     //private Turmas turma;
     private int codigo;
     private String CEP;
-    private String endereco;
+    private String logradouro;
     private String corRaca;
-    private String observacao;
+    private String observacoes;
     
     
     
@@ -38,12 +38,12 @@ public class Alunos extends Dados{
         this.CEP = CEP;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setLogradouro(String endereco) {
+        this.logradouro = endereco;
     }
 
     public String getCorRaca() {
@@ -54,12 +54,12 @@ public class Alunos extends Dados{
         this.corRaca = corRaca;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public String getObservacoes() {
+        return observacoes;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
     
     // Demais vagas

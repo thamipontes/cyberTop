@@ -10,7 +10,7 @@ public class Dados {
     private String nome;
     private YearMonth dataNascimento;
     private String telefone;
-    private int idade;
+    //private int idade;
     private char genero;
     
     
@@ -19,12 +19,12 @@ public class Dados {
         
     }
     
-     public Dados(String CPF, String nome, YearMonth dataNascimento, String telefone, int idade, char genero) {
+     public Dados(String CPF, String nome, YearMonth dataNascimento, String telefone, char genero) {
         this.CPF = CPF;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
-        this.idade = idade;
+        
         this.genero = genero;
     }
     
