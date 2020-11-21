@@ -1,4 +1,4 @@
-package cursinho;
+package model;
 //
 // Super classe abstrata que contem atributos comuns da classe Alunos, Diretor e Professores
 

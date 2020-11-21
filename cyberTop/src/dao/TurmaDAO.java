@@ -6,33 +6,32 @@
 package dao;
 
 import model.Alunos;
+import model.Turmas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import telas.CadastroAluno;
 
 /**
  *
  * @author thamires
  */
-public class AlunosDAO {
+public class TurmaDAO {
     
     private final Connection connection;
 
-    public AlunosDAO(Connection connection) {
+    public TurmaDAO(Connection connection) {
         this.connection = connection;
     }
-
-    public void insert(Alunos aluno) throws SQLException{
+    
+    public void insert(Turmas turma) throws SQLException{
        
-            String sql = "insert into aluno (nome, cpf, data_nascimento, telefone, endereco) values ('"+aluno.getNome()+"', '"+aluno.getCpf()+"', '"+aluno.getData_nascimento().getTime()+"', '"+aluno.getTelefone()+"', '"+aluno.getEndereco()+"');";
+            String sql = "insert into turma (nome, horario, tipo, periodo, vagas) values ('"+turma.getNome()+"', '"+turma.getHorario()+"', '"+turma.getTipo()+"', '"+turma.getPeriodo()+"', '"+turma.getVagas()+"');";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.execute();            
             connection.close();            
        
     }
+    
     
     
 }

@@ -1,4 +1,4 @@
-package cursinho;
+package model;
 //
 public class Professores extends Dados{
     private String materia;
