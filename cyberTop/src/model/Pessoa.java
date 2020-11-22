@@ -1,34 +1,37 @@
-/*package model;
+package model;
 //
 // Super classe abstrata que contem atributos comuns da classe Alunos, Diretor e Professores
 
-import java.time.YearMonth;
+import java.util.Calendar;
 
-public abstract class Dados {
+public abstract class Pessoa {
+    
     // Declaração de atributos
-    private String CPF;
+    
     private String nome;
-    private YearMonth dataNascimento;
+    private String CPF;
+    private Calendar dataNascimento;
     private String telefone;
-    //private int idade;
+    private String endereco;
     private char genero;
     
     
     // Construtores 
-    public Dados(){
+    public Pessoa(){
         
     }
     
-     public Dados(String CPF, String nome, YearMonth dataNascimento, String telefone, char genero) {
+     public Pessoa(String nome, String CPF, Calendar dataNascimento, String telefone, String endereco, char genero) {
         this.CPF = CPF;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
+        this.endereco = endereco;
         this.genero = genero;
     }
     
     // Métodos getters e setters
-
+     
     public String getCPF() {
         return CPF;
     }
@@ -45,13 +48,13 @@ public abstract class Dados {
         this.nome = nome;
     }
 
-    public YearMonth getDataNascimento() {
+    public Calendar getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(YearMonth dataNascimento) {
+    public void setDataNascimento(Calendar dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
+    }    
 
     public String getTelefone() {
         return telefone;
@@ -68,6 +71,15 @@ public abstract class Dados {
     public void setGenero(char genero) {
         this.genero = genero;
     }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }   
+    
     
     // Demais métodos
     @Override
@@ -78,4 +90,3 @@ public abstract class Dados {
     
     
 }
-*/

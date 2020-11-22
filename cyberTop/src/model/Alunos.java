@@ -3,64 +3,52 @@ package model;
 import java.math.BigInteger;
 import java.util.Calendar;
 
-public class Alunos{
+public class Alunos extends Pessoa{
+    
     // Declaração de atributos
-    private Turmas turma;
-    //private int codigo; desnecessario
-    private String CEP;
-    //private String logradouro;
-    private String corRaca;
-    //private String observacoes;
+    private BigInteger id;    
+    private Turmas turma;    
+    private String CEP;   
+    private String corRaca;    
     
 
-    // Construtores
-
-    private BigInteger id;
-    private String nome;
-    private String cpf;
-    private Calendar data_nascimento;
-    private String telefone;
-    private String endereco;
-
+    // Construtores 
     
     public Alunos(){
         
     }
     
-    //Construtor para o teste com o banco de dados
 
-    public Alunos(BigInteger id, String nome, String cpf, Calendar data_nascimento, String telefone, String endereco) {
+    public Alunos(BigInteger id, String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
+                    Turmas turma, String CEP, String corRaca
+    ) {
+        super(nome, cpf, dataNascimento, telefone, endereco, genero);
         this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.data_nascimento = data_nascimento;
-        this.telefone = telefone;
-        this.endereco = endereco;
-    }
-
-    public Alunos(String nome, String cpf, Calendar data_nascimento, String telefone, String endereco) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.data_nascimento = data_nascimento;
-        this.telefone = telefone;
-        this.endereco = endereco;
-    }
-    
-    
-    
-    
-        
-    /*
-    public Turmas getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turmas turma) {
         this.turma = turma;
+        this.CEP = CEP;
+        this.corRaca = corRaca;        
     }
-    */
+    
+    
+    public Alunos(String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
+                   String CEP, String corRaca
+    ) {
+        super(nome, cpf, dataNascimento, telefone, endereco, genero);   
+        this.CEP = CEP;
+        this.corRaca = corRaca;        
+    }  
+    
+   
     // Métodos getters e setters
 
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+    
     public String getCEP() {
         return CEP;
     }
@@ -76,59 +64,16 @@ public class Alunos{
     public void setCorRaca(String corRaca) {
         this.corRaca = corRaca;
     }
-    
-    //Getters e Setters para o teste com banco de dados
 
-    public BigInteger getId() {
-        return id;
+    public Turmas getTurma() {
+        return turma;
     }
 
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public Calendar getData_nascimento() {
-        return data_nascimento;
-    }
-
-    public void setData_nascimento(Calendar data_nascimento) {
-        this.data_nascimento = data_nascimento;
-    }    
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setTurma(Turmas turma) {
+        this.turma = turma;
     }
     
-    
-    
+     
     
     
 }

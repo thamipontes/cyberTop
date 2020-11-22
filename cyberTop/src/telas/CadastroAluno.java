@@ -5,20 +5,32 @@
  */
 package telas;
 
+import controller.CadastroAlunoController;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Jhonatan Borges
  */
 public class CadastroAluno extends javax.swing.JFrame {
+    
+    
+    //Atributo que poderá ser utilizado em toda a classe
+    private final CadastroAlunoController controller;
 
-    /**
-     * Creates new form CadastroAluno
-     */
+   
     public CadastroAluno() {
         // Inicializa os componentes da interface grafica
         initComponents();
+        
+        //Dá o comando da tela para Controller fazer as regras de negócio        
+        controller = new CadastroAlunoController(this);
         
         // Quando a pagina é aberta o cursor ja fica destacado no campo Nome do aluno
         txtNome.requestFocus();
@@ -383,6 +395,14 @@ public class CadastroAluno extends javax.swing.JFrame {
             
         }
         
+        //Salva os dados no banco de dados
+        try {            
+            controller.salvarAluno();
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
@@ -405,6 +425,42 @@ public class CadastroAluno extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bntVoltarActionPerformed
 
+    public JComboBox<String> getCmbCorRaca() {
+        return cmbCorRaca;
+    }
+
+    public JComboBox<String> getCmbGenero() {
+        return cmbGenero;
+    }
+
+    public JFormattedTextField getTxtCEP() {
+        return txtCEP;
+    }
+
+    public JFormattedTextField getTxtCPF() {
+        return txtCPF;
+    }
+
+    public JFormattedTextField getTxtDataNascimento() {
+        return txtDataNascimento;
+    }
+
+    public JTextField getTxtLogradouro() {
+        return txtLogradouro;
+    }
+
+    public JTextField getTxtNome() {
+        return txtNome;
+    }
+
+    public JFormattedTextField getTxtTelefone() {
+        return txtTelefone;
+    }
+    
+    //Getters dos campos da tela cadastro aluno
+    
+    
+    
    
     /**
      * @param args the command line arguments
