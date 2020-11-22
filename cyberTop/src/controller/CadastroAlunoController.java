@@ -9,11 +9,15 @@ import model.Alunos;
 
 import telas.CadastroAluno;
 import dao.Conexao;
+import dao.TurmaDAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Turmas;
 import telas.CadastroTurma;
 
 /**
@@ -26,6 +30,7 @@ public class CadastroAlunoController {
     
     //Declaração do atributo que possui a tela CadastroAluno
     private CadastroAluno view;
+    
 
     //Construtor
     public CadastroAlunoController(CadastroAluno view) {
@@ -37,7 +42,7 @@ public class CadastroAlunoController {
         Parâmetros: vazio
         Descrição: pega os dados inseridos na tela e salva no banco de dados    
     */
-    public void salvarAluno() throws ParseException{
+    public void salvarAluno() throws ParseException, SQLException{
         
         /*Pegas as informações passadas nos campos da tela*/
         String nome = view.getTxtNome().getText();
@@ -56,10 +61,13 @@ public class CadastroAlunoController {
         char genero = formatarGenero((view.getCmbGenero().getSelectedIndex()));        
     
        /*Tratando o dado Cor Raça*/
-        String corRaca = view.getCmbCorRaca().getSelectedItem().toString(); 
-       
+        String corRaca = view.getCmbCorRaca().getSelectedItem().toString();
+        
+       /*Tratando a turma*/
+        int turmaId = Integer.parseInt(view.getTxtTurma().getText());
+    
        /*Instaciando o objeto aluno com os dados recebidos pela tela*/
-       Alunos aluno = new Alunos(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca);
+       Alunos aluno = new Alunos(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, turmaId);
        
        /*Conexão com o banco de dados*/
         Connection conexao;        
@@ -93,7 +101,7 @@ public class CadastroAlunoController {
     }
     
     
-    public void exibirAlertarCampos(){        
+    public boolean exibirAlertarCampos(){        
         //Descobre se alguns dos campos ficaram vazios
         if(view.getTxtNome().getText().equals("")                       ||
             view.getTxtCPF().getText().equals("   .   .   -  ")         || 
@@ -106,8 +114,12 @@ public class CadastroAlunoController {
                 ){            
             
             //Mostra a mensagem para preencher todos os campos
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");            
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+
+            return true;
         }
+        
+        return false;
     }
     
     
@@ -127,5 +139,47 @@ public class CadastroAlunoController {
     
     }
     
+    
+     private ArrayList<Turmas> carregarDadosTurma() throws SQLException {
+        Connection conexao;
+        conexao = new Conexao().getConnection();
+        TurmaDAO turmaDAO = new TurmaDAO(conexao);
+        ArrayList<Turmas> turmasBanco = turmaDAO.findAll();
+        return turmasBanco;
+    }
+    
+    
+    public void inserirDadosTurmaTabela() throws SQLException{
+        
+        ArrayList<Turmas> turmasBanco = carregarDadosTurma();
+    
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Id", "Nome", "Horário", "Período", "Vagas"}, 0);
+        
+        turmasBanco.forEach(e -> {        
+            Object linha[] = new Object[]{e.getId(), e.getNome(), e.getHorario(), e.getPeriodo(), e.getVagas()};
+            modelo.addRow(linha);        
+        });        
+        
+        view.getTblTurmas().setModel(modelo);
+    
+    }
+
+   
+    public void salvarLinhaTurma() throws SQLException {
+        
+        ArrayList<Turmas> turmasBanco = carregarDadosTurma();
+        
+        int linha = view.getTblTurmas().getSelectedRow();
+        
+        //Conferindo se é uma linha inválida
+        if(linha >= 0 && linha<turmasBanco.size()){
+        
+            Turmas turma = turmasBanco.get(linha);
+            view.getTxtTurma().setText(String.valueOf(turma.getId()));
+            view.getTxtTurma().setEnabled(false);
+
+        }  
+    
+    }
     
 }

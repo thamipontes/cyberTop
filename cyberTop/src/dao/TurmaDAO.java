@@ -78,7 +78,7 @@ public class TurmaDAO {
             boolean periodo = resultSet.getBoolean("periodo");
             int vagas = resultSet.getInt("vagas");
             
-            Turmas turmaBanco = new Turmas(nome, horario, tipo, periodo, vagas);
+            Turmas turmaBanco = new Turmas(id, nome, horario, tipo, periodo, vagas);
             turmas.add(turmaBanco);         
         }
         
@@ -90,11 +90,8 @@ public class TurmaDAO {
     
         String sql = "select * from turma where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, turma.getId());
-        
-        ArrayList<Turmas> pesquisar = pesquisar(statement);        
-        
-        return pesquisar.get(0);    
+        statement.setInt(1, turma.getId());        
+        return pesquisar(statement).get(0);    
     
     }
     

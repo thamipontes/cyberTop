@@ -6,12 +6,14 @@
 package telas;
 
 import controller.CadastroAlunoController;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -37,6 +39,13 @@ public class CadastroAluno extends javax.swing.JFrame {
         
         // Centraliza a janela aberta no centro da tela
         setLocationRelativeTo(null);
+        
+        //Carregar a tabela da turma
+        try {
+            controller.inserirDadosTurmaTabela();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,6 +73,8 @@ public class CadastroAluno extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         cmbCorRaca = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtTurma = new javax.swing.JTextField();
         pnlEndereco = new javax.swing.JPanel();
         lblCEP = new javax.swing.JLabel();
         txtCEP = new javax.swing.JFormattedTextField();
@@ -78,6 +89,11 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de aluno");
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
@@ -140,6 +156,14 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Turma:");
+
+        txtTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTurmaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlDadosPessoaisLayout = new javax.swing.GroupLayout(pnlDadosPessoais);
         pnlDadosPessoais.setLayout(pnlDadosPessoaisLayout);
         pnlDadosPessoaisLayout.setHorizontalGroup(
@@ -169,8 +193,12 @@ public class CadastroAluno extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlDadosPessoaisLayout.setVerticalGroup(
@@ -189,12 +217,14 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbCorRaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -244,6 +274,12 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         pnlDadosTurma.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a turma desejada"));
 
+        ScrollTabelaTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ScrollTabelaTurmasMouseClicked(evt);
+            }
+        });
+
         tblTurmas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -265,6 +301,11 @@ public class CadastroAluno extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTurmasMouseClicked(evt);
             }
         });
         ScrollTabelaTurmas.setViewportView(tblTurmas);
@@ -381,16 +422,15 @@ public class CadastroAluno extends javax.swing.JFrame {
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         
         // Exibe alerta caso algum campo do formulario esteja vazio
-        controller.exibirAlertarCampos();
-        
+        if(!(controller.exibirAlertarCampos())){            
         //Salva os dados no banco de dados
         try {            
             controller.salvarAluno();
-        } catch (ParseException ex) {
+        } catch (ParseException | SQLException ex) {
             Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+        }       
+    }   
+   
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
@@ -403,6 +443,28 @@ public class CadastroAluno extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bntVoltarActionPerformed
 
+    private void txtTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTurmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTurmaActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    private void ScrollTabelaTurmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ScrollTabelaTurmasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ScrollTabelaTurmasMouseClicked
+
+    private void tblTurmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurmasMouseClicked
+        try {
+            controller.salvarLinhaTurma();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tblTurmasMouseClicked
+
+    
+    //Getters dos campos da tela cadastro aluno
     public JComboBox<String> getCmbCorRaca() {
         return cmbCorRaca;
     }
@@ -434,11 +496,19 @@ public class CadastroAluno extends javax.swing.JFrame {
     public JFormattedTextField getTxtTelefone() {
         return txtTelefone;
     }
-    
-    //Getters dos campos da tela cadastro aluno
-    
-    
-    
+
+    public JTable getTblTurmas() {
+        return tblTurmas;
+    }
+
+    public JTextField getTxtTurma() {
+        return txtTurma;
+    }
+
+    public void setTxtTurma(JTextField txtTurma) {
+        this.txtTurma = txtTurma;
+    }
+         
    
     /**
      * @param args the command line arguments
@@ -487,6 +557,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCPF;
@@ -503,5 +574,6 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtTelefone;
+    private javax.swing.JTextField txtTurma;
     // End of variables declaration//GEN-END:variables
 }

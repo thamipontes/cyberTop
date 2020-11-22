@@ -6,10 +6,10 @@ import java.util.Calendar;
 public class Alunos extends Pessoa{
     
     // Declaração de atributos
-    private BigInteger id;    
-    private Turmas turma;    
+    private int id;    
+    private int turmaId;    
     private String CEP;   
-    private String corRaca;    
+    private String corRaca;
     
 
     // Construtores 
@@ -19,34 +19,36 @@ public class Alunos extends Pessoa{
     }
     
 
-    public Alunos(BigInteger id, String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
-                    Turmas turma, String CEP, String corRaca
+    public Alunos(int id, String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
+                    int turmaId, String CEP, String corRaca
     ) {
         super(nome, cpf, dataNascimento, telefone, endereco, genero);
         this.id = id;
-        this.turma = turma;
+        this.turmaId = turmaId;
         this.CEP = CEP;
         this.corRaca = corRaca;        
     }
     
-    
+    //Construtor para o método salvar no banco
     public Alunos(String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
-                   String CEP, String corRaca
+                   String CEP, String corRaca, int turmaId
     ) {
         super(nome, cpf, dataNascimento, telefone, endereco, genero);   
         this.CEP = CEP;
-        this.corRaca = corRaca;        
+        this.corRaca = corRaca; 
+        this.turmaId = turmaId;
     }  
+
+  
     
-   
+
     // Métodos getters e setters
-
-    public BigInteger getId() {
-        return id;
-    }
-
-    public void setId(BigInteger id) {
+    public void setId(int id) {
         this.id = id;
+    }
+    
+    public int getId() {
+        return id;
     }
     
     public String getCEP() {
@@ -65,13 +67,13 @@ public class Alunos extends Pessoa{
         this.corRaca = corRaca;
     }
 
-    public Turmas getTurma() {
-        return turma;
+    public int getTurmaId() {
+        return turmaId;
     }
 
-    public void setTurma(Turmas turma) {
-        this.turma = turma;
-    }
+    public void setTurmaId(int turmaId) {
+        this.turmaId = turmaId;
+    }    
     
      
     

@@ -12,14 +12,24 @@ import java.math.BigInteger;
  * @author thamires
  */
 public class Turmas {
-    private BigInteger id;
+    private int id;
     private String nome;
     private String horario;
     private Boolean tipo;
     private Boolean periodo;
     private int vagas;
 
-    public Turmas(String nome, String horario, Boolean tipo, Boolean periodo, int vagas) {
+    public Turmas(int id, String nome, String horario, Boolean tipo, Boolean periodo, int vagas) {
+        this.id = id;
+        this.nome = nome;
+        this.horario = horario;
+        this.tipo = tipo;
+        this.periodo = periodo;
+        this.vagas = vagas;
+    }
+    
+    
+        public Turmas(String nome, String horario, Boolean tipo, Boolean periodo, int vagas) {
         this.nome = nome;
         this.horario = horario;
         this.tipo = tipo;
@@ -27,13 +37,15 @@ public class Turmas {
         this.vagas = vagas;
     }
 
-    public BigInteger getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+    
 
     public String getNome() {
         return nome;
