@@ -1,6 +1,6 @@
 package model;
 //
-public class Diretor{
+public class Diretor extends Pessoa{
     private String login;
     private String senha;
 
