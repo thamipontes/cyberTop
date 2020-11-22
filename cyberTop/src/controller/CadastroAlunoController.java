@@ -117,7 +117,7 @@ public class CadastroAlunoController {
         uma mensagem para preencher todos os campos.
     */
     public boolean exibirAlertarCampos(){        
-        //Descobre se alguns dos campos ficaram vazios
+        //Descobre se algum dos campos ficou vazio
         if(view.getTxtNome().getText().equals("")                       ||
             view.getTxtCPF().getText().equals("   .   .   -  ")         || 
             view.getTxtDataNascimento().getText().equals("  /  /    ")  ||
