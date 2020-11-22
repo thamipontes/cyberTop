@@ -21,10 +21,10 @@ import javax.swing.JTextField;
 public class CadastroAluno extends javax.swing.JFrame {
     
     
-    //Atributo que poderá ser utilizado em toda a classe
-    private final CadastroAlunoController controller;
+    //Declaração de atributos 
+    private final CadastroAlunoController controller; //Fica responsável pelo controle das regras de negócios
 
-   
+   //Construtor
     public CadastroAluno() {
         // Inicializa os componentes da interface grafica
         initComponents();
@@ -379,21 +379,9 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbCorRacaActionPerformed
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
+        
         // Exibe alerta caso algum campo do formulario esteja vazio
-        if(txtNome.getText().equals("")                       ||
-            txtCPF.getText().equals("   .   .   -  ")         || 
-            txtDataNascimento.getText().equals("  /  /    ")  ||
-            cmbGenero.getSelectedItem().equals("Selecione")   ||
-            cmbCorRaca.getSelectedItem().equals("Selecione")  ||
-            txtTelefone.getText().equals("(  )      -    ")   ||
-            txtCEP.getText().equals("     -   ")              ||
-            txtLogradouro.getText().equals("")
-                ){
-            
-            
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            
-        }
+        controller.exibirAlertarCampos();
         
         //Salva os dados no banco de dados
         try {            
@@ -406,18 +394,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
-        //Insere o cursor no txtNome e o deixa em foco
-        txtNome.requestFocus();
-
-        // Limpa todos os campos
-        txtNome.setText("");
-        txtCPF.setText("");
-        txtDataNascimento.setText("");
-        cmbCorRaca.setSelectedItem("Selecione");
-        cmbGenero.setSelectedItem("Selecione");
-        txtTelefone.setText("");
-        txtCEP.setText("");
-        txtLogradouro.setText("");
+        controller.limparCampos();
     }//GEN-LAST:event_bntLimparActionPerformed
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
