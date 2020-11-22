@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Turmas;
-import telas.CadastroTurma;
+import telas.CadastroTurma2;
 
 /**
  *
@@ -89,7 +89,7 @@ public class CadastroAlunoController {
             JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");            
             
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroTurma2.class.getName()).log(Level.SEVERE, null, ex);
             //Caso dê erro mostra essa tela
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar dado no banco");
         }  

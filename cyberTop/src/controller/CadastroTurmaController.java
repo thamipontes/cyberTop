@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Turmas;
 import telas.CadastroAluno;
-import telas.CadastroTurma;
+import telas.CadastroTurma2;
 
 /**
  *
@@ -22,9 +22,9 @@ import telas.CadastroTurma;
  */
 public class CadastroTurmaController {
     
-    private CadastroTurma view;
+    private CadastroTurma2 view;
 
-    public CadastroTurmaController(CadastroTurma view) {
+    public CadastroTurmaController(CadastroTurma2 view) {
         this.view = view;
     }    
 
@@ -49,7 +49,7 @@ public class CadastroTurmaController {
             JOptionPane.showMessageDialog(null, "Turma criada com sucesso");
             
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroTurma2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

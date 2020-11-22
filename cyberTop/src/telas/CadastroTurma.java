@@ -1,35 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
-import controller.CadastroTurmaController;
-import model.Turmas;
-import dao.Conexao;
-import dao.TurmaDAO;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-/**
- *
- * @author thamires
- */
 public class CadastroTurma extends javax.swing.JFrame {
 
-    private final CadastroTurmaController controller;
-
-    /**
-     * Creates new form CadastroTurma
-     */
     public CadastroTurma() {
-        initComponents();        
-        controller = new CadastroTurmaController(this);
+        initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,25 +16,158 @@ public class CadastroTurma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        campoNome = new javax.swing.JTextField();
-        campoTipo = new javax.swing.JTextField();
-        campoPeriodo = new javax.swing.JTextField();
-        campoHorario = new javax.swing.JTextField();
-        campoVagas = new javax.swing.JTextField();
+        pnlInformacoes = new javax.swing.JPanel();
+        lblNomeTurma = new javax.swing.JLabel();
+        txtNomeTurma = new javax.swing.JTextField();
+        lblUniversidade = new javax.swing.JLabel();
+        lblHorario = new javax.swing.JLabel();
+        lblTipo = new javax.swing.JLabel();
+        lblPeriodo = new javax.swing.JLabel();
+        rdbEnem = new javax.swing.JRadioButton();
+        rdbVestibular = new javax.swing.JRadioButton();
+        rdbSemestral = new javax.swing.JRadioButton();
+        rdbAnual = new javax.swing.JRadioButton();
+        cmbUniversidade = new javax.swing.JComboBox<>();
+        cmbHorario = new javax.swing.JComboBox<>();
+        bntSalvar = new javax.swing.JButton();
+        bntLimpar = new javax.swing.JButton();
+        bntVoltar3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Turma");
 
-        jButton1.setText("cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        pnlInformacoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações da nova turma"));
+        pnlInformacoes.setToolTipText("");
+
+        lblNomeTurma.setText("Nome:");
+
+        lblUniversidade.setText("Universidade:");
+
+        lblHorario.setText("Horários:");
+
+        lblTipo.setText("Tipo:");
+
+        lblPeriodo.setText("Período:");
+
+        rdbEnem.setText("Enem");
+        rdbEnem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                rdbEnemActionPerformed(evt);
             }
         });
 
-        campoHorario.addActionListener(new java.awt.event.ActionListener() {
+        rdbVestibular.setText("Vestibular");
+        rdbVestibular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoHorarioActionPerformed(evt);
+                rdbVestibularActionPerformed(evt);
+            }
+        });
+
+        rdbSemestral.setText("Semestral");
+        rdbSemestral.setToolTipText("");
+        rdbSemestral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbSemestralActionPerformed(evt);
+            }
+        });
+
+        rdbAnual.setText("Anual");
+        rdbAnual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbAnualActionPerformed(evt);
+            }
+        });
+
+        cmbUniversidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Universidade de Brasília" }));
+        cmbUniversidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUniversidadeActionPerformed(evt);
+            }
+        });
+
+        cmbHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Matutino", "Vespertino", "Noturno" }));
+
+        javax.swing.GroupLayout pnlInformacoesLayout = new javax.swing.GroupLayout(pnlInformacoes);
+        pnlInformacoes.setLayout(pnlInformacoesLayout);
+        pnlInformacoesLayout.setHorizontalGroup(
+            pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInformacoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInformacoesLayout.createSequentialGroup()
+                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNomeTurma)
+                            .addComponent(txtNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHorario))
+                        .addGap(11, 11, 11)
+                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTipo)
+                            .addComponent(rdbEnem)
+                            .addComponent(rdbVestibular))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rdbSemestral)
+                            .addGroup(pnlInformacoesLayout.createSequentialGroup()
+                                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPeriodo)
+                                    .addComponent(rdbAnual))
+                                .addGap(64, 64, 64)
+                                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUniversidade)
+                                    .addComponent(cmbUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(pnlInformacoesLayout.createSequentialGroup()
+                        .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        pnlInformacoesLayout.setVerticalGroup(
+            pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInformacoesLayout.createSequentialGroup()
+                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomeTurma)
+                    .addComponent(lblTipo)
+                    .addComponent(lblPeriodo)
+                    .addComponent(lblUniversidade))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdbEnem)
+                    .addComponent(rdbAnual)
+                    .addComponent(cmbUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInformacoesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdbVestibular)
+                            .addComponent(rdbSemestral)))
+                    .addGroup(pnlInformacoesLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblHorario)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        bntSalvar.setText("Salvar");
+        bntSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSalvarActionPerformed(evt);
+            }
+        });
+
+        bntLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar .png"))); // NOI18N
+        bntLimpar.setText("Limpar");
+        bntLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntLimparActionPerformed(evt);
+            }
+        });
+
+        bntVoltar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
+        bntVoltar3.setText("Voltar");
+        bntVoltar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVoltar3ActionPerformed(evt);
             }
         });
 
@@ -67,95 +175,103 @@ public class CadastroTurma extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(campoTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(campoHorario, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(campoNome, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoVagas, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(91, 91, 91)
+                .addComponent(bntSalvar)
+                .addGap(76, 76, 76)
+                .addComponent(bntLimpar)
+                .addGap(68, 68, 68)
+                .addComponent(bntVoltar3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(campoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(21, 21, 21))
+                    .addComponent(bntSalvar)
+                    .addComponent(bntLimpar)
+                    .addComponent(bntVoltar3))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(663, 290));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.salvaTurma();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void campoHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoHorarioActionPerformed
+    private void rdbEnemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbEnemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoHorarioActionPerformed
+        rdbVestibular.setSelected(false);
+        
+        // Desativa a opção de inserção do nome da Universidade e limpa o campo
+        cmbUniversidade.setEnabled(false);
+        cmbUniversidade.setSelectedItem("Selecione");
+        
+        // 
+        rdbAnual.setSelected(true);
+        rdbSemestral.setSelected(false);
+        
+        
+    }//GEN-LAST:event_rdbEnemActionPerformed
 
-    //Getter e Setters dos campos
-    
-    public JTextField getCampoHorario() {
-        return campoHorario;
-    }
+    private void rdbVestibularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbVestibularActionPerformed
+        // TODO add your handling code here:
+        rdbEnem.setSelected(false);
+        
+        //Ativa o campo para inserção do nome da Universidade
+        cmbUniversidade.setEnabled(true);
+        
+        
+    }//GEN-LAST:event_rdbVestibularActionPerformed
 
-    public void setCampoHorario(JTextField campoHorario) {
-        this.campoHorario = campoHorario;
-    }
+    private void rdbAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAnualActionPerformed
+        // TODO add your handling code here:
+        rdbSemestral.setSelected(false);
+    }//GEN-LAST:event_rdbAnualActionPerformed
 
-    public JTextField getCampoNome() {
-        return campoNome;
-    }
+    private void rdbSemestralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSemestralActionPerformed
+        // TODO add your handling code here:
+        
+        rdbAnual.setSelected(false);
+        //Desativar rdb enem
+        rdbEnem.setSelected(false);
+    }//GEN-LAST:event_rdbSemestralActionPerformed
 
-    public void setCampoNome(JTextField campoNome) {
-        this.campoNome = campoNome;
-    }
+    private void cmbUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUniversidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUniversidadeActionPerformed
 
-    public JTextField getCampoPeriodo() {
-        return campoPeriodo;
-    }
+    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
+        // Exibe alerta caso algum campo do formulario esteja vazio
+        
 
-    public void setCampoPeriodo(JTextField campoPeriodo) {
-        this.campoPeriodo = campoPeriodo;
-    }
+    }//GEN-LAST:event_bntSalvarActionPerformed
 
-    public JTextField getCampoTipo() {
-        return campoTipo;
-    }
+    private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
+        //Insere o cursor no txtNome e o deixa em foco
+        txtNomeTurma.requestFocus();
 
-    public void setCampoTipo(JTextField campoTipo) {
-        this.campoTipo = campoTipo;
-    }
+        // Limpa todos os campos
+        txtNomeTurma.setText("");
+        rdbEnem.setSelected(false);
+        rdbVestibular.setSelected(false);
+        rdbAnual.setSelected(false);
+        rdbSemestral.setSelected(false);
+        cmbUniversidade.setSelectedItem("Selecione");
+        cmbHorario.setSelectedItem("Selecione");
+    }//GEN-LAST:event_bntLimparActionPerformed
 
-    public JTextField getCampoVagas() {
-        return campoVagas;
-    }
+    private void bntVoltar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltar3ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_bntVoltar3ActionPerformed
 
-    public void setCampoVagas(JTextField campoVagas) {
-        this.campoVagas = campoVagas;
-    }
-
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -182,6 +298,7 @@ public class CadastroTurma extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CadastroTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -192,11 +309,21 @@ public class CadastroTurma extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campoHorario;
-    private javax.swing.JTextField campoNome;
-    private javax.swing.JTextField campoPeriodo;
-    private javax.swing.JTextField campoTipo;
-    private javax.swing.JTextField campoVagas;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bntLimpar;
+    private javax.swing.JButton bntSalvar;
+    private javax.swing.JButton bntVoltar3;
+    private javax.swing.JComboBox<String> cmbHorario;
+    private javax.swing.JComboBox<String> cmbUniversidade;
+    private javax.swing.JLabel lblHorario;
+    private javax.swing.JLabel lblNomeTurma;
+    private javax.swing.JLabel lblPeriodo;
+    private javax.swing.JLabel lblTipo;
+    private javax.swing.JLabel lblUniversidade;
+    private javax.swing.JPanel pnlInformacoes;
+    private javax.swing.JRadioButton rdbAnual;
+    private javax.swing.JRadioButton rdbEnem;
+    private javax.swing.JRadioButton rdbSemestral;
+    private javax.swing.JRadioButton rdbVestibular;
+    private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
 }
