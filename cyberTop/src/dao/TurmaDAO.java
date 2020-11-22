@@ -5,7 +5,7 @@
  */
 package dao;
 
-import model.Alunos;
+import model.Aluno;
 import model.Turmas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import model.Alunos;
+import model.Aluno;
 
 import telas.CadastroAluno;
 import dao.Conexao;
@@ -74,7 +74,7 @@ public class CadastroAlunoController {
         int turmaId = Integer.parseInt(view.getTxtTurma().getText());
     
        /*Instaciando o objeto aluno com os dados recebidos pela tela*/
-       Alunos aluno = new Alunos(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, turmaId);
+       Aluno aluno = new Aluno(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, turmaId);
        
        /*Conexão com o banco de dados*/
         Connection conexao;        

@@ -1,6 +1,6 @@
 package model;
 //
-public class Professores{
+public class Professor{
     private String materia;
     private Turmas turma;
 

@@ -3,7 +3,7 @@ package model;
 import java.math.BigInteger;
 import java.util.Calendar;
 
-public class Alunos extends Pessoa{
+public class Aluno extends Pessoa{
     
     // Declaração de atributos
     private int id;    
@@ -14,12 +14,12 @@ public class Alunos extends Pessoa{
 
     // Construtores 
     
-    public Alunos(){
+    public Aluno(){
         
     }
     
 
-    public Alunos(int id, String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
+    public Aluno(int id, String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
                     int turmaId, String CEP, String corRaca
     ) {
         super(nome, cpf, dataNascimento, telefone, endereco, genero);
@@ -30,7 +30,7 @@ public class Alunos extends Pessoa{
     }
     
     //Construtor para o método salvar no banco
-    public Alunos(String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
+    public Aluno(String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
                    String CEP, String corRaca, int turmaId
     ) {
         super(nome, cpf, dataNascimento, telefone, endereco, genero);   

@@ -5,7 +5,7 @@
  */
 package dao;
 
-import model.Alunos;
+import model.Aluno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class AlunosDAO {
         this.connection = connection;
     }
 
-    public void insert(Alunos aluno) throws SQLException{
+    public void insert(Aluno aluno) throws SQLException{
        
             String sql = "insert into aluno (nome, cpf, data_nascimento, telefone, endereco, genero, CEP, cor_raca, id_turma) values (?, ?, ?, ?, ?, "
                     + "'"+aluno.getGenero()+"', ?, ?, ?);";
@@ -46,7 +46,7 @@ public class AlunosDAO {
     }
 
     
-    public void update(Alunos aluno){    
+    public void update(Aluno aluno){    
     
     
     }
