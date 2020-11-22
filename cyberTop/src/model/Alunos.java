@@ -1,18 +1,16 @@
 package model;
-//
-// Subclasse(classe filha) de Dados
 
 import java.math.BigInteger;
 import java.util.Calendar;
 
-public class Alunos extends Dados{
+public class Alunos{
     // Declaração de atributos
-    //private Turmas turma;
+    private Turmas turma;
     //private int codigo; desnecessario
     private String CEP;
-    private String logradouro;
+    //private String logradouro;
     private String corRaca;
-    private String observacoes;
+    //private String observacoes;
     
 
     // Construtores
@@ -71,14 +69,6 @@ public class Alunos extends Dados{
         this.CEP = CEP;
     }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String endereco) {
-        this.logradouro = endereco;
-    }
-
     public String getCorRaca() {
         return corRaca;
     }
@@ -86,17 +76,6 @@ public class Alunos extends Dados{
     public void setCorRaca(String corRaca) {
         this.corRaca = corRaca;
     }
-
-    public String getObservacoes() {
-        return observacoes;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
-    }
-    
-    // Demais vagas
-    
     
     //Getters e Setters para o teste com banco de dados
 

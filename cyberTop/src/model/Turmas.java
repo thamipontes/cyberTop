@@ -26,8 +26,6 @@ public class Turmas {
         this.periodo = periodo;
         this.vagas = vagas;
     }
-  
-    
 
     public BigInteger getId() {
         return id;
@@ -76,14 +74,6 @@ public class Turmas {
     public void setVagas(int vagas) {
         this.vagas = vagas;
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }

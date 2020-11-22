@@ -1,5 +1,5 @@
 package model;
 //
-public class Diretor extends Dados{
+public class Diretor{
     
 }

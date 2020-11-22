@@ -1,4 +1,4 @@
-package model;
+/*package model;
 //
 // Super classe abstrata que contem atributos comuns da classe Alunos, Diretor e Professores
 
@@ -78,3 +78,4 @@ public abstract class Dados {
     
     
 }
+*/

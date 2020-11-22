@@ -1,8 +1,8 @@
 package model;
 //
-public class Professores extends Dados{
+public class Professores{
     private String materia;
-    //private Turmas turma;
+    private Turmas turma;
 
     public String getMateria() {
         return materia;
@@ -12,7 +12,7 @@ public class Professores extends Dados{
         this.materia = materia;
     }
     
-    /*
+    
     public Turmas getTurma() {
         return turma;
     }
@@ -20,5 +20,5 @@ public class Professores extends Dados{
     public void setTurma(Turmas turma) {
         this.turma = turma;
     }
-    */
+    
 }
