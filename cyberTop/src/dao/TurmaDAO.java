@@ -9,7 +9,9 @@ import model.Alunos;
 import model.Turmas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +32,70 @@ public class TurmaDAO {
             statement.execute();            
             connection.close();            
        
+    }
+    
+    
+    public void update(Turmas turma) throws SQLException{
+    
+        String sql = "update turma set nome = ?, horario = ?, tipo = ?, periodo = ?, vagas = ? where id = ?; ";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, turma.getNome());
+        statement.setString(2, turma.getHorario());
+        statement.setBoolean(3, turma.getTipo());
+        statement.setBoolean(4, turma.getPeriodo());
+        statement.setInt(5, turma.getVagas());
+        statement.execute(); 
+    
+    }
+    
+    public void delete(Turmas turma) throws SQLException{    
+        String sql = "delete from turma where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, turma.getId());
+        statement.execute();    
+    }
+    
+    
+    public ArrayList<Turmas> findAll() throws SQLException{
+    
+        String sql = "select * from turma";
+        PreparedStatement statement = connection.prepareStatement(sql); 
+        
+        return pesquisar(statement);        
+    
+    }
+
+    private ArrayList<Turmas> pesquisar(PreparedStatement statement) throws SQLException {
+        ArrayList<Turmas> turmas = new ArrayList<>();
+        statement.execute();
+        ResultSet resultSet = statement.getResultSet();
+        
+        while(resultSet.next()){
+            int id = resultSet.getInt("id"); //nome na coluna
+            String nome = resultSet.getString("nome");
+            String horario = resultSet.getString("horario");
+            boolean tipo = resultSet.getBoolean("tipo");
+            boolean periodo = resultSet.getBoolean("periodo");
+            int vagas = resultSet.getInt("vagas");
+            
+            Turmas turmaBanco = new Turmas(nome, horario, tipo, periodo, vagas);
+            turmas.add(turmaBanco);         
+        }
+        
+        return turmas;
+    }
+    
+    
+    public Turmas findById(Turmas turma) throws SQLException{
+    
+        String sql = "select * from turma where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, turma.getId());
+        
+        ArrayList<Turmas> pesquisar = pesquisar(statement);        
+        
+        return pesquisar.get(0);    
+    
     }
     
     

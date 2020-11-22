@@ -394,6 +394,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
+        //Método que limpa os campos
         controller.limparCampos();
     }//GEN-LAST:event_bntLimparActionPerformed
 

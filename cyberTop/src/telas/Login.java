@@ -5,6 +5,13 @@
  */
 package telas;
 
+import controller.LoginController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Jhonatan Borges
@@ -14,7 +21,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    private final LoginController controller;
+    
     public Login() {
+        
+        controller = new LoginController(this);        
         initComponents();
         
         setLocationRelativeTo(null);
@@ -195,17 +206,16 @@ public class Login extends javax.swing.JFrame {
 
     private void bntEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEntrarActionPerformed
         
-        // Verificar se o usuario e senha estao corretos
-        
-        // Oculta a pagina
-        this.setVisible(false);
-        
-        // Abre a tela principal
-        new Principal().setVisible(true);
-        
-        
-        // Se está tudo okay a janela X sera chamada
-       // CadastroAluno();
+        try {
+            // Verificar se o usuario e senha estao corretos
+            controller.autenticar();
+            
+            
+            // Se está tudo okay a janela X sera chamada
+            // CadastroAluno();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         
@@ -234,6 +244,20 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_mntSairActionPerformed
 
+    //Getters    
+    
+    public JPasswordField getTxtSenha() {
+        return txtSenha;
+    }
+
+    public JTextField getTxtUsuario() {
+        return txtUsuario;
+    }
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
