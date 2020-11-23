@@ -107,6 +107,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel1.setText("Gênero:");
 
         cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Não informar", "Masculino", "Feminino", "Outros" }));
+        cmbGenero.setToolTipText("Selecione o gênero do aluno");
         cmbGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGeneroActionPerformed(evt);
@@ -153,6 +154,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel4.setText("Cor/Raça");
 
         cmbCorRaca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Não declarar", "Preta", "Parda", "Indígena", "Amarela" }));
+        cmbCorRaca.setToolTipText("Selecione a cor/raca do aluno");
         cmbCorRaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCorRacaActionPerformed(evt);
@@ -313,6 +315,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         jLabel5.setText("Id da turma:");
 
+        txtTurma.setToolTipText("Insira o id da turma");
         txtTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTurmaActionPerformed(evt);
@@ -320,6 +323,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         });
 
         bntBuscar.setText("Buscar");
+        bntBuscar.setToolTipText("pesquisar");
 
         javax.swing.GroupLayout pnlDadosTurmaLayout = new javax.swing.GroupLayout(pnlDadosTurma);
         pnlDadosTurma.setLayout(pnlDadosTurmaLayout);
@@ -411,7 +415,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                     .addComponent(bntSalvar)
                     .addComponent(bntLimpar)
                     .addComponent(bntVoltar))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         jScrollPane2.setViewportView(pnlCentral);
@@ -426,8 +430,8 @@ public class CadastroAluno extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -520,6 +524,10 @@ public class CadastroAluno extends javax.swing.JFrame {
     }
 
     public JTextField getTxtNome() {
+        return txtNome;
+    }
+    
+    public JTextField getTxtEmail() {
         return txtNome;
     }
 

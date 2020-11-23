@@ -65,7 +65,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         cmbCorRacaProfessor = new javax.swing.JComboBox<>();
         lblMateria = new javax.swing.JLabel();
-        txtEmailProfessor = new javax.swing.JTextField();
+        txtMateria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Professor");
@@ -211,7 +211,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDadosPessoais4Layout.createSequentialGroup()
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMateria)
-                            .addComponent(txtEmailProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -262,7 +262,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmailProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbGeneroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbCorRacaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -279,11 +279,11 @@ public class CadastroProfessor extends javax.swing.JFrame {
                     .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
             .addGroup(pnlCentralLayout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addGap(152, 152, 152)
                 .addComponent(bntSalvar)
                 .addGap(101, 101, 101)
                 .addComponent(bntLimpar)
-                .addGap(90, 90, 90)
+                .addGap(95, 95, 95)
                 .addComponent(bntVoltar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -294,12 +294,12 @@ public class CadastroProfessor extends javax.swing.JFrame {
                 .addComponent(pnlDadosPessoais4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(pnlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(26, 26, 26)
                 .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntSalvar)
                     .addComponent(bntLimpar)
                     .addComponent(bntVoltar))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,7 +338,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
 
     private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
         //Método que limpa os campos
-        //controller.limparCampos();
+        controller.limparCampos();
     }//GEN-LAST:event_bntLimparActionPerformed
 
     private void cmbGeneroProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroProfessorActionPerformed
@@ -397,44 +397,24 @@ public class CadastroProfessor extends javax.swing.JFrame {
     private javax.swing.JButton bntSalvar;
     private javax.swing.JButton bntVoltar;
     private javax.swing.JComboBox<String> cmbCorRacaProfessor;
-    private javax.swing.JComboBox<String> cmbGenero;
-    private javax.swing.JComboBox<String> cmbGenero1;
-    private javax.swing.JComboBox<String> cmbGenero2;
-    private javax.swing.JComboBox<String> cmbGenero3;
     private javax.swing.JComboBox<String> cmbGeneroProfessor;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblLogradouro;
     private javax.swing.JLabel lblMateria;
-    private javax.swing.JLabel lblNomeAluno;
-    private javax.swing.JLabel lblNomeAluno1;
-    private javax.swing.JLabel lblNomeAluno2;
-    private javax.swing.JLabel lblNomeAluno3;
     private javax.swing.JLabel lblNomeAluno4;
     private javax.swing.JPanel pnlCentral;
-    private javax.swing.JPanel pnlDadosPessoais;
-    private javax.swing.JPanel pnlDadosPessoais1;
-    private javax.swing.JPanel pnlDadosPessoais2;
-    private javax.swing.JPanel pnlDadosPessoais3;
     private javax.swing.JPanel pnlDadosPessoais4;
     private javax.swing.JPanel pnlEndereco;
     private javax.swing.JFormattedTextField txtCEPProfessor;
     private javax.swing.JFormattedTextField txtCPFProfessor;
     private javax.swing.JFormattedTextField txtDataNascimentoProfessor;
-    private javax.swing.JTextField txtEmailProfessor;
     private javax.swing.JTextField txtLogradouroProfessor;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNome1;
-    private javax.swing.JTextField txtNome2;
-    private javax.swing.JTextField txtNome3;
+    private javax.swing.JTextField txtMateria;
     private javax.swing.JTextField txtNomeProfessor;
     private javax.swing.JFormattedTextField txtTelefoneProfessor;
     // End of variables declaration//GEN-END:variables
@@ -471,7 +451,10 @@ public class CadastroProfessor extends javax.swing.JFrame {
     public JFormattedTextField getTxtTelefone() {
         return txtTelefoneProfessor;
     }
-
+    
+    public JTextField getTxtMateria(){
+        return txtMateria;
+    }
 
 
 

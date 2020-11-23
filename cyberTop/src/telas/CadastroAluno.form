@@ -38,8 +38,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="723" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="621" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,7 +92,7 @@
                           <Component id="bntLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bntVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="141" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -221,6 +221,7 @@
                         <StringItem index="4" value="Outros"/>
                       </StringArray>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Selecione o g&#xea;nero do aluno"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbGeneroActionPerformed"/>
@@ -291,6 +292,7 @@
                         <StringItem index="5" value="Amarela"/>
                       </StringArray>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Selecione a cor/raca do aluno"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbCorRacaActionPerformed"/>
@@ -490,6 +492,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTurma">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="Insira o id da turma"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTurmaActionPerformed"/>
                   </Events>
@@ -497,6 +502,7 @@
                 <Component class="javax.swing.JButton" name="bntBuscar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Buscar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="pesquisar"/>
                   </Properties>
                 </Component>
               </SubComponents>

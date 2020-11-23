@@ -54,11 +54,11 @@
                   <EmptySpace pref="49" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                   <Component id="bntSalvar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                   <Component id="bntLimpar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                   <Component id="bntVoltar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -71,13 +71,13 @@
                   <Component id="pnlDadosPessoais4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="pnlEndereco" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bntSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bntLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bntVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="152" max="32767" attributes="0"/>
+                  <EmptySpace pref="192" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -205,7 +205,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblMateria" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtEmailProfessor" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="txtMateria" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -272,7 +272,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtTelefoneProfessor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtEmailProfessor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMateria" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbGeneroProfessor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbCorRacaProfessor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -391,7 +391,7 @@
                 <Property name="text" type="java.lang.String" value="Mat&#xe9;ria:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtEmailProfessor">
+            <Component class="javax.swing.JTextField" name="txtMateria">
             </Component>
           </SubComponents>
         </Container>
