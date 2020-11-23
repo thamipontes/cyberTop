@@ -126,7 +126,8 @@ public class CadastroAlunoController {
             view.getTxtTelefone().getText().equals("(  )      -    ")   ||
             view.getTxtCEP().getText().equals("     -   ")              ||
             view.getTxtLogradouro().getText().equals("")                ||
-            view.getTxtEmail().getText().equals("")
+            view.getTxtEmail().getText().equals("")                     ||
+            view.getTxtCurso().getText().equals("")
                 ){            
             
             //Mostra a mensagem para preencher todos os campos
@@ -157,6 +158,7 @@ public class CadastroAlunoController {
         view.getTxtCEP().setText("");
         view.getTxtLogradouro().setText("");
         view.getTxtEmail().setText("");
+        view.getTxtCurso().setText("");
     
     }
     
