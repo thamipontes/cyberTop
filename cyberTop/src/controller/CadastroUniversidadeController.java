@@ -11,7 +11,11 @@ public class CadastroUniversidadeController {
     }
     
     public boolean exibirAlertarCampos(){
-        if(view.getTxtNomeUniversidade().getText().equals("")){
+        if(view.getTxtNomeUniversidade().getText().equals("")   ||
+            view.getTxtCampus().getText().equals("")            ||
+            view.getCmbEstado().getSelectedItem().equals("Selecione")
+                
+                ){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return true;
         }
