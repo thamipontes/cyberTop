@@ -218,7 +218,7 @@ public class CadastroAlunoController {
             //Seta no campo turma da tela o id da turma
             view.getTxtTurma().setText(String.valueOf(turma.getId()));
             //Desabilita o campo turma da tela
-            view.getTxtTurma().setEnabled(false);
+            //view.getTxtTurma().setEnabled(false);
 
         }  
     
