@@ -40,7 +40,7 @@ public class CadastroAlunoController {
     /*
         Método: salvarAluno
         Parâmetros: vazio
-        Descrição: pega os dados inseridos na tela e salva no banco de dados    
+        Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
     */
     public void salvarAluno() throws ParseException, SQLException{
         
