@@ -18,7 +18,7 @@ public class Aluno extends Pessoa{
         
     }
     
-
+    //Construtor para o método pesquisar
     public Aluno(int id, String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
                     int turmaId, String CEP, String corRaca
     ) {
@@ -37,9 +37,7 @@ public class Aluno extends Pessoa{
         this.CEP = CEP;
         this.corRaca = corRaca; 
         this.turmaId = turmaId;
-    }  
-
-  
+    }   
     
 
     // Métodos getters e setters
@@ -73,7 +71,14 @@ public class Aluno extends Pessoa{
 
     public void setTurmaId(int turmaId) {
         this.turmaId = turmaId;
-    }    
+    }  
+
+    @Override
+    public String toString() {
+        return "Aluno{" + "id=" + id + ", turmaId=" + turmaId + ", CEP=" + CEP + ", corRaca=" + corRaca + '}';
+    }
+    
+    
     
      
     

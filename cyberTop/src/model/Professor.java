@@ -20,5 +20,13 @@ public class Professor extends Pessoa{
     public void setTurma(Turmas turma) {
         this.turma = turma;
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" + "materia=" + materia + ", turma=" + turma + '}';
+    }
+    
+    
+    
     
 }

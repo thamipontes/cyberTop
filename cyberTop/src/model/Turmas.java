@@ -86,6 +86,13 @@ public class Turmas {
     public void setVagas(int vagas) {
         this.vagas = vagas;
     }
+
+    @Override
+    public String toString() {
+        return "Turmas{" + "id=" + id + ", nome=" + nome + ", horario=" + horario + ", tipo=" + tipo + ", periodo=" + periodo + ", vagas=" + vagas + '}';
+    }
+    
+    
     
     
 }
