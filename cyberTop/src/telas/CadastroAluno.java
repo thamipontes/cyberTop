@@ -6,6 +6,7 @@
 package telas;
 
 import controller.CadastroAlunoController;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -39,6 +40,14 @@ public class CadastroAluno extends javax.swing.JFrame {
         
         // Centraliza a janela aberta no centro da tela
         setLocationRelativeTo(null);
+        
+        //Seta as cores da tela de login
+        this.getContentPane().setBackground(Color.white);
+        pnlCentral.setBackground(Color.white);
+        pnlDadosPessoais.setBackground(Color.white);
+        pnlDadosTurma.setBackground(Color.white);
+        cmbCorRaca.setBackground(Color.white);
+        cmbGenero.setBackground(Color.white);
         
         //Carregar a tabela da turma
         try {

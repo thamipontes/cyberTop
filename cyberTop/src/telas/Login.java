@@ -6,6 +6,7 @@
 package telas;
 
 import controller.LoginController;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,11 @@ public class Login extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         txtUsuario.requestFocus();
+        
+        //Seta as cores da tela de login
+        this.getContentPane().setBackground(Color.white);
+        pnlLogin.setBackground(Color.white);
+
     }
 
     /**
