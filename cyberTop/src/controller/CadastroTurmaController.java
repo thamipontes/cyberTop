@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Turmas;
 import telas.CadastroAluno;
-import telas.CadastroTurma2;
+import telas.CadastroTurma;
 
 /**
  *
@@ -22,23 +22,45 @@ import telas.CadastroTurma2;
  */
 public class CadastroTurmaController {
     
-    private CadastroTurma2 view;
+    private CadastroTurma view;
 
-    public CadastroTurmaController(CadastroTurma2 view) {
+    public CadastroTurmaController(CadastroTurma view) {
         this.view = view;
     }    
 
     public void salvaTurma(){    
         
         
-        String nome = view.getCampoNome().getText();
-        String horario = view.getCampoHorario().getText();
-        Boolean tipo = Boolean.parseBoolean(view.getCampoTipo().getText());
-        Boolean periodo = Boolean.parseBoolean(view.getCampoPeriodo().getText());
-        Integer vagas = Integer.parseInt(view.getCampoVagas().getText());
+        String nome = view.getCampoNomeTurma().getText();
+        
+        String horario;
+        if(view.getCampoHorario().getSelectedItem() == "Matutino"){
+            horario = "Matutino";
+        }else if(view.getCampoHorario().getSelectedItem() == "Vespertino"){
+            horario = "Vespertino";
+        }else{
+            horario = "Noturno";
+        }
+        
+        Boolean tipo;
+        if(view.getCampoTipoEnem().isSelected()){
+            tipo = true;
+        }else{
+            tipo = false;
+        }
+        
+        
+        Boolean periodo;
+        if(view.getCampoPeriodoAnual().isSelected()){
+            periodo = true;
+        }else{
+            periodo = false;
+        }
+        
+        
        
         
-        Turmas turma = new Turmas(nome, horario, tipo , periodo, vagas);
+        Turmas turma = new Turmas(nome, horario, tipo , periodo, 60);
         
         Connection conexao;
         try {
@@ -49,7 +71,7 @@ public class CadastroTurmaController {
             JOptionPane.showMessageDialog(null, "Turma criada com sucesso");
             
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroTurma2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

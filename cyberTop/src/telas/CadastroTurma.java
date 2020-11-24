@@ -1,5 +1,9 @@
 package telas;
 
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
 public class CadastroTurma extends javax.swing.JFrame {
 
     public CadastroTurma() {
@@ -209,7 +213,7 @@ public class CadastroTurma extends javax.swing.JFrame {
     private void rdbEnemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbEnemActionPerformed
         // TODO add your handling code here:
         rdbVestibular.setSelected(false);
-        
+        //rdbVestibular.
         // Desativa a opção de inserção do nome da Universidade e limpa o campo
         cmbUniversidade.setEnabled(false);
         cmbUniversidade.setSelectedItem("Selecione");
@@ -333,4 +337,39 @@ public class CadastroTurma extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdbVestibular;
     private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
+
+    
+    //Getter e Setters dos campos
+    
+    
+    public JTextField getCampoNomeTurma(){
+        return txtNomeTurma;
+    }
+    
+    public JComboBox getCampoHorario(){
+        return cmbHorario;
+    }
+    
+
+    public JRadioButton getCampoTipoEnem(){
+        return rdbEnem;
+    }
+    
+    public JRadioButton getCampoTipoVestibular(){
+        return rdbVestibular;
+    }
+    
+    public JRadioButton getCampoPeriodoAnual(){
+        return rdbEnem;
+    }
+    
+    public JRadioButton getCampoPeriodoSemestral(){
+        return rdbVestibular;
+    }
+    
+    public JComboBox<String> getCampoUniversidade(){
+        return cmbUniversidade;
+    }
+
+
 }
