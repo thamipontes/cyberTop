@@ -486,7 +486,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         if(!(controller.exibirAlertarCampos())){            
         //Salva os dados no banco de dados
         try {            
-            controller.salvarAluno();
+            controller.salvarCadastro();
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
         }       

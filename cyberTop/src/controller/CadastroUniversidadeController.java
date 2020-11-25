@@ -2,9 +2,10 @@ package controller;
 
 import dao.Conexao;
 import dao.UniversidadeDAO;
+import interfaces.Cadastrar;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -12,7 +13,7 @@ import model.Universidade;
 import telas.CadastroUniversidade;
 
 // Classe que controla toda regras e negocios do cadastro de universidades
-public class CadastroUniversidadeController {
+public class CadastroUniversidadeController implements Cadastrar{
     private final CadastroUniversidade view;
     
     //Construtor
@@ -21,6 +22,7 @@ public class CadastroUniversidadeController {
     }
     
     
+    @Override
     public void salvarCadastro(){
     
         String nome = view.getTxtNomeUniversidade().getText();
@@ -70,6 +72,7 @@ public class CadastroUniversidadeController {
         Descrição: deixa todos os campos da tela vazio
         Retorno: void
     */
+    @Override
     public void limparCampos(){        
         
     //Insere o cursor no txtNome e o deixa em foco
@@ -81,6 +84,16 @@ public class CadastroUniversidadeController {
         view.getTxtCampus().setText("");
     
     }    
+
+    @Override
+    public void removerCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void editarCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

@@ -26,10 +26,10 @@ import telas.CadastroTurma;
  */
 
 /*Classe que controla todas as regras de negócios do cadastro do Aluno*/
-public class CadastroAlunoController {
+public class CadastroAlunoController{
     
     //Declaração do atributo que possui a tela CadastroAluno
-    private CadastroAluno view;
+    private final CadastroAluno view;
     
 
     //Construtor
@@ -42,7 +42,10 @@ public class CadastroAlunoController {
         Parâmetros: vazio
         Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
     */
-    public void salvarAluno() throws ParseException, SQLException{
+
+
+    
+    public void salvarCadastro() throws ParseException, SQLException{
         
         /*Pegas as informações passadas nos campos da tela*/
         String nome = view.getTxtNome().getText();

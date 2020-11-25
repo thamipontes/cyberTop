@@ -8,12 +8,18 @@ public class Professor extends Pessoa{
     private String materia;
     private Turmas turma;
 
-    public Professor(int id, String materia, Turmas turma, String nome, String CPF, Calendar dataNascimento, String telefone, String endereco, char genero) {
+    public Professor(int id, String nome, String CPF, Calendar dataNascimento, String telefone, String endereco, char genero, String materia, Turmas turma) {
         super(nome, CPF, dataNascimento, telefone, endereco, genero);
         this.id = id;
         this.materia = materia;
         this.turma = turma;
     }
+
+    public Professor(String nome, String CPF, Calendar dataNascimento, String telefone, String endereco, char genero, String materia, Turmas turma) {
+        super(nome, CPF, dataNascimento, telefone, endereco, genero);
+        this.materia = materia;
+        this.turma = turma;
+    }    
     
 
     public int getId() {

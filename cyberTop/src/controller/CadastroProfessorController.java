@@ -1,13 +1,20 @@
 package controller;
 
+import interfaces.Cadastrar;
 import javax.swing.JOptionPane;
 import telas.CadastroProfessor;
 
-public class CadastroProfessorController {
-    private CadastroProfessor view;
+public class CadastroProfessorController implements Cadastrar{
+    private final CadastroProfessor view;
     
     public CadastroProfessorController(CadastroProfessor view){
         this.view = view;
+    }
+    
+    
+    @Override
+    public void salvarCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
@@ -43,6 +50,7 @@ public class CadastroProfessorController {
         Parâmetros: vazio
         Descrição: deixa todos os campos da tela vazio
     */
+    @Override
     public void limparCampos(){    
     //Insere o cursor no txtNome e o deixa em foco
         view.getTxtNome().requestFocus();
@@ -58,6 +66,18 @@ public class CadastroProfessorController {
         view.getTxtLogradouro().setText("");
         view.getTxtMateria().setText("");
     
+    }
+
+    
+
+    @Override
+    public void removerCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void editarCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

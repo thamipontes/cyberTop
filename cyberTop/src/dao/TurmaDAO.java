@@ -27,9 +27,15 @@ public class TurmaDAO {
     
     public void insert(Turmas turma) throws SQLException{
        
-            String sql = "insert into turma (nome, horario, tipo, periodo, vagas) values ('"+turma.getNome()+"', '"+turma.getHorario()+"', '"+turma.getTipo()+"', '"+turma.getPeriodo()+"', '"+turma.getVagas()+"');";
+            String sql = "insert into turma (nome, horario, tipo, periodo, vagas, universidade) values (?, ?, ?, ?, ?, ?);";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.execute();            
+            statement.setString(1, turma.getNome());
+            statement.setString(2, turma.getHorario());
+            statement.setBoolean(3, turma.getTipo());
+            statement.setBoolean(4, turma.getPeriodo());
+            statement.setInt(5, turma.getVagas());
+            statement.setString(6, turma.getNomeUniversidade());
+            statement.execute();           
             connection.close();            
        
     }
@@ -59,7 +65,8 @@ public class TurmaDAO {
     
     public ArrayList<Turmas> findAll() throws SQLException{
     
-        String sql = "select * from turma";
+
+            String sql = "select id, nome, horario, tipo, periodo, vagas from turma";
         PreparedStatement statement = connection.prepareStatement(sql); 
         
         return pesquisar(statement);        
@@ -95,6 +102,8 @@ public class TurmaDAO {
         return pesquisar(statement).get(0);     
     
     }
+       
+    
     
     
     

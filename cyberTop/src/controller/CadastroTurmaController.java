@@ -8,6 +8,7 @@ package controller;
 import dao.Conexao;
 import dao.TurmaDAO;
 import dao.UniversidadeDAO;
+import interfaces.Cadastrar;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,23 +25,25 @@ import telas.CadastroTurma;
  *
  * @author thamires
  */
-public class CadastroTurmaController {
+public class CadastroTurmaController implements Cadastrar{
     
-    private CadastroTurma view;
+    private final CadastroTurma view;
 
     public CadastroTurmaController(CadastroTurma view) {
         this.view = view;
     }    
 
+    @Override
     public void salvarCadastro(){  
         
         
         String nome = view.getCampoNomeTurma().getText();  
         String horario = view.getCampoHorario().getSelectedItem().toString();        
         Boolean tipo = view.getCampoTipoEnem().isSelected();      
-        Boolean periodo = view.getCampoPeriodoAnual().isSelected();    
- 
-        Turmas turma = new Turmas(nome, horario, tipo , periodo, 60);
+        Boolean periodo = view.getCampoPeriodoAnual().isSelected();
+        String universidade = view.getCampoUniversidade().getSelectedItem().toString();
+     
+        Turmas turma = new Turmas(nome, horario, tipo , periodo, 60, universidade);
         
         Connection conexao;
         try {
@@ -55,6 +58,8 @@ public class CadastroTurmaController {
             JOptionPane.showMessageDialog(null, "Falha ao criar turma!");
         }
     }
+    
+ 
     
     /*
         Método: exibirAlertarCampos
@@ -78,6 +83,7 @@ public class CadastroTurmaController {
         Parâmetros: vazio
         Descrição: deixa todos os campos da tela vazio
     */
+    @Override
     public void limparCampos(){
         //Insere o cursor no txtNome e o deixa em foco
         view.getCampoNomeTurma().requestFocus();
@@ -94,7 +100,7 @@ public class CadastroTurmaController {
     }
     
     
-    public ArrayList<Universidade> carregarDadosUniversidades() throws SQLException{    
+    public ArrayList<Universidade> carregarDadosUniversidades() throws SQLException{
         //Faz a conexão com o banco 
         Connection conexao;
         conexao = new Conexao().getConnection();
@@ -157,6 +163,16 @@ public class CadastroTurmaController {
         //Ativa o combo box para inserção do nome da Universidade
         view.getCampoUniversidade().setEnabled(true);    
     
+    }
+
+    @Override
+    public void removerCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void editarCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

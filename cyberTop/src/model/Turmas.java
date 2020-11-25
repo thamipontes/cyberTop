@@ -18,7 +18,27 @@ public class Turmas {
     private Boolean tipo;
     private Boolean periodo;
     private int vagas;
+    private String nomeUniversidade;
 
+    public Turmas(int id, String nome, String horario, Boolean tipo, Boolean periodo, int vagas, String nomeUniversidade) {
+        this.id = id;
+        this.nome = nome;
+        this.horario = horario;
+        this.tipo = tipo;
+        this.periodo = periodo;
+        this.vagas = vagas;
+        this.nomeUniversidade = nomeUniversidade;
+    }
+
+    public Turmas(String nome, String horario, Boolean tipo, Boolean periodo, int vagas, String nomeUniversidade) {
+        this.nome = nome;
+        this.horario = horario;
+        this.tipo = tipo;
+        this.periodo = periodo;
+        this.vagas = vagas;
+        this.nomeUniversidade = nomeUniversidade;
+    }
+  
     public Turmas(int id, String nome, String horario, Boolean tipo, Boolean periodo, int vagas) {
         this.id = id;
         this.nome = nome;
@@ -27,16 +47,9 @@ public class Turmas {
         this.periodo = periodo;
         this.vagas = vagas;
     }
-    
-    
-        public Turmas(String nome, String horario, Boolean tipo, Boolean periodo, int vagas) {
-        this.nome = nome;
-        this.horario = horario;
-        this.tipo = tipo;
-        this.periodo = periodo;
-        this.vagas = vagas;
-    }
+ 
 
+        
     public int getId() {
         return id;
     }
@@ -86,6 +99,16 @@ public class Turmas {
     public void setVagas(int vagas) {
         this.vagas = vagas;
     }
+
+    public String getNomeUniversidade() {
+        return nomeUniversidade;
+    }
+
+    public void setNomeUniversidade(String nomeUniversidade) {
+        this.nomeUniversidade = nomeUniversidade;
+    }
+
+   
 
     @Override
     public String toString() {

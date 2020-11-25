@@ -1,0 +1,77 @@
+CRIAR TABELA ALUNO
+
+-- Drop table
+
+-- DROP TABLE public.aluno;
+
+CREATE TABLE public.aluno (
+	id serial NOT NULL,
+	nome varchar NOT NULL,
+	cpf varchar NOT NULL,
+	data_nascimento date NOT NULL,
+	telefone varchar NOT NULL,
+	endereco varchar NOT NULL,
+	genero bpchar(1) NOT NULL,
+	cep varchar NOT NULL,
+	cor_raca varchar NOT NULL,
+	id_turma int4 NOT NULL,
+	email varchar NOT NULL,
+	curso varchar NOT NULL,
+	CONSTRAINT pk_id_aluno PRIMARY KEY (id)
+);
+
+CRIAR TABELA TURMA
+
+-- Drop table
+
+-- DROP TABLE public.turma;
+
+CREATE TABLE public.turma (
+	id serial NOT NULL,
+	nome varchar NOT NULL,
+	horario varchar NOT NULL,
+	tipo bool NOT NULL,
+	periodo bool NULL,
+	vagas int4 NOT NULL DEFAULT 60,
+	universidade varchar NULL,
+	CONSTRAINT pk_id_turma PRIMARY KEY (id)
+);
+
+
+CRIAR TABELA UNIVERSIDADE
+
+-- Drop table
+
+-- DROP TABLE public.universidade;
+
+CREATE TABLE public.universidade (
+	id serial NOT NULL,
+	nome varchar NOT NULL,
+	estado varchar NOT NULL,
+	campus varchar NOT NULL,
+	CONSTRAINT pk_id_universidade PRIMARY KEY (id)
+);
+
+
+CRIAR TABELA PROFESSOR
+
+CREATE TABLE public.professor (
+	id serial NOT NULL,
+	nome varchar NOT NULL,
+	cpf varchar NOT NULL,
+	data_nascimento date NOT NULL,
+	telefone varchar NOT NULL,
+	endereco varchar NOT NULL,
+	genero char NOT NULL,
+	materia varchar NOT NULL,
+	id_turma int4 NOT NULL,
+	CONSTRAINT pk_id_professor PRIMARY KEY (id)
+);
+
+
+
+--CRIAR RELACIONAMENTO DE CHAVE ESTRANGEIRA
+
+ALTER TABLE public.aluno ADD CONSTRAINT aluno_fk FOREIGN KEY (id_turma) REFERENCES public.turma(id);
+
+ALTER TABLE public.professor ADD CONSTRAINT professor_fk FOREIGN KEY (id_turma) REFERENCES public.turma(id);
