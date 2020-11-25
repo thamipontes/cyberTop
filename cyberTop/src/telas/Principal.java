@@ -36,12 +36,13 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblCINCUN = new javax.swing.JLabel();
         Logo = new javax.swing.JLabel();
-        lblSlogan = new javax.swing.JLabel();
         bntAdicionarAluno = new javax.swing.JButton();
         bntAdicionarProfessor = new javax.swing.JButton();
         bntAdicionarUniversidade = new javax.swing.JButton();
         bntAdicionarTurma = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
         mnbLogin = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
         mnSobre = new javax.swing.JMenu();
@@ -51,12 +52,13 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CyberTop.png"))); // NOI18N
-        getContentPane().add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 33, 590, 76));
+        lblCINCUN.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 14)); // NOI18N
+        lblCINCUN.setForeground(new java.awt.Color(255, 255, 255));
+        lblCINCUN.setText("  Aqui você garante sua aprovação");
+        getContentPane().add(lblCINCUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 240, 30));
 
-        lblSlogan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblSlogan.setText("Aqui você garante sua aprovação");
-        getContentPane().add(lblSlogan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CyberTop.png"))); // NOI18N
+        getContentPane().add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 590, 140));
 
         bntAdicionarAluno.setBackground(new java.awt.Color(255, 102, 0));
         bntAdicionarAluno.setText("Adicionar Aluno");
@@ -83,6 +85,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bntAdicionarTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 120, 60));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, -1));
 
         mnAjuda.setText("Ajuda");
         mnAjuda.addActionListener(new java.awt.event.ActionListener() {
@@ -186,11 +191,12 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
+    private javax.swing.JLabel background;
     private javax.swing.JButton bntAdicionarAluno;
     private javax.swing.JButton bntAdicionarProfessor;
     private javax.swing.JButton bntAdicionarTurma;
     private javax.swing.JButton bntAdicionarUniversidade;
-    private javax.swing.JLabel lblSlogan;
+    private javax.swing.JLabel lblCINCUN;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnSobre;
