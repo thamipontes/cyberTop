@@ -44,6 +44,7 @@ public class TurmaDAO {
         statement.setBoolean(3, turma.getTipo());
         statement.setBoolean(4, turma.getPeriodo());
         statement.setInt(5, turma.getVagas());
+        statement.setInt(6, turma.getId());
         statement.execute(); 
     
     }
@@ -86,12 +87,12 @@ public class TurmaDAO {
     }
     
     
-    public Turmas findById(Turmas turma) throws SQLException{
+    public Turmas findById(int idTurma) throws SQLException{
     
         String sql = "select * from turma where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, turma.getId());        
-        return pesquisar(statement).get(0);    
+        statement.setInt(1, idTurma);        
+        return pesquisar(statement).get(0);     
     
     }
     

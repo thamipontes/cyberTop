@@ -332,6 +332,11 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         bntBuscar.setText("Buscar");
         bntBuscar.setToolTipText("pesquisar");
+        bntBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDadosTurmaLayout = new javax.swing.GroupLayout(pnlDadosTurma);
         pnlDadosTurma.setLayout(pnlDadosTurmaLayout);
@@ -504,6 +509,14 @@ public class CadastroAluno extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblTurmasMouseClicked
 
+    private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
+        try {
+            controller.inserirTurmaPorIdTabela();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+    }//GEN-LAST:event_bntBuscarActionPerformed
+
     
     //Getters dos campos da tela cadastro aluno
     public JComboBox<String> getCmbCorRaca() {
@@ -557,6 +570,8 @@ public class CadastroAluno extends javax.swing.JFrame {
     public JTextField getTxtCurso(){
         return txtCurso;
     }
+    
+    
          
    
     /**

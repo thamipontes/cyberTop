@@ -109,7 +109,7 @@ public class CadastroTurma extends javax.swing.JFrame {
                             .addComponent(lblTipo)
                             .addComponent(rdbEnem)
                             .addComponent(rdbVestibular))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rdbSemestral)
                             .addGroup(pnlInformacoesLayout.createSequentialGroup()

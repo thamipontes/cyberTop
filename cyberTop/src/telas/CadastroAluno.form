@@ -498,6 +498,9 @@
                 <Property name="text" type="java.lang.String" value="Buscar"/>
                 <Property name="toolTipText" type="java.lang.String" value="pesquisar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntBuscarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

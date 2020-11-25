@@ -50,6 +50,8 @@ public class CadastroAlunoController {
         String telefone = view.getTxtTelefone().getText();
         String endereco = view.getTxtLogradouro().getText();
         String cep = view.getTxtCEP().getText();
+        String email = view.getTxtEmail().getText();
+        String curso = view.getTxtCurso().getText();
         
         /*Tratando o dado Data de Nascimento*/   
         //Pega o texto que está no campo data de nascimento
@@ -72,9 +74,13 @@ public class CadastroAlunoController {
        /*Tratando o dado da turma*/
        //Transforma String em inteiro
         int turmaId = Integer.parseInt(view.getTxtTurma().getText());
+        
+        
     
        /*Instaciando o objeto aluno com os dados recebidos pela tela*/
-       Aluno aluno = new Aluno(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, turmaId);
+       Aluno aluno = new Aluno(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, turmaId, email, curso);
+       
+       diminuirVagasTurma();
        
        /*Conexão com o banco de dados*/
         Connection conexao;        
@@ -84,7 +90,7 @@ public class CadastroAlunoController {
             //Passa a conexão para a classe AlunosDAO que possui o CRUD
             AlunosDAO alunoDAO = new AlunosDAO(conexao);
             //Chama o método de inserção            
-            alunoDAO.insert(aluno);        
+            alunoDAO.insert(aluno);
             //Mensagem de aluno cadastrado com sucesso
             JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");            
             
@@ -226,6 +232,70 @@ public class CadastroAlunoController {
 
         }  
     
+    }
+    
+    
+    /*
+        Método: pesquisarTurmaPorId
+        Parâmetros: vazio
+        Descrição: procura no banco a turma correspondente ao id passado no campo
+        turma id da tela.
+    */ 
+    public Turmas pesquisarTurmaPorId() throws SQLException{               
+              //Faz a conexão com o banco 
+            Connection conexao;
+            conexao = new Conexao().getConnection();
+            //Passa a conexão para a classe TurmaDAO para realizar o CRUD
+            TurmaDAO turmaDAO = new TurmaDAO(conexao);
+            //Chama o método findAll que retorna uma lista de turmas que está no banco de dados
+            Turmas turma = turmaDAO.findById(Integer.parseInt(view.getTxtTurma().getText())); 
+            
+            return turma; 
+    }
+    
+    
+    /*
+        Método: inserirTurmaPorIdTabela
+        Parâmetros: vazio
+        Descrição: insere na tabela a turma correspondente ao id passado no campo
+        turma id da tela.
+    */
+    public void inserirTurmaPorIdTabela() throws SQLException{        
+        
+        
+        //Chama o método que irá retorna uma turma de acordo com o Id
+        Turmas turma = pesquisarTurmaPorId();
+        
+        
+        //Cria o modelo da tabela
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Id", "Nome", "Horário", "Período", "Vagas"}, 0);
+        
+        //Insere a turma na linha da tabela       
+        Object linha[] = new Object[]{turma.getId(), turma.getNome(), turma.getHorario(), turma.getPeriodo(), turma.getVagas()};
+        modelo.addRow(linha);              
+        
+        //Seta na tabela os valores da linha
+        view.getTblTurmas().setModel(modelo);             
+        
+    }
+    
+    
+    public void diminuirVagasTurma() throws SQLException{
+    
+        Turmas turma = pesquisarTurmaPorId();
+        
+        int vagasAtual = turma.getVagas(); 
+        turma.setVagas(vagasAtual -1);     
+        
+        Connection conexao;
+        conexao = new Conexao().getConnection();
+        //Passa a conexão para a classe TurmaDAO para realizar o CRUD
+        TurmaDAO turmaDAO = new TurmaDAO(conexao);
+            
+        turmaDAO.update(turma);
+        
+        inserirDadosTurmaTabela();    
+ 
     }
     
 }

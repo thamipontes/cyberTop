@@ -27,18 +27,21 @@ public class AlunosDAO {
 
     public void insert(Aluno aluno) throws SQLException{
        
-            String sql = "insert into aluno (nome, cpf, data_nascimento, telefone, endereco, genero, CEP, cor_raca, id_turma) values (?, ?, ?, ?, ?, "
-                    + "'"+aluno.getGenero()+"', ?, ?, ?);";
+            String sql = "insert into aluno (nome, cpf, data_nascimento, telefone, endereco, genero, CEP, cor_raca, id_turma, email, curso) "
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, aluno.getNome());
             statement.setString(2, aluno.getCPF());
             statement.setDate(3, new java.sql.Date(aluno.getDataNascimento().getTimeInMillis()));
             statement.setString(4, aluno.getTelefone());
             statement.setString(5, aluno.getEndereco());
-//            statement.setCharacterStream(5, aluno.getGenero());
-            statement.setString(6, aluno.getCEP());
-            statement.setString(7, aluno.getCorRaca());
-            statement.setInt(8, aluno.getTurmaId());
+            statement.setString(6, String.valueOf(aluno.getGenero()));
+            statement.setString(7, aluno.getCEP());
+            statement.setString(8, aluno.getCorRaca());
+            statement.setInt(9, aluno.getTurmaId());
+            statement.setString(10, aluno.getEmail());
+            statement.setString(11, aluno.getCurso());
+
             
             statement.execute();            
             connection.close();         

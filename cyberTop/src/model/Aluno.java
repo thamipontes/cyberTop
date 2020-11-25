@@ -10,6 +10,9 @@ public class Aluno extends Pessoa{
     private int turmaId;    
     private String CEP;   
     private String corRaca;
+    private String email;
+    private String curso;
+    
     
 
     // Construtores 
@@ -20,31 +23,32 @@ public class Aluno extends Pessoa{
     
     //Construtor para o método pesquisar
     public Aluno(int id, String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
-                    int turmaId, String CEP, String corRaca
+                    int turmaId, String CEP, String corRaca, String email, String curso
     ) {
         super(nome, cpf, dataNascimento, telefone, endereco, genero);
         this.id = id;
         this.turmaId = turmaId;
         this.CEP = CEP;
-        this.corRaca = corRaca;        
+        this.corRaca = corRaca;
+        this.email = email;
+        this.curso = curso;
     }
     
     //Construtor para o método salvar no banco
     public Aluno(String nome, String cpf, Calendar dataNascimento, String telefone, String endereco, char genero,
-                   String CEP, String corRaca, int turmaId
+                   String CEP, String corRaca, int turmaId, String email, String curso
     ) {
         super(nome, cpf, dataNascimento, telefone, endereco, genero);   
         this.CEP = CEP;
         this.corRaca = corRaca; 
         this.turmaId = turmaId;
+        this.email = email;
+        this.curso = curso;
     }   
     
 
     // Métodos getters e setters
-    public void setId(int id) {
-        this.id = id;
-    }
-    
+        
     public int getId() {
         return id;
     }
@@ -71,7 +75,25 @@ public class Aluno extends Pessoa{
 
     public void setTurmaId(int turmaId) {
         this.turmaId = turmaId;
-    }  
+    } 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+    
+    
 
     @Override
     public String toString() {

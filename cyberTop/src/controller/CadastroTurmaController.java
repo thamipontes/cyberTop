@@ -28,38 +28,14 @@ public class CadastroTurmaController {
         this.view = view;
     }    
 
-    public void salvaTurma(){    
+    public void salvaTurma(){   
         
         
-        String nome = view.getCampoNomeTurma().getText();
-        
-        String horario;
-        if(view.getCampoHorario().getSelectedItem() == "Matutino"){
-            horario = "Matutino";
-        }else if(view.getCampoHorario().getSelectedItem() == "Vespertino"){
-            horario = "Vespertino";
-        }else{
-            horario = "Noturno";
-        }
-        
-        Boolean tipo;
-        if(view.getCampoTipoEnem().isSelected()){
-            tipo = true;
-        }else{
-            tipo = false;
-        }
-        
-        
-        Boolean periodo;
-        if(view.getCampoPeriodoAnual().isSelected()){
-            periodo = true;
-        }else{
-            periodo = false;
-        }
-        
-        
-       
-        
+        String nome = view.getCampoNomeTurma().getText();  
+        String horario = view.getCampoHorario().getSelectedItem().toString();        
+        Boolean tipo = view.getCampoTipoEnem().isSelected();      
+        Boolean periodo = view.getCampoPeriodoAnual().isSelected();    
+ 
         Turmas turma = new Turmas(nome, horario, tipo , periodo, 60);
         
         Connection conexao;
@@ -72,8 +48,11 @@ public class CadastroTurmaController {
             
         } catch (SQLException ex) {
             Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Falha ao criar turma!");
         }
     }
+
+    
     
     
 }
