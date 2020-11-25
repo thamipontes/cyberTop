@@ -6,20 +6,25 @@
 package telas;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author thamires
+ * @author Jhonatan Borges
  */
 public class Principal extends javax.swing.JFrame {
 
     /**
-     * Creates new form Principal
+     * Creates new form PrincipalFinal
      */
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
-        this.setBackground(Color.white);
+        
+        //bntCadastroAluno.setBackground(Color.yellow);
     }
 
     /**
@@ -31,10 +36,12 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        logoCyberTop = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        Logo = new javax.swing.JLabel();
+        lblSlogan = new javax.swing.JLabel();
+        bntAdicionarAluno = new javax.swing.JButton();
+        bntAdicionarProfessor = new javax.swing.JButton();
+        bntAdicionarUniversidade = new javax.swing.JButton();
+        bntAdicionarTurma = new javax.swing.JButton();
         mnbLogin = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
         mnSobre = new javax.swing.JMenu();
@@ -42,28 +49,47 @@ public class Principal extends javax.swing.JFrame {
         mntSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(102, 204, 0));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Cadastrar aluno");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CyberTop.png"))); // NOI18N
+        getContentPane().add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 33, 590, 76));
+
+        lblSlogan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblSlogan.setText("Aqui você garante sua aprovação");
+        getContentPane().add(lblSlogan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
+
+        bntAdicionarAluno.setBackground(new java.awt.Color(255, 102, 0));
+        bntAdicionarAluno.setText("Adicionar Aluno");
+        bntAdicionarAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bntAdicionarAlunoActionPerformed(evt);
             }
         });
+        getContentPane().add(bntAdicionarAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 130, 60));
 
-        jButton2.setText("Cadastrar turma");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bntAdicionarProfessor.setBackground(new java.awt.Color(255, 153, 0));
+        bntAdicionarProfessor.setText("Adcionionar Professor");
+        getContentPane().add(bntAdicionarProfessor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, 60));
+
+        bntAdicionarUniversidade.setBackground(new java.awt.Color(255, 153, 51));
+        bntAdicionarUniversidade.setText("Adicionar Universidade");
+        getContentPane().add(bntAdicionarUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, 60));
+
+        bntAdicionarTurma.setBackground(new java.awt.Color(255, 204, 0));
+        bntAdicionarTurma.setText("Adicionar Turma");
+        bntAdicionarTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bntAdicionarTurmaActionPerformed(evt);
             }
         });
-
-        logoCyberTop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/CyberTop.png"))); // NOI18N
-
-        jButton3.setText("jButton3");
+        getContentPane().add(bntAdicionarTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 120, 60));
 
         mnAjuda.setText("Ajuda");
+        mnAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAjudaActionPerformed(evt);
+            }
+        });
         mnbLogin.add(mnAjuda);
 
         mnSobre.setText("Sobre");
@@ -88,38 +114,6 @@ public class Principal extends javax.swing.JFrame {
 
         setJMenuBar(mnbLogin);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(280, 280, 280)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(logoCyberTop, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(240, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logoCyberTop, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(130, 130, 130)
-                .addComponent(jButton3))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,16 +126,27 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnSairActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bntAdicionarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAdicionarAlunoActionPerformed
+        // TODO add your handling code here:
         CadastroAluno telaCadastroAluno = new CadastroAluno();
         telaCadastroAluno.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bntAdicionarAlunoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bntAdicionarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAdicionarTurmaActionPerformed
         // TODO add your handling code here:
-        
         new CadastroTurma().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bntAdicionarTurmaActionPerformed
+
+    private void mnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAjudaActionPerformed
+        try {
+            // TODO add your handling code here:
+
+            java.awt.Desktop.getDesktop().browse( new java.net.URI( "http://www.google.com" ) );
+        } catch (URISyntaxException | IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_mnAjudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,6 +174,7 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -179,10 +185,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel logoCyberTop;
+    private javax.swing.JLabel Logo;
+    private javax.swing.JButton bntAdicionarAluno;
+    private javax.swing.JButton bntAdicionarProfessor;
+    private javax.swing.JButton bntAdicionarTurma;
+    private javax.swing.JButton bntAdicionarUniversidade;
+    private javax.swing.JLabel lblSlogan;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnSobre;
