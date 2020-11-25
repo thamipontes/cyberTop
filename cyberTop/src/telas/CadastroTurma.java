@@ -1,14 +1,32 @@
 package telas;
 
+import controller.CadastroAlunoController;
+import controller.CadastroTurmaController;
+import controller.CadastroUniversidadeController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class CadastroTurma extends javax.swing.JFrame {
-
+    
+    private final CadastroTurmaController controller;
+    
+    
     public CadastroTurma() {
         initComponents();
+        controller = new CadastroTurmaController(this);       
+         
+        
         setLocationRelativeTo(null);
+        //Insere os dados da universidade na combo box
+        try {
+            controller.inserirDadosUniversidadeCmb();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -206,77 +224,82 @@ public class CadastroTurma extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(663, 290));
+        setSize(new java.awt.Dimension(739, 290));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void rdbEnemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbEnemActionPerformed
-        // TODO add your handling code here:
-        rdbVestibular.setSelected(false);
-        //rdbVestibular.
-        // Desativa a opção de inserção do nome da Universidade e limpa o campo
-        cmbUniversidade.setEnabled(false);
-        cmbUniversidade.setSelectedItem("Selecione");
-        
-        // 
-        rdbAnual.setSelected(true);
-        rdbSemestral.setSelected(false);
-        
-        
+        controller.selecionarTipoEnem();        
     }//GEN-LAST:event_rdbEnemActionPerformed
 
     private void rdbVestibularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbVestibularActionPerformed
-        // TODO add your handling code here:
-        rdbEnem.setSelected(false);
-        
-        //Ativa o campo para inserção do nome da Universidade
-        cmbUniversidade.setEnabled(true);
-        
-        
+        controller.selecionarTipoVestibular();
     }//GEN-LAST:event_rdbVestibularActionPerformed
 
     private void rdbAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAnualActionPerformed
-        // TODO add your handling code here:
-        rdbSemestral.setSelected(false);
+       
+        controller.selecionarPeriodoAnual();
     }//GEN-LAST:event_rdbAnualActionPerformed
 
     private void rdbSemestralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSemestralActionPerformed
-        // TODO add your handling code here:
-        
-        rdbAnual.setSelected(false);
-        //Desativar rdb enem
-        rdbEnem.setSelected(false);
+        controller.selecionarPeriodoSemestral();        
     }//GEN-LAST:event_rdbSemestralActionPerformed
 
     private void cmbUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUniversidadeActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cmbUniversidadeActionPerformed
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         // Exibe alerta caso algum campo do formulario esteja vazio
-        
-
+        if(!(controller.exibirAlertarCampos())){           
+            //Salva os dados no banco de dados                   
+            controller.salvarCadastro();
+        }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
-        //Insere o cursor no txtNome e o deixa em foco
-        txtNomeTurma.requestFocus();
-
-        // Limpa todos os campos
-        txtNomeTurma.setText("");
-        rdbEnem.setSelected(false);
-        rdbVestibular.setSelected(false);
-        rdbAnual.setSelected(false);
-        rdbSemestral.setSelected(false);
-        cmbUniversidade.setSelectedItem("Selecione");
-        cmbHorario.setSelectedItem("Selecione");
+        controller.limparCampos();
     }//GEN-LAST:event_bntLimparActionPerformed
 
     private void bntVoltar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltar3ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_bntVoltar3ActionPerformed
+    
+    
+       
+    //Getter e Setters dos campos    
+    
+    public JTextField getCampoNomeTurma(){
+        return txtNomeTurma;
+    }
+    
+    public JComboBox getCampoHorario(){
+        return cmbHorario;
+    }
+    
 
+    public JRadioButton getCampoTipoEnem(){
+        return rdbEnem;
+    }
+    
+    public JRadioButton getCampoTipoVestibular(){
+        return rdbVestibular;
+    }
+    
+    public JRadioButton getCampoPeriodoAnual(){
+        return rdbAnual;
+    }
+    
+    public JRadioButton getCampoPeriodoSemestral(){
+        return rdbSemestral;
+    }
+    
+    public JComboBox<String> getCampoUniversidade(){
+        return cmbUniversidade;
+    }
+
+    
     /**
      * @param args the command line arguments
      */
@@ -314,7 +337,7 @@ public class CadastroTurma extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroTurma().setVisible(true);
+                new CadastroTurma().setVisible(true);                
             }
         });
     }
@@ -338,38 +361,6 @@ public class CadastroTurma extends javax.swing.JFrame {
     private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
 
-    
-    //Getter e Setters dos campos
-    
-    
-    public JTextField getCampoNomeTurma(){
-        return txtNomeTurma;
-    }
-    
-    public JComboBox getCampoHorario(){
-        return cmbHorario;
-    }
-    
-
-    public JRadioButton getCampoTipoEnem(){
-        return rdbEnem;
-    }
-    
-    public JRadioButton getCampoTipoVestibular(){
-        return rdbVestibular;
-    }
-    
-    public JRadioButton getCampoPeriodoAnual(){
-        return rdbEnem;
-    }
-    
-    public JRadioButton getCampoPeriodoSemestral(){
-        return rdbVestibular;
-    }
-    
-    public JComboBox<String> getCampoUniversidade(){
-        return cmbUniversidade;
-    }
-
+ 
 
 }
