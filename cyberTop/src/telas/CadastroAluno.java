@@ -67,6 +67,9 @@ public class CadastroAluno extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        bntVoltar = new javax.swing.JButton();
+        bntLimpar = new javax.swing.JButton();
+        bntSalvar = new javax.swing.JButton();
         pnlCentral = new javax.swing.JPanel();
         pnlDadosPessoais = new javax.swing.JPanel();
         lblNomeAluno = new javax.swing.JLabel();
@@ -95,11 +98,11 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtTurma = new javax.swing.JTextField();
         bntBuscar = new javax.swing.JButton();
-        bntSalvar = new javax.swing.JButton();
-        bntVoltar = new javax.swing.JButton();
-        bntLimpar = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        lblCorTitulo = new javax.swing.JLabel();
+        background1 = new javax.swing.JLabel();
+        background2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de aluno");
@@ -110,6 +113,35 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        bntVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
+        bntVoltar.setText("Voltar");
+        bntVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVoltarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 600, -1, -1));
+
+        bntLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar .png"))); // NOI18N
+        bntLimpar.setText("Limpar");
+        bntLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntLimparActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bntLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 600, -1, -1));
+
+        bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        bntSalvar.setText("Salvar");
+        bntSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSalvarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 600, -1, -1));
+
+        pnlCentral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
@@ -190,7 +222,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         }
         txtCEP.setToolTipText("Insira o CEP do estudante");
 
-        lblLogradouro.setText("Logradouro:");
+        lblLogradouro.setText("Endereço:");
 
         txtLogradouro.setToolTipText("Insira o endereço do estudante");
 
@@ -234,7 +266,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cmbCorRaca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(cmbCorRaca, 0, 90, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDadosPessoaisLayout.createSequentialGroup()
                                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblNomeAluno, javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,8 +316,10 @@ public class CadastroAluno extends javax.swing.JFrame {
                     .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        pnlCentral.add(pnlDadosPessoais, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 71, 670, -1));
 
         pnlDadosTurma.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a turma desejada"));
 
@@ -349,7 +383,7 @@ public class CadastroAluno extends javax.swing.JFrame {
             .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ScrollTabelaTurmas)
+                    .addComponent(ScrollTabelaTurmas, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                     .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
                         .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -364,7 +398,7 @@ public class CadastroAluno extends javax.swing.JFrame {
             pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntBuscar))
@@ -372,92 +406,29 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addComponent(ScrollTabelaTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
-        bntSalvar.setText("Salvar");
-        bntSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSalvarActionPerformed(evt);
-            }
-        });
-
-        bntVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
-        bntVoltar.setText("Voltar");
-        bntVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntVoltarActionPerformed(evt);
-            }
-        });
-
-        bntLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar .png"))); // NOI18N
-        bntLimpar.setText("Limpar");
-        bntLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntLimparActionPerformed(evt);
-            }
-        });
+        pnlCentral.add(pnlDadosTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 272, 670, 320));
 
         pnlTitulo.setBackground(new java.awt.Color(255, 153, 0));
         pnlTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblTitulo.setText("Cadastro de Aluno");
+        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(166, 12, -1, -1));
 
-        javax.swing.GroupLayout pnlTituloLayout = new javax.swing.GroupLayout(pnlTitulo);
-        pnlTitulo.setLayout(pnlTituloLayout);
-        pnlTituloLayout.setHorizontalGroup(
-            pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTituloLayout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(lblTitulo)
-                .addGap(183, 183, 183))
-        );
-        pnlTituloLayout.setVerticalGroup(
-            pnlTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblCorTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/grey.png"))); // NOI18N
+        lblCorTitulo.setText("jLabel6");
+        pnlTitulo.add(lblCorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 60));
 
-        javax.swing.GroupLayout pnlCentralLayout = new javax.swing.GroupLayout(pnlCentral);
-        pnlCentral.setLayout(pnlCentralLayout);
-        pnlCentralLayout.setHorizontalGroup(
-            pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCentralLayout.createSequentialGroup()
-                .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlCentralLayout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(bntSalvar)
-                        .addGap(94, 94, 94)
-                        .addComponent(bntLimpar)
-                        .addGap(112, 112, 112)
-                        .addComponent(bntVoltar))
-                    .addGroup(pnlCentralLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlDadosTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(pnlCentralLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(27, 27, 27))
-        );
-        pnlCentralLayout.setVerticalGroup(
-            pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCentralLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(pnlDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlDadosTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntSalvar)
-                    .addComponent(bntLimpar)
-                    .addComponent(bntVoltar))
-                .addGap(24, 24, 24))
-        );
+        pnlCentral.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
+        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
+        background1.setText("jLabel6");
+        pnlCentral.add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 690, -1));
+
+        background2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
+        background2.setText("jLabel6");
+        pnlCentral.add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, -30, 820, -1));
 
         getContentPane().add(pnlCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -626,6 +597,8 @@ public class CadastroAluno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollTabelaTurmas;
+    private javax.swing.JLabel background1;
+    private javax.swing.JLabel background2;
     private javax.swing.JButton bntBuscar;
     private javax.swing.JButton bntLimpar;
     private javax.swing.JButton bntSalvar;
@@ -640,6 +613,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblCorTitulo;
     private javax.swing.JLabel lblCurso;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblLogradouro;
