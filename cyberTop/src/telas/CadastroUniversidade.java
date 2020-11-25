@@ -6,6 +6,10 @@
 package telas;
 
 import controller.CadastroUniversidadeController;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -162,12 +166,11 @@ public class CadastroUniversidade extends javax.swing.JFrame {
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
 
-        // Exibe alerta caso algum campo do formulario esteja vazio
+        /* Exibe alerta caso algum campo do formulario esteja vazio, se não exibir
+        salva o dado */
         if(!(controller.exibirAlertarCampos())){
             //Salva os dados no banco de dados
-            
-        }else{
-           
+            controller.salvarCadastro();            
         }
 
     }//GEN-LAST:event_bntSalvarActionPerformed
@@ -182,6 +185,21 @@ public class CadastroUniversidade extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bntVoltar2ActionPerformed
 
+    
+    //Getters e Setters
+    
+     public JTextField getTxtNomeUniversidade(){
+        return txtNomeUniversidade;
+    }
+    public JComboBox<String> getCmbEstado() {
+        return cmbEstado;
+    }
+    
+    public JTextField getTxtCampus(){
+        return txtCampus;
+    }    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -232,16 +250,7 @@ public class CadastroUniversidade extends javax.swing.JFrame {
     private javax.swing.JTextField txtNomeUniversidade;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getTxtNomeUniversidade(){
-        return txtNomeUniversidade;
-    }
-    public JComboBox<String> getCmbEstado() {
-        return cmbEstado;
-    }
-    
-    public JTextField getTxtCampus(){
-        return txtCampus;
-    }
+   
     
     
     
