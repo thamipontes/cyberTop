@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,15 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        bntAlunoAdicionar.setVisible(false);
+        bntUniversidadeAdicionar.setVisible(false);
+        bntProfessorAdicionar.setVisible(false);
+        bntTurmaAdicionar.setVisible(false);
+        
+        bntAlunoRemover.setVisible(false);
+        bntUniversidadeRemover.setVisible(false);
+        bntTurmaRemover.setVisible(false);
+        
         //bntCadastroAluno.setBackground(Color.yellow);
     }
 
@@ -36,14 +46,18 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlGerenciarAluno = new javax.swing.JPanel();
-        bntAdicionarAluno = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         LOGO = new javax.swing.JLabel();
         lblCINCUN = new javax.swing.JLabel();
-        bntAdicionarProfessor = new javax.swing.JButton();
-        bntAdicionarUniversidade = new javax.swing.JButton();
-        bntAdicionarTurma = new javax.swing.JButton();
+        bntRemover = new javax.swing.JLabel();
+        bntBuscar = new javax.swing.JLabel();
+        bntAdicionar = new javax.swing.JLabel();
+        bntAlunoAdicionar = new javax.swing.JLabel();
+        bntUniversidadeAdicionar = new javax.swing.JLabel();
+        bntProfessorAdicionar = new javax.swing.JLabel();
+        bntTurmaAdicionar = new javax.swing.JLabel();
+        bntAlunoRemover = new javax.swing.JLabel();
+        bntUniversidadeRemover = new javax.swing.JLabel();
+        bntTurmaRemover = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         mnbLogin = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
@@ -54,49 +68,118 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bntAdicionarAluno.setBackground(new java.awt.Color(255, 102, 0));
-        bntAdicionarAluno.setText("Adicionar Aluno");
-        bntAdicionarAluno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAdicionarAlunoActionPerformed(evt);
-            }
-        });
-        pnlGerenciarAluno.add(bntAdicionarAluno);
-
-        jLabel1.setText("jLabel1");
-        pnlGerenciarAluno.add(jLabel1);
-
-        getContentPane().add(pnlGerenciarAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 140, 120));
-
         LOGO.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         LOGO.setForeground(new java.awt.Color(255, 255, 255));
         LOGO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/LOGO.jpg"))); // NOI18N
-        getContentPane().add(LOGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, -50, -1, 240));
+        LOGO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LOGOMouseClicked(evt);
+            }
+        });
+        getContentPane().add(LOGO, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, 100));
 
         lblCINCUN.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 14)); // NOI18N
         lblCINCUN.setForeground(new java.awt.Color(255, 255, 255));
         lblCINCUN.setText("  Aqui você garante sua aprovação");
         getContentPane().add(lblCINCUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 240, 30));
 
-        bntAdicionarProfessor.setBackground(new java.awt.Color(255, 153, 0));
-        bntAdicionarProfessor.setText("Adcionionar Professor");
-        getContentPane().add(bntAdicionarProfessor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, 60));
-
-        bntAdicionarUniversidade.setBackground(new java.awt.Color(255, 153, 51));
-        bntAdicionarUniversidade.setText("Adicionar Universidade");
-        getContentPane().add(bntAdicionarUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, 60));
-
-        bntAdicionarTurma.setBackground(new java.awt.Color(255, 204, 0));
-        bntAdicionarTurma.setText("Adicionar Turma");
-        bntAdicionarTurma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAdicionarTurmaActionPerformed(evt);
+        bntRemover.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntRemover.setForeground(new java.awt.Color(255, 255, 255));
+        bntRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/eraser.png"))); // NOI18N
+        bntRemover.setText("Remover");
+        bntRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntRemoverMouseClicked(evt);
             }
         });
-        getContentPane().add(bntAdicionarTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 120, 60));
+        getContentPane().add(bntRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, -1));
+        bntBuscar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        bntBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
+        bntBuscar.setText("Buscar");
+        bntBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntBuscarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(bntBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, -1, -1));
+
+        bntAdicionar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntAdicionar.setForeground(new java.awt.Color(255, 255, 255));
+        bntAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
+        bntAdicionar.setText("Adicionar");
+        bntAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntAdicionarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(bntAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
+
+        bntAlunoAdicionar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntAlunoAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/student.png"))); // NOI18N
+        bntAlunoAdicionar.setText("Aluno");
+        bntAlunoAdicionar.setToolTipText("Adicionar aluno");
+        bntAlunoAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntAlunoAdicionarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(bntAlunoAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
+
+        bntUniversidadeAdicionar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntUniversidadeAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/school.png"))); // NOI18N
+        bntUniversidadeAdicionar.setText("Universidade");
+        bntUniversidadeAdicionar.setToolTipText("Adicionar universidade");
+        bntUniversidadeAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntUniversidadeAdicionarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(bntUniversidadeAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
+
+        bntProfessorAdicionar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntProfessorAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/teacher.png"))); // NOI18N
+        bntProfessorAdicionar.setText("Professor");
+        bntProfessorAdicionar.setToolTipText("Adicionar professor");
+        bntProfessorAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntProfessorAdicionarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(bntProfessorAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
+
+        bntTurmaAdicionar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntTurmaAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/classroom.png"))); // NOI18N
+        bntTurmaAdicionar.setText("Turma");
+        bntTurmaAdicionar.setToolTipText("Adicionar turma");
+        bntTurmaAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntTurmaAdicionarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(bntTurmaAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, -1, -1));
+
+        bntAlunoRemover.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntAlunoRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/student.png"))); // NOI18N
+        bntAlunoRemover.setText("Aluno");
+        bntAlunoRemover.setToolTipText("Remover aluno");
+        getContentPane().add(bntAlunoRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
+
+        bntUniversidadeRemover.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntUniversidadeRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/school.png"))); // NOI18N
+        bntUniversidadeRemover.setText("Universidade");
+        bntUniversidadeRemover.setToolTipText("Remover universidade");
+        getContentPane().add(bntUniversidadeRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
+
+        bntTurmaRemover.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bntTurmaRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/classroom.png"))); // NOI18N
+        bntTurmaRemover.setText("Turma");
+        bntTurmaRemover.setToolTipText("Remover turma");
+        getContentPane().add(bntTurmaRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, -1, -1));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/grey.png"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 410));
 
         mnAjuda.setText("Ajuda");
         mnAjuda.addActionListener(new java.awt.event.ActionListener() {
@@ -140,17 +223,6 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnSairActionPerformed
 
-    private void bntAdicionarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAdicionarAlunoActionPerformed
-        // TODO add your handling code here:
-        CadastroAluno telaCadastroAluno = new CadastroAluno();
-        telaCadastroAluno.setVisible(true);
-    }//GEN-LAST:event_bntAdicionarAlunoActionPerformed
-
-    private void bntAdicionarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAdicionarTurmaActionPerformed
-        // TODO add your handling code here:
-        new CadastroTurma().setVisible(true);
-    }//GEN-LAST:event_bntAdicionarTurmaActionPerformed
-
     private void mnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAjudaActionPerformed
         try {
             // TODO add your handling code here:
@@ -161,6 +233,75 @@ public class Principal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_mnAjudaActionPerformed
+
+    private void bntBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntBuscarMouseClicked
+        // TODO add your handling code here:
+        bntRemover.setEnabled(false);
+        bntBuscar.setEnabled(true);
+        bntAdicionar.setEnabled(false);
+        
+        
+        
+    }//GEN-LAST:event_bntBuscarMouseClicked
+
+    private void bntRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntRemoverMouseClicked
+        // TODO add your handling code here:
+        bntRemover.setEnabled(true);
+        bntBuscar.setEnabled(false);
+        bntAdicionar.setEnabled(false);
+        
+        bntAlunoAdicionar.setVisible(false);
+        bntUniversidadeAdicionar.setVisible(false);
+        bntProfessorAdicionar.setVisible(false);
+        bntTurmaAdicionar.setVisible(false);
+        
+        bntAlunoRemover.setVisible(true);
+        bntUniversidadeRemover.setVisible(true);
+        //bntProfessorRemover.setVisible(false);
+        bntTurmaRemover.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_bntRemoverMouseClicked
+
+    private void bntAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntAdicionarMouseClicked
+        // TODO add your handling code here:
+        bntAdicionar.setEnabled(true);
+        bntBuscar.setEnabled(false);
+        bntRemover.setEnabled(false);
+        
+        bntAlunoAdicionar.setVisible(true);
+        bntUniversidadeAdicionar.setVisible(true);
+        bntProfessorAdicionar.setVisible(true);
+        bntTurmaAdicionar.setVisible(true);
+        
+        
+    }//GEN-LAST:event_bntAdicionarMouseClicked
+
+    private void LOGOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LOGOMouseClicked
+
+    private void bntAlunoAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntAlunoAdicionarMouseClicked
+        // TODO add your handling code here:
+        
+        new CadastroAluno().setVisible(true);
+    }//GEN-LAST:event_bntAlunoAdicionarMouseClicked
+
+    private void bntProfessorAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntProfessorAdicionarMouseClicked
+        // TODO add your handling code here:
+        new CadastroProfessor().setVisible(true);
+    }//GEN-LAST:event_bntProfessorAdicionarMouseClicked
+
+    private void bntUniversidadeAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntUniversidadeAdicionarMouseClicked
+        // TODO add your handling code here:
+        new CadastroUniversidade().setVisible(true);
+    }//GEN-LAST:event_bntUniversidadeAdicionarMouseClicked
+
+    private void bntTurmaAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntTurmaAdicionarMouseClicked
+        // TODO add your handling code here:
+        new CadastroTurma().setVisible(true);
+    }//GEN-LAST:event_bntTurmaAdicionarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -201,17 +342,21 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LOGO;
     private javax.swing.JLabel background;
-    private javax.swing.JButton bntAdicionarAluno;
-    private javax.swing.JButton bntAdicionarProfessor;
-    private javax.swing.JButton bntAdicionarTurma;
-    private javax.swing.JButton bntAdicionarUniversidade;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel bntAdicionar;
+    private javax.swing.JLabel bntAlunoAdicionar;
+    private javax.swing.JLabel bntAlunoRemover;
+    private javax.swing.JLabel bntBuscar;
+    private javax.swing.JLabel bntProfessorAdicionar;
+    private javax.swing.JLabel bntRemover;
+    private javax.swing.JLabel bntTurmaAdicionar;
+    private javax.swing.JLabel bntTurmaRemover;
+    private javax.swing.JLabel bntUniversidadeAdicionar;
+    private javax.swing.JLabel bntUniversidadeRemover;
     private javax.swing.JLabel lblCINCUN;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnSair;
     private javax.swing.JMenu mnSobre;
     private javax.swing.JMenuBar mnbLogin;
     private javax.swing.JMenuItem mntSair;
-    private javax.swing.JPanel pnlGerenciarAluno;
     // End of variables declaration//GEN-END:variables
 }
