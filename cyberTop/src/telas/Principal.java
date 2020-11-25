@@ -66,6 +66,7 @@ public class Principal extends javax.swing.JFrame {
         mntSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CyberTop");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LOGO.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N

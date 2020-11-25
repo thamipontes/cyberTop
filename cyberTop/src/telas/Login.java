@@ -33,8 +33,8 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.requestFocus();
         
         //Seta as cores da tela de login
-        this.getContentPane().setBackground(Color.white);
-        pnlLogin.setBackground(Color.white);
+        //this.getContentPane().setBackground(Color.white);
+       // pnlLogin.setBackground(Color.white);
 
     }
 
@@ -51,12 +51,12 @@ public class Login extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblSeuUsuario = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        bntEntrar = new javax.swing.JButton();
         lblSuaSenha = new javax.swing.JLabel();
-        bntLimpar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
         pnlLogin = new javax.swing.JPanel();
+        bntLimpar = new javax.swing.JButton();
+        bntEntrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         mnbLogin = new javax.swing.JMenuBar();
         mnAjuda = new javax.swing.JMenu();
         mnSobre = new javax.swing.JMenu();
@@ -86,28 +86,10 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 130, -1));
 
-        bntEntrar.setBackground(new java.awt.Color(51, 153, 0));
-        bntEntrar.setText("Entrar");
-        bntEntrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntEntrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bntEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
-
         lblSuaSenha.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         lblSuaSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadeado.png"))); // NOI18N
         lblSuaSenha.setText("Sua senha:");
         getContentPane().add(lblSuaSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
-
-        bntLimpar.setBackground(new java.awt.Color(204, 0, 0));
-        bntLimpar.setText("Limpar");
-        bntLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntLimparActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bntLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
 
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,25 +98,52 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 130, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/TelaLogin.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, -1));
-
-        pnlLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlLogin.setForeground(new java.awt.Color(255, 153, 153));
+        pnlLogin.setBackground(new java.awt.Color(0, 102, 102));
+        pnlLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        pnlLogin.setForeground(new java.awt.Color(51, 51, 51));
         pnlLogin.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+
+        bntLimpar.setBackground(new java.awt.Color(204, 0, 0));
+        bntLimpar.setText("Limpar");
+        bntLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntLimparActionPerformed(evt);
+            }
+        });
+
+        bntEntrar.setBackground(new java.awt.Color(0, 102, 0));
+        bntEntrar.setText("Entrar");
+        bntEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
         pnlLogin.setLayout(pnlLoginLayout);
         pnlLoginLayout.setHorizontalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addComponent(bntEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
+                .addComponent(bntLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
         pnlLoginLayout.setVerticalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 264, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                .addContainerGap(217, Short.MAX_VALUE)
+                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         getContentPane().add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/grey.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 370));
 
         mnAjuda.setText("Ajuda");
         mnbLogin.add(mnAjuda);
