@@ -222,7 +222,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         }
         txtCEP.setToolTipText("Insira o CEP do estudante");
 
-        lblLogradouro.setText("Logradouro:");
+        lblLogradouro.setText("Endereço:");
 
         txtLogradouro.setToolTipText("Insira o endereço do estudante");
 
