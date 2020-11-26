@@ -41,11 +41,11 @@ public class GerenciarAlunoController {
     public void inserirDadosAlunoTabela() throws SQLException, ParseException{
         ArrayList<Aluno> alunosBanco = carregarDadosAluno();
         
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Id", "Nome", "Data de Nascimento"}, 0);
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Id", "Nome", "Turma"}, 0);
         
         
         alunosBanco.forEach(e -> {        
-            Object linha[] = new Object[]{e.getId(), e.getNome(), e.getDataNascimento()};
+            Object linha[] = new Object[]{e.getId(), e.getNome(), e.getTurmaId()};
             modelo.addRow(linha);        
         });
         
@@ -54,38 +54,40 @@ public class GerenciarAlunoController {
     }
     
     public  void removerLinhaAluno() throws SQLException, ParseException{
-        ArrayList<Aluno> alunoBanco = carregarDadosAluno();
-        int linha = view.getTblAluno().getSelectedRow();
         
-        if(linha >= 0 && linha < alunoBanco.size()){
-            Aluno aluno = alunoBanco.get(linha);
-            /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
-        Connection conexao;        
-        try {
-            //Faz a conexão com o banco
-            conexao = new Conexao().getConnection();
-            //Passa a conexão para a classe AlunosDAO que possui o CRUD
-            AlunosDAO alunoDAO = new AlunosDAO(conexao);
-            //Chama o método de inserção            
-            alunoDAO.remove(aluno);
-            //Mensagem de aluno cadastrado com sucesso
-            JOptionPane.showMessageDialog(null, "Aluno descadastrado com sucesso");
-            inserirDadosAlunoTabela();
-            
-            aumentarVagasTurma(aluno.getTurmaId());
-            
-            
-            
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
-            //Caso dê erro mostra essa tela
-            JOptionPane.showMessageDialog(null, "Falha ao descadastrar dado no banco");
-        }  
-            
+        
+        if(view.getTblAluno().getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder remover.");
+        }else{
+        
+            ArrayList<Aluno> alunoBanco = carregarDadosAluno();
+            int linha = view.getTblAluno().getSelectedRow();
+
+            if(linha >= 0 && linha < alunoBanco.size()){
+                Aluno aluno = alunoBanco.get(linha);
+                /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
+            Connection conexao;        
+            try {
+                //Faz a conexão com o banco
+                conexao = new Conexao().getConnection();
+                //Passa a conexão para a classe AlunosDAO que possui o CRUD
+                AlunosDAO alunoDAO = new AlunosDAO(conexao);
+                //Chama o método de inserção            
+                alunoDAO.remove(aluno);
+                //Mensagem de aluno cadastrado com sucesso
+                JOptionPane.showMessageDialog(null, "Aluno descadastrado com sucesso");
+                inserirDadosAlunoTabela();
+
+                aumentarVagasTurma(aluno.getTurmaId());
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+                //Caso dê erro mostra essa tela
+                JOptionPane.showMessageDialog(null, "Falha ao descadastrar dado no banco");
+            }  
+
+            }
         }
-        
         
     }
     

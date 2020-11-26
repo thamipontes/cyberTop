@@ -228,11 +228,11 @@ public class CadastroTurma extends javax.swing.JFrame {
         pnlCentralLayout.setHorizontalGroup(
             pnlCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCentralLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(bntLimpar)
-                .addGap(98, 98, 98)
+                .addGap(113, 113, 113)
                 .addComponent(bntSalvar)
-                .addGap(107, 107, 107)
+                .addGap(101, 101, 101)
+                .addComponent(bntLimpar)
+                .addGap(81, 81, 81)
                 .addComponent(bntVoltar3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlCentralLayout.createSequentialGroup()
@@ -254,7 +254,7 @@ public class CadastroTurma extends javax.swing.JFrame {
                     .addComponent(bntLimpar)
                     .addComponent(bntSalvar)
                     .addComponent(bntVoltar3))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 700, 320));

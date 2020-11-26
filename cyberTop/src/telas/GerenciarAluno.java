@@ -27,7 +27,9 @@ public class GerenciarAluno extends javax.swing.JFrame {
         
         controller = new GerenciarAlunoController(this);
         
-        lblEditar.setVisible(false);
+        setLocationRelativeTo(null);
+        
+        
         
         try {
             controller.inserirDadosAlunoTabela();
@@ -52,23 +54,30 @@ public class GerenciarAluno extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblBuscar = new javax.swing.JLabel();
         lblRemover = new javax.swing.JLabel();
+        pnlTitulo = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblCorTitulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Alunos matriculados"));
 
         tblAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nome"
+                "Id", "Nome", "Turma"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -86,24 +95,43 @@ public class GerenciarAluno extends javax.swing.JFrame {
                 lblEditarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
+        jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
         jLabel2.setText("Cadastrar");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
 
         lblBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         lblBuscar.setText("Buscar");
-        jPanel1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
+        jPanel1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
         lblRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/eraser.png"))); // NOI18N
-        lblRemover.setText("Remover");
+        lblRemover.setText("Descadastrar");
         lblRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblRemoverMouseClicked(evt);
             }
         });
-        jPanel1.add(lblRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        jPanel1.add(lblRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        pnlTitulo.setBackground(new java.awt.Color(255, 153, 0));
+        pnlTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lblTitulo.setText("Gerenciar Aluno");
+        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+
+        lblCorTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/grey.png"))); // NOI18N
+        lblCorTitulo.setText("jLabel6");
+        pnlTitulo.add(lblCorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 60));
+
+        jPanel1.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 520, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 440));
 
@@ -122,6 +150,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
+       
+        
         try {
             // TODO add your handling code here:
             controller.removerLinhaAluno();
@@ -129,6 +159,13 @@ public class GerenciarAluno extends javax.swing.JFrame {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblRemoverMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        new CadastroAluno().setVisible(true);
+        
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -141,7 +178,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -171,8 +208,11 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscar;
+    private javax.swing.JLabel lblCorTitulo;
     private javax.swing.JLabel lblEditar;
     private javax.swing.JLabel lblRemover;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlTitulo;
     private javax.swing.JTable tblAluno;
     // End of variables declaration//GEN-END:variables
 
