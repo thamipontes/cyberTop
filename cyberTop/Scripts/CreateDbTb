@@ -1,8 +1,4 @@
-CRIAR TABELA ALUNO
-
--- Drop table
-
--- DROP TABLE public.aluno;
+--CRIAR TABELA ALUNO
 
 CREATE TABLE public.aluno (
 	id serial NOT NULL,
@@ -20,11 +16,8 @@ CREATE TABLE public.aluno (
 	CONSTRAINT pk_id_aluno PRIMARY KEY (id)
 );
 
-CRIAR TABELA TURMA
 
--- Drop table
-
--- DROP TABLE public.turma;
+--CRIAR TABELA TURMA
 
 CREATE TABLE public.turma (
 	id serial NOT NULL,
@@ -38,11 +31,7 @@ CREATE TABLE public.turma (
 );
 
 
-CRIAR TABELA UNIVERSIDADE
-
--- Drop table
-
--- DROP TABLE public.universidade;
+--CRIAR TABELA UNIVERSIDADE
 
 CREATE TABLE public.universidade (
 	id serial NOT NULL,
@@ -53,7 +42,7 @@ CREATE TABLE public.universidade (
 );
 
 
-CRIAR TABELA PROFESSOR
+--CRIAR TABELA PROFESSOR
 
 CREATE TABLE public.professor (
 	id serial NOT NULL,
@@ -64,14 +53,28 @@ CREATE TABLE public.professor (
 	endereco varchar NOT NULL,
 	genero char NOT NULL,
 	materia varchar NOT NULL,
-	id_turma int4 NOT NULL,
+	turma varchar NOT NULL,
 	CONSTRAINT pk_id_professor PRIMARY KEY (id)
 );
 
 
+--CRIAR TABELA DIRETOR
 
---CRIAR RELACIONAMENTO DE CHAVE ESTRANGEIRA
+CREATE TABLE public.diretor (
+	id serial NOT NULL,
+	login varchar NOT NULL,
+	senha varchar NOT NULL,
+	CONSTRAINT pk_id_diretor PRIMARY KEY (id)
+);
+
+
+--CRIAR RELACIONAMENTO DE CHAVE ESTRANGEIRA ENTRE ALUNO E TURMA
 
 ALTER TABLE public.aluno ADD CONSTRAINT aluno_fk FOREIGN KEY (id_turma) REFERENCES public.turma(id);
 
-ALTER TABLE public.professor ADD CONSTRAINT professor_fk FOREIGN KEY (id_turma) REFERENCES public.turma(id);
+
+--INSERIR LOGIN E SENHA NA TABELA DIRETOR
+
+INSERT INTO public.diretor (login,senha)
+	VALUES ('maria','maria');
+

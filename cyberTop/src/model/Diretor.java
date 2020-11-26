@@ -1,8 +1,17 @@
 package model;
 //
+
+import java.util.Calendar;
+
 public class Diretor extends Pessoa{
     private String login;
     private String senha;
+
+    public Diretor(String login, String senha, String nome, String CPF, Calendar dataNascimento, String telefone, String endereco, char genero) {
+        super(nome, CPF, dataNascimento, telefone, endereco, genero);
+        this.login = login;
+        this.senha = senha;
+    }    
 
     public Diretor(String login, String senha) {
         this.login = login;
