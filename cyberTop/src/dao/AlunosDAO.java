@@ -30,7 +30,17 @@ public class AlunosDAO {
     public AlunosDAO(Connection connection) {
         this.connection = connection;
     }
+    
+    
+    public  void remove(Aluno aluno) throws SQLException{
+        String sql = "delete from aluno where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        
+        statement.setInt(1,aluno.getId());
+        statement.execute();
+    }
 
+    
     public void insert(Aluno aluno) throws SQLException{
        
             String sql = "insert into aluno (nome, cpf, data_nascimento, telefone, endereco, genero, CEP, cor_raca, id_turma, email, curso) "
@@ -52,9 +62,7 @@ public class AlunosDAO {
             statement.execute();            
             connection.close();         
        
-    
-            
-    
+    }
     
     
     public ArrayList<Aluno> findAll() throws SQLException, ParseException{
@@ -115,9 +123,26 @@ public class AlunosDAO {
     
     
 
-    
-    public void update(Aluno aluno){    
-    
+    // Tipo data
+    public void update(Aluno aluno) throws SQLException{    
+        String sql = "update aluno set nome = ?, CPF = ?, " /*data_nascimento = ?,*/+ " telefone = ?, endereco = ?, genero = ?,"
+                + " cep = ?, cor_raca = ?, id_turma = ?, email = ?, curso = ? where  id = ?; ";
+        
+        PreparedStatement statement = connection.prepareStatement(sql);
+        
+        statement.setString(1, aluno.getNome());
+        statement.setString(2, aluno.getCPF());
+        //statement.setString(3, );
+        statement.setString(3, aluno.getTelefone());
+        statement.setString(4, aluno.getEndereco());
+        statement.setString(5, Character.toString(aluno.getGenero()));
+        statement.setString(6, aluno.getCEP());
+        statement.setString(7, aluno.getCorRaca());
+        statement.setInt(8, aluno.getTurmaId());
+        statement.setString(9, aluno.getEmail());
+        statement.setString(10, aluno.getCurso());
+        statement.setInt(11, aluno.getId());
+        statement.execute();
     
     }
     

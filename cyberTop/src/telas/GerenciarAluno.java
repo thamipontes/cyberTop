@@ -27,6 +27,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
         
         controller = new GerenciarAlunoController(this);
         
+        lblEditar.setVisible(false);
+        
         try {
             controller.inserirDadosAlunoTabela();
         } catch (SQLException | ParseException ex) {
@@ -79,6 +81,11 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         lblEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lapis.png"))); // NOI18N
         lblEditar.setText("Editar");
+        lblEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditarMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
@@ -91,6 +98,11 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         lblRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/eraser.png"))); // NOI18N
         lblRemover.setText("Remover");
+        lblRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRemoverMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 440));
@@ -101,6 +113,22 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_lblEditarMouseClicked
+
+    private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
+        try {
+            // TODO add your handling code here:
+            controller.removerLinhaAluno();
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_lblRemoverMouseClicked
 
     /**
      * @param args the command line arguments
