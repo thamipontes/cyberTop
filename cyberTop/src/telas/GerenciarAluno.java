@@ -5,17 +5,33 @@
  */
 package telas;
 
+import controller.GerenciarAlunoController;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+
 /**
  *
  * @author Jhonatan Borges
  */
 public class GerenciarAluno extends javax.swing.JFrame {
 
+    private final GerenciarAlunoController controller;
     /**
      * Creates new form GerenciarAluno
      */
     public GerenciarAluno() {
         initComponents();
+        
+        controller = new GerenciarAlunoController(this);
+        
+        try {
+            controller.inserirDadosAlunoTabela();
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }
 
     /**
@@ -29,7 +45,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAluno = new javax.swing.JTable();
         lblEditar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblBuscar = new javax.swing.JLabel();
@@ -41,33 +57,23 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nome"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblAluno);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 520, 240));
 
@@ -136,9 +142,13 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblEditar;
     private javax.swing.JLabel lblRemover;
+    private javax.swing.JTable tblAluno;
     // End of variables declaration//GEN-END:variables
+
+    public JTable getTblAluno(){
+        return tblAluno;
+    }
 }

@@ -66,7 +66,7 @@ public class TurmaDAO {
     public ArrayList<Turmas> findAll() throws SQLException{
     
 
-            String sql = "select id, nome, horario, tipo, periodo, vagas from turma";
+        String sql = "select id, nome, horario, tipo, periodo, vagas from turma";
         PreparedStatement statement = connection.prepareStatement(sql); 
         
         return pesquisar(statement);        
