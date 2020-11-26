@@ -35,11 +35,11 @@ public class GerenciarAlunoController {
     public void inserirDadosAlunoTabela() throws SQLException, ParseException{
         ArrayList<Aluno> alunosBanco = carregarDadosAluno();
         
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Id", "Nome"}, 0);
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Id", "Nome", "Data de Nascimento"}, 0);
         
         
         alunosBanco.forEach(e -> {        
-            Object linha[] = new Object[]{e.getId(), e.getNome()};
+            Object linha[] = new Object[]{e.getId(), e.getNome(), e.getDataNascimento()};
             modelo.addRow(linha);        
         });
         

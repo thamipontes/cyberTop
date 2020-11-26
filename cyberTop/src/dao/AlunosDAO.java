@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import telas.CadastroAluno;
 
 /**
@@ -51,15 +52,20 @@ public class AlunosDAO {
             statement.execute();            
             connection.close();         
        
-    }
+    
+            
+    
+    
     
     public ArrayList<Aluno> findAll() throws SQLException, ParseException{
-        String sql = "select id, nome, CPF, data_nascimento telefone, endereco, genero, cep, cor_raca, id_turma from aluno";
+        String sql = "select id, nome, CPF, data_nascimento, telefone, endereco, genero, cep, cor_raca, id_turma, email, curso from aluno";
         
         PreparedStatement statement = connection.prepareStatement(sql);
         return pesquisar(statement);
         
     }
+    
+    // Revisar funcao especialmente o data de nascimento
     
     public ArrayList<Aluno> pesquisar(PreparedStatement statement) throws SQLException, ParseException{
         ArrayList<Aluno> alunos = new ArrayList<>();;
@@ -73,12 +79,20 @@ public class AlunosDAO {
             String cpf = resultSet.getString("cpf");
             //String dataNascimento = resultSet.getString("data_nascimento");
             
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dataNascimentoString = "23-08-200";//resultSet.getString("data_nascimento1");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             Calendar dataNascimento = Calendar.getInstance();
-            dataNascimento.setTime(sdf.parse("23/07/2000"));
+            
+            //dataNascimentoString = resultSet.getString("data_nascimento");
+            
+            dataNascimento.setTime(sdf.parse(dataNascimentoString));
+            
+            //JOptionPane.showMessageDialog(null, resultSet.getDate("data_nascimento"));
+            
+            //dataNascimento.setTime(sdf.parse(resultSet.get));
             
             //resultSet.getDate("data_nascimento", dataNascimento);
-                    
+             
                     
             String telefone = resultSet.getString("telefone");
             String endereco = resultSet.getString("endereco");
