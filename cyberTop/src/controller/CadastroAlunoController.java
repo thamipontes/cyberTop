@@ -10,6 +10,7 @@ import model.Aluno;
 import telas.CadastroAluno;
 import dao.Conexao;
 import dao.TurmaDAO;
+import interfaces.Cadastrar;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import telas.CadastroTurma;
  */
 
 /*Classe que controla todas as regras de negócios do cadastro do Aluno*/
-public class CadastroAlunoController{
+public class CadastroAlunoController implements Cadastrar{
     
     //Declaração do atributo que possui a tela CadastroAluno
     private final CadastroAluno view;
@@ -36,16 +37,15 @@ public class CadastroAlunoController{
     public CadastroAlunoController(CadastroAluno view) {
         this.view = view;
     }
+    
 
     /*
-        Método: salvarAluno
+        Método: salvarCadastro
         Parâmetros: vazio
         Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
-    */
-
-
-    
-    public void salvarCadastro() throws ParseException, SQLException{
+    */    
+    @Override
+    public void salvarCadastro(){
         
         /*Pegas as informações passadas nos campos da tela*/
         String nome = view.getTxtNome().getText();
@@ -63,8 +63,12 @@ public class CadastroAlunoController{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy"); 
         //Transforma o atributo em tipo calendar
         Calendar dataNascimento = Calendar.getInstance();
-        //Seta a data no atributo data nascimento
-        dataNascimento.setTime(sdf.parse(dataNascimentoString));  
+        try {
+            //Seta a data no atributo data nascimento
+            dataNascimento.setTime(sdf.parse(dataNascimentoString));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroAlunoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
        /*Tratando o dado Genero*/  
        //Variável que recebe o return do método formatarGenero que está implementado no final do código
@@ -83,9 +87,15 @@ public class CadastroAlunoController{
        /*Instaciando o objeto aluno com os dados recebidos pela tela*/
        Aluno aluno = new Aluno(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, turmaId, email, curso);
        
-       diminuirVagasTurma();
+       /*Atualizando o atributo vagas no banco de dados*/
+        try {
+            //Método que atualiza a tabela turma diminuindo a vagas toda vez que um aluno é criado na turma específica
+            diminuirVagasTurma();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroAlunoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
-       /*Conexão com o banco de dados*/
+       /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
         Connection conexao;        
         try {
             //Faz a conexão com o banco
@@ -153,6 +163,7 @@ public class CadastroAlunoController{
         Parâmetros: vazio
         Descrição: deixa todos os campos da tela vazio
     */
+    @Override
     public void limparCampos(){    
     //Insere o cursor no txtNome e o deixa em foco
         view.getTxtNome().requestFocus();
@@ -245,7 +256,7 @@ public class CadastroAlunoController{
         turma id da tela.
     */ 
     public Turmas pesquisarTurmaPorId() throws SQLException{               
-              //Faz a conexão com o banco 
+            //Faz a conexão com o banco 
             Connection conexao;
             conexao = new Conexao().getConnection();
             //Passa a conexão para a classe TurmaDAO para realizar o CRUD
@@ -283,6 +294,12 @@ public class CadastroAlunoController{
     }
     
     
+     /*
+        Método: diminuirVagasTurma()
+        Parâmetros: vazio
+        Descrição: pesquisa a turma pelo id e atualiza o campo vagas da tabela turma 
+        diminuindo 1 na quantidade de vagas no banco e insere os dados da turma novamente na tabela da tela.
+    */
     public void diminuirVagasTurma() throws SQLException{
     
         Turmas turma = pesquisarTurmaPorId();
@@ -299,6 +316,16 @@ public class CadastroAlunoController{
         
         inserirDadosTurmaTabela();    
  
+    }
+
+    @Override
+    public void removerCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void editarCadastro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -14,6 +14,8 @@ import telas.CadastroUniversidade;
 
 // Classe que controla toda regras e negocios do cadastro de universidades
 public class CadastroUniversidadeController implements Cadastrar{
+    
+    //Declaração do atributo que possui a tela CadastroUniversidade
     private final CadastroUniversidade view;
     
     //Construtor
@@ -22,6 +24,11 @@ public class CadastroUniversidadeController implements Cadastrar{
     }
     
     
+    /*
+        Método: salvarCadastro
+        Parâmetros: vazio
+        Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
+    */ 
     @Override
     public void salvarCadastro(){
     

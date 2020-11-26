@@ -51,7 +51,7 @@ CREATE TABLE public.professor (
 	data_nascimento date NOT NULL,
 	telefone varchar NOT NULL,
 	endereco varchar NOT NULL,
-	genero char NOT NULL,
+	genero bpchar(1) NOT NULL,
 	materia varchar NOT NULL,
 	turma varchar NOT NULL,
 	CONSTRAINT pk_id_professor PRIMARY KEY (id)

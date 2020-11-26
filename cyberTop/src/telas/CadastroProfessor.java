@@ -205,7 +205,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblNomeAluno4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCPF)
                             .addComponent(txtCPFProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,7 +272,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
 
         lblMateria.setText("Matéria que leciona:");
 
-        jLabel1.setText("Turmas que administra:");
+        jLabel1.setText("Turma que administra:");
 
         cmbTurmaProfessor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", " " }));
 

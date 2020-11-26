@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
 import dao.Conexao;
@@ -14,32 +10,40 @@ import model.Diretor;
 import telas.Login;
 import telas.Principal;
 
-/**
- *
- * @author thamires
- */
+/*Classe que controla todas as regras de negócios do cadastro do Login*/
 public class LoginController {
-    private Login view;
-
+    
+    //Declaração do atributo que possui a tela Login
+    private final Login view;
+    
+    //Construtor
     public LoginController(Login view) {
         this.view = view;
     }
     
+    /*
+        Método: autenticar
+        Parâmetros: vazio
+        Descrição: consulta no banco os dados os dados de logins inseridos na tela login 
+        para permitir acesso ou não sistema.   
+    */ 
     public void autenticar() throws SQLException{
         
-    //Buscar na tela as entradas     
+    /*Pegas as informações passadas nos campos da tela*/     
     String login = view.getTxtUsuario().getText();
     String senha = view.getTxtSenha().getText();
     
     //Instacia o objeto diretor
     Diretor diretor = new Diretor(login, senha);
     
-    //Verificar se existe no banco
+    //Conexão com o banco de dados 
     Connection conexao = new Conexao().getConnection();
     DiretorDAO diretorDAO = new DiretorDAO(conexao);
     
+    //Retorna verdadeiro ou falso caso tenha os dados passado na tela no banco
     boolean existeLogin =  diretorDAO.autenticarUsuario(diretor);
     
+    //Verifica a existência do login 
     if(existeLogin){
         //Mostra a tela principal    
          Principal telaPrincipal = new Principal(); 
