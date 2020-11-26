@@ -9,6 +9,7 @@ package telas;
 import controller.CadastroProfessorController;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
@@ -21,16 +22,20 @@ import javax.swing.JTextField;
 public class CadastroProfessor extends javax.swing.JFrame {
 
     private final CadastroProfessorController controller;
-    /**
-     * Creates new form CadastroProfessor
-     */
-    public CadastroProfessor() {
+    
+    public CadastroProfessor(){
         initComponents();
         
         controller = new CadastroProfessorController(this);
         
         // Centraliza a janela no centro da tela
         setLocationRelativeTo(null);
+        
+        try {
+            controller.inserirDadosTurmaCmB();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,7 +75,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
         lblMateria = new javax.swing.JLabel();
         txtMateria = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbTurmaProfessor = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -226,7 +231,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblNomeAluno4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCPF)
                             .addComponent(txtCPFProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -276,7 +281,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
 
         jLabel1.setText("Turmas que administra:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", " " }));
+        cmbTurmaProfessor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", " " }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -290,7 +295,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTurmaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(224, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -303,7 +308,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTurmaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -335,7 +340,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
         // Exibe alerta caso algum campo do formulario esteja vazio
         if(!(controller.exibirAlertarCampos())){
             //Salva os dados no banco de dados
-            
+            controller.salvarCadastro();
         }
 
     }//GEN-LAST:event_bntSalvarActionPerformed
@@ -407,7 +412,7 @@ public class CadastroProfessor extends javax.swing.JFrame {
     private javax.swing.JButton bntVoltar;
     private javax.swing.JComboBox<String> cmbCorRacaProfessor;
     private javax.swing.JComboBox<String> cmbGeneroProfessor;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbTurmaProfessor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -470,6 +475,15 @@ public class CadastroProfessor extends javax.swing.JFrame {
     public JTextField getTxtMateria(){
         return txtMateria;
     }
+
+    public JComboBox<String> getCmbTurmaProfessor() {
+        return cmbTurmaProfessor;
+    }
+
+    public void setCmbTurmaProfessor(JComboBox<String> cmbTurmaProfessor) {
+        this.cmbTurmaProfessor = cmbTurmaProfessor;
+    }    
+    
 
 
 

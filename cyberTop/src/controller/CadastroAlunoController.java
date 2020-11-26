@@ -111,7 +111,7 @@ public class CadastroAlunoController{
         Descrição: Confere qual index foi selecionado na tela cadastro aluno do campo gênero 
     e retorna um char que indica se o gênero é não informado, masculino, feminino e outros    
     */
-    public char formatarGenero(int index){        
+    public static char formatarGenero(int index){        
         if(index == 1) return 'I'; //Prefiro não informar
         if(index == 2) return 'M'; //Masculino
         if(index == 3) return 'F'; //Feminino
@@ -176,7 +176,7 @@ public class CadastroAlunoController{
         Parâmetros: vazio
         Descrição: retorna a lista de turmas que está persistido no banco de dados
     */
-     private ArrayList<Turmas> carregarDadosTurma() throws SQLException {
+     public static ArrayList<Turmas> carregarDadosTurma() throws SQLException {
         //Faz a conexão com o banco 
         Connection conexao;
         conexao = new Conexao().getConnection();
