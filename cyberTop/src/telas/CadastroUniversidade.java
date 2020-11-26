@@ -40,7 +40,11 @@ public class CadastroUniversidade extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlUniao = new javax.swing.JPanel();
+        pnlTitulo = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblCorTitulo = new javax.swing.JLabel();
+        pnlInformacoesUniversidade = new javax.swing.JPanel();
         lblNomeUniversidade = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
         lblCampus = new javax.swing.JLabel();
@@ -50,12 +54,32 @@ public class CadastroUniversidade extends javax.swing.JFrame {
         bntSalvar = new javax.swing.JButton();
         bntLimpar = new javax.swing.JButton();
         bntVoltar2 = new javax.swing.JButton();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Universidade");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações da Universidade"));
-        jPanel1.setToolTipText("");
+        pnlUniao.setBackground(new java.awt.Color(255, 255, 255));
+        pnlUniao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlTitulo.setBackground(new java.awt.Color(255, 153, 0));
+        pnlTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lblTitulo.setText("Cadastro de Universidade");
+        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        lblCorTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/grey.png"))); // NOI18N
+        lblCorTitulo.setText("jLabel6");
+        pnlTitulo.add(lblCorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 70));
+
+        pnlUniao.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
+        pnlInformacoesUniversidade.setBackground(new java.awt.Color(255, 255, 255));
+        pnlInformacoesUniversidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações da Universidade"));
+        pnlInformacoesUniversidade.setToolTipText("");
 
         lblNomeUniversidade.setText("Nome:");
 
@@ -65,37 +89,37 @@ public class CadastroUniversidade extends javax.swing.JFrame {
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlInformacoesUniversidadeLayout = new javax.swing.GroupLayout(pnlInformacoesUniversidade);
+        pnlInformacoesUniversidade.setLayout(pnlInformacoesUniversidadeLayout);
+        pnlInformacoesUniversidadeLayout.setHorizontalGroup(
+            pnlInformacoesUniversidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInformacoesUniversidadeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlInformacoesUniversidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInformacoesUniversidadeLayout.createSequentialGroup()
                         .addComponent(txtCampus, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInformacoesUniversidadeLayout.createSequentialGroup()
+                        .addGroup(pnlInformacoesUniversidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNomeUniversidade)
                             .addComponent(txtNomeUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlInformacoesUniversidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEstado)
                             .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(68, 68, 68))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlInformacoesUniversidadeLayout.createSequentialGroup()
                         .addComponent(lblCampus)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        pnlInformacoesUniversidadeLayout.setVerticalGroup(
+            pnlInformacoesUniversidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInformacoesUniversidadeLayout.createSequentialGroup()
+                .addGroup(pnlInformacoesUniversidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomeUniversidade)
                     .addComponent(lblEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlInformacoesUniversidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -105,6 +129,9 @@ public class CadastroUniversidade extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pnlUniao.add(pnlInformacoesUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 650, -1));
+
+        bntSalvar.setBackground(new java.awt.Color(255, 255, 255));
         bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +139,9 @@ public class CadastroUniversidade extends javax.swing.JFrame {
                 bntSalvarActionPerformed(evt);
             }
         });
+        pnlUniao.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
 
+        bntLimpar.setBackground(new java.awt.Color(255, 255, 255));
         bntLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar .png"))); // NOI18N
         bntLimpar.setText("Limpar");
         bntLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +149,9 @@ public class CadastroUniversidade extends javax.swing.JFrame {
                 bntLimparActionPerformed(evt);
             }
         });
+        pnlUniao.add(bntLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
 
+        bntVoltar2.setBackground(new java.awt.Color(255, 255, 255));
         bntVoltar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
         bntVoltar2.setText("Voltar");
         bntVoltar2.addActionListener(new java.awt.event.ActionListener() {
@@ -128,38 +159,12 @@ public class CadastroUniversidade extends javax.swing.JFrame {
                 bntVoltar2ActionPerformed(evt);
             }
         });
+        pnlUniao.add(bntVoltar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(bntSalvar)
-                        .addGap(81, 81, 81)
-                        .addComponent(bntLimpar)
-                        .addGap(82, 82, 82)
-                        .addComponent(bntVoltar2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntSalvar)
-                    .addComponent(bntLimpar)
-                    .addComponent(bntVoltar2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(pnlUniao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 260));
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
+        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 280));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,14 +243,17 @@ public class CadastroUniversidade extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntLimpar;
     private javax.swing.JButton bntSalvar;
-    private javax.swing.JButton bntVoltar;
-    private javax.swing.JButton bntVoltar1;
     private javax.swing.JButton bntVoltar2;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblCampus;
+    private javax.swing.JLabel lblCorTitulo;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblNomeUniversidade;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlInformacoesUniversidade;
+    private javax.swing.JPanel pnlTitulo;
+    private javax.swing.JPanel pnlUniao;
     private javax.swing.JTextField txtCampus;
     private javax.swing.JTextField txtNomeUniversidade;
     // End of variables declaration//GEN-END:variables

@@ -96,7 +96,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         pnlDadosTurma = new javax.swing.JPanel();
         ScrollTabelaTurmas = new javax.swing.JScrollPane();
         tblTurmas = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
+        lblIdTurma = new javax.swing.JLabel();
         txtTurma = new javax.swing.JTextField();
         bntBuscar = new javax.swing.JButton();
         bntLimpar = new javax.swing.JButton();
@@ -117,8 +117,10 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         pnlCentral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlUniao.setBackground(new java.awt.Color(255, 255, 255));
         pnlUniao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlDadosPessoais.setBackground(new java.awt.Color(255, 255, 255));
         pnlDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
         lblNomeAluno.setText("Nome:");
@@ -314,8 +316,10 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         pnlUniao.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
+        pnlDadosTurma.setBackground(new java.awt.Color(255, 255, 255));
         pnlDadosTurma.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a turma desejada"));
 
+        ScrollTabelaTurmas.setBackground(new java.awt.Color(255, 255, 255));
         ScrollTabelaTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ScrollTabelaTurmasMouseClicked(evt);
@@ -352,7 +356,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         });
         ScrollTabelaTurmas.setViewportView(tblTurmas);
 
-        jLabel5.setText("Id da turma:");
+        lblIdTurma.setText("Id da turma:");
 
         txtTurma.setToolTipText("Insira o id da turma");
         txtTurma.addActionListener(new java.awt.event.ActionListener() {
@@ -361,35 +365,12 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
 
+        bntBuscar.setBackground(new java.awt.Color(255, 255, 255));
         bntBuscar.setText("Buscar");
         bntBuscar.setToolTipText("pesquisar");
         bntBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntBuscarActionPerformed(evt);
-            }
-        });
-
-        bntLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar .png"))); // NOI18N
-        bntLimpar.setText("Limpar");
-        bntLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntLimparActionPerformed(evt);
-            }
-        });
-
-        bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
-        bntSalvar.setText("Salvar");
-        bntSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSalvarActionPerformed(evt);
-            }
-        });
-
-        bntVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
-        bntVoltar.setText("Voltar");
-        bntVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntVoltarActionPerformed(evt);
             }
         });
 
@@ -403,43 +384,60 @@ public class CadastroAluno extends javax.swing.JFrame {
                     .addComponent(ScrollTabelaTurmas)
                     .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
                         .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(lblIdTurma)
                             .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
                                 .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bntBuscar)))
                         .addGap(0, 0, 0)))
                 .addContainerGap())
-            .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(bntSalvar)
-                .addGap(94, 94, 94)
-                .addComponent(bntLimpar)
-                .addGap(109, 109, 109)
-                .addComponent(bntVoltar)
-                .addContainerGap(93, Short.MAX_VALUE))
         );
         pnlDadosTurmaLayout.setVerticalGroup(
             pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
-                .addComponent(jLabel5)
+                .addComponent(lblIdTurma)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScrollTabelaTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntLimpar)
-                    .addComponent(bntSalvar)
-                    .addComponent(bntVoltar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlUniao.add(pnlDadosTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 272, 650, 360));
+        pnlUniao.add(pnlDadosTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 650, 310));
 
-        pnlCentral.add(pnlUniao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 620));
+        bntLimpar.setBackground(new java.awt.Color(255, 255, 255));
+        bntLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limpar .png"))); // NOI18N
+        bntLimpar.setText("Limpar");
+        bntLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntLimparActionPerformed(evt);
+            }
+        });
+        pnlUniao.add(bntLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 590, -1, -1));
+
+        bntSalvar.setBackground(new java.awt.Color(255, 255, 255));
+        bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        bntSalvar.setText("Salvar");
+        bntSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSalvarActionPerformed(evt);
+            }
+        });
+        pnlUniao.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, -1, -1));
+
+        bntVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        bntVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/voltar.png"))); // NOI18N
+        bntVoltar.setText("Voltar");
+        bntVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVoltarActionPerformed(evt);
+            }
+        });
+        pnlUniao.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 590, -1, -1));
+
+        pnlCentral.add(pnlUniao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 630));
 
         background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
         background1.setText("jLabel6");
@@ -629,12 +627,12 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCorTitulo;
     private javax.swing.JLabel lblCurso;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblIdTurma;
     private javax.swing.JLabel lblLogradouro;
     private javax.swing.JLabel lblNomeAluno;
     private javax.swing.JLabel lblTitulo;
