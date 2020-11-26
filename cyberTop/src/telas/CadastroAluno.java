@@ -472,12 +472,8 @@ public class CadastroAluno extends javax.swing.JFrame {
         
         // Exibe alerta caso algum campo do formulario esteja vazio
         if(!(controller.exibirAlertarCampos())){            
-        //Salva os dados no banco de dados
-        try {            
+            //Salva os dados no banco de dados
             controller.salvarCadastro();
-        } catch (ParseException | SQLException ex) {
-            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
-        }       
     }   
    
     }//GEN-LAST:event_bntSalvarActionPerformed
