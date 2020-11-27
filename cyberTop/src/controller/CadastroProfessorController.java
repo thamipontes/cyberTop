@@ -93,6 +93,7 @@ public class CadastroProfessorController implements Cadastrar{
         Descrição: confere se teve algum campo que ficou sem ser preenchido e mostra na tela
         uma mensagem para preencher todos os campos.
     */
+    @Override
     public boolean exibirAlertarCampos(){
         if(view.getTxtNome().getText().equals("")                       ||
             view.getTxtCPF().getText().equals("   .   .   -  ")         || 
@@ -158,12 +159,6 @@ public class CadastroProfessorController implements Cadastrar{
    
     }
 
-    
-
-    @Override
-    public void removerCadastro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void editarCadastro() {

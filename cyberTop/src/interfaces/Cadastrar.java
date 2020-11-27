@@ -13,7 +13,7 @@ public interface Cadastrar {
     
     void salvarCadastro();
     void limparCampos();
-    void removerCadastro();
+    boolean exibirAlertarCampos();
     void editarCadastro();
     
 }

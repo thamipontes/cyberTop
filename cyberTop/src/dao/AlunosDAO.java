@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import javax.swing.JOptionPane;
+
 
 /*Classe de conexão do banco com a tabela alunos*/
 public class AlunosDAO {
@@ -84,23 +84,10 @@ public class AlunosDAO {
             int id = resultSet.getInt("id");
             String nome = resultSet.getString("nome");
             String cpf = resultSet.getString("cpf");
-            //String dataNascimento = resultSet.getString("data_nascimento");
+            Date dataNascimentoBanco = resultSet.getDate("data_nascimento");
+            Calendar dataNascimento = Calendar.getInstance();             
+            dataNascimento.setTime(dataNascimentoBanco); 
             
-            String dataNascimentoString = "23-08-200";//resultSet.getString("data_nascimento1");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            Calendar dataNascimento = Calendar.getInstance();
-            
-            //dataNascimentoString = resultSet.getString("data_nascimento");
-            
-            dataNascimento.setTime(sdf.parse(dataNascimentoString));
-            
-            //JOptionPane.showMessageDialog(null, resultSet.getDate("data_nascimento"));
-            
-            //dataNascimento.setTime(sdf.parse(resultSet.get));
-            
-            //resultSet.getDate("data_nascimento", dataNascimento);
-             
-                    
             String telefone = resultSet.getString("telefone");
             String endereco = resultSet.getString("endereco");
             String genero1 = resultSet.getString("genero");
@@ -130,7 +117,7 @@ public class AlunosDAO {
         PreparedStatement statement = connection.prepareStatement(sql);
         
         statement.setString(1, aluno.getNome());
-        JOptionPane.showMessageDialog(null, "HAHAHAHAHAHAAHAHAHAHAHAHAHAHAH"); 
+        //JOptionPane.showMessageDialog(null, "HAHAHAHAHAHAAHAHAHAHAHAHAHAHAH"); 
         statement.setString(2, aluno.getCPF());
         //statement.setDate(3, aluno.getDataNascimento().getTime());
         statement.setString(4, aluno.getTelefone());

@@ -131,6 +131,8 @@ public class CadastroAlunoController implements Cadastrar{
         Descrição: confere se teve algum campo que ficou sem ser preenchido e mostra na tela
         uma mensagem para preencher todos os campos.
     */
+    
+    @Override
     public boolean exibirAlertarCampos(){        
         //Descobre se algum dos campos ficou vazio
         if(view.getTxtNome().getText().equals("")                       ||
@@ -313,15 +315,7 @@ public class CadastroAlunoController implements Cadastrar{
         inserirDadosTurmaTabela();    
  
     }
-    
-    
-    
-    
 
-    @Override
-    public void removerCadastro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void editarCadastro() {

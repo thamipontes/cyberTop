@@ -21,10 +21,7 @@ import telas.CadastroAluno;
 import telas.CadastroTurma;
 import telas.GerenciarAluno;
 
-/**
- *
- * @author Jhonatan Borges
- */
+
 public class GerenciarAlunoController {
     private final GerenciarAluno view;
     
