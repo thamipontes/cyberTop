@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 
 /*Classe de conexão do banco com a tabela alunos*/
@@ -54,7 +55,7 @@ public class AlunosDAO {
 
             
             statement.execute();            
-            connection.close();         
+            //connection.close();         
        
     }
     
@@ -65,7 +66,7 @@ public class AlunosDAO {
     */
     public ArrayList<Aluno> findAll() throws SQLException, ParseException{
         //comando sql que será executado no banco de dados
-        String sql = "select id, nome, CPF, data_nascimento, telefone, endereco, genero, cep, cor_raca, id_turma, email, curso from aluno";
+        String sql = "select id, nome, cpf, data_nascimento, telefone, endereco, genero, cep, cor_raca, id_turma, email, curso from aluno";
         
         PreparedStatement statement = connection.prepareStatement(sql);
         return pesquisar(statement);
@@ -111,15 +112,15 @@ public class AlunosDAO {
 
     // Tipo data
     public void update(Aluno aluno) throws SQLException{    
-        String sql = "update aluno set nome = ?, CPF = ?, data_nascimento = ?, telefone = ?, endereco = ?, genero = ?,"
-                + " cep = ?, cor_raca = ?, id_turma = ?, email = ?, curso = ? where  id = ?; ";
+        String sql = "update aluno set nome = ?, cpf = ?, data_nascimento = ?, telefone = ?, endereco = ?, genero = ?,"
+                + " cep = ?, cor_raca = ?, id_turma = ?, email = ?, curso = ? where  id = ?;";
         
         PreparedStatement statement = connection.prepareStatement(sql);
         
         statement.setString(1, aluno.getNome());
-        //JOptionPane.showMessageDialog(null, "HAHAHAHAHAHAAHAHAHAHAHAHAHAHAH"); 
+        JOptionPane.showMessageDialog(null, aluno); 
         statement.setString(2, aluno.getCPF());
-        //statement.setDate(3, aluno.getDataNascimento().getTime());
+        statement.setDate(3, new java.sql.Date(aluno.getDataNascimento().getTimeInMillis()));
         statement.setString(4, aluno.getTelefone());
         statement.setString(5, aluno.getEndereco());
         statement.setString(6, Character.toString(aluno.getGenero()));

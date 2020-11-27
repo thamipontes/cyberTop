@@ -46,7 +46,7 @@ public class GerenciarAlunoController {
     }
     
     
-    public void salvarEditar() throws ParseException{
+    public void salvarEditar() throws ParseException, SQLException{
         
         /*Pegas as informações passadas nos campos da tela*/
         String nome = view.getTxtNome().getText();
@@ -81,13 +81,22 @@ public class GerenciarAlunoController {
         
        /*Tratando o dado da turma*/
        //Transforma String em inteiro
-        //int turmaId = Integer.parseInt(view.getTxtTurma().getText());
+        //int turmaId;
+        int turmaId = 0;
+        ArrayList<Aluno> alunoBanco = carregarDadosAluno();
+        int linha = view.getTblAluno().getSelectedRow();
         
+        int id=0;
+        if(linha >= 0 && linha < alunoBanco.size()){
+            Aluno aux = alunoBanco.get(linha);
+            id = aux.getId();
+            turmaId = aux.getTurmaId();
+        }
         
     
        /*Instaciando o objeto aluno com os dados recebidos pela tela*/
-       Aluno aluno = new Aluno(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, 2, email, curso);
-                
+       Aluno aluno = new Aluno(id, nome, cpf, dataNascimento, telefone, endereco, genero, turmaId, cep, corRaca, email, curso);
+        
                 
                 // Editar calendar
                 //aluno.setDataNascimento(dataNascimento);

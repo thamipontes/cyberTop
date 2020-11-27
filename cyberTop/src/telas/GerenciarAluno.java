@@ -477,7 +477,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             controller.salvarEditar();
-        } catch (ParseException ex) {
+        } catch (ParseException | SQLException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblSalvarMouseClicked
