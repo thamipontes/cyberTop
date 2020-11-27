@@ -29,7 +29,7 @@ public class GerenciarAlunoController {
     // Metodo que vai setar as informações do aluno selecionado na tabela para o campo de dados
     public void editar() throws SQLException, ParseException{
         if(view.getTblAluno().getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder remover.");
+            JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder editar.");
         }else{
         
             ArrayList<Aluno> alunoBanco = carregarDadosAluno();
