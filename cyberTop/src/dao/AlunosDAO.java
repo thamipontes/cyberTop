@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
 /*Classe de conexão do banco com a tabela alunos*/
 public class AlunosDAO {
     //Atributo que recebe a conexão
@@ -20,7 +19,7 @@ public class AlunosDAO {
         this.connection = connection;
     }
     
-    
+    /**/
     public  void remove(Aluno aluno) throws SQLException{
         String sql = "delete from aluno where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -141,6 +140,14 @@ public class AlunosDAO {
         statement.setString(10, aluno.getCurso());
         statement.setInt(11, aluno.getId());
         statement.execute();
+    }
+    
+    public Aluno findById(int idAluno) throws SQLException, ParseException{
+    
+        String sql = "select * from aluno where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, idAluno);        
+        return pesquisar(statement).get(0);     
     
     }
     
