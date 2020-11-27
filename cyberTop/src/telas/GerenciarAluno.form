@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel3"/>
-      </Properties>
-    </Component>
-  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -245,7 +238,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="71" width="650" height="190"/>
+              <AbsoluteConstraints x="10" y="71" width="650" height="230"/>
             </Constraint>
           </Constraints>
 
@@ -322,6 +315,13 @@
                               </Group>
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblTurma" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtIdTurma" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -366,7 +366,11 @@
                           <Component id="txtCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtLogradouro" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblTurma" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtIdTurma" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -520,10 +524,20 @@
                 <Property name="toolTipText" type="java.lang.String" value="Insira o endere&#xe7;o do estudante"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="lblTurma">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Id da turma:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtIdTurma">
+            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="lblCancelar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/cancelar.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
@@ -531,12 +545,15 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="290" y="280" width="-1" height="-1"/>
+              <AbsoluteConstraints x="380" y="320" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSalvar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/salvar.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
           <Events>
@@ -544,7 +561,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="420" y="280" width="-1" height="-1"/>
+              <AbsoluteConstraints x="250" y="310" width="-1" height="40"/>
             </Constraint>
           </Constraints>
         </Component>

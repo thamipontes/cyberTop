@@ -40,6 +40,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
         controller.desativarCampos();
         lblRemover.setEnabled(false);
         lblEditar.setEnabled(false);
+        lblCancelar.setVisible(false);
+        lblSalvar.setVisible(false);
         
         
         try {
@@ -60,7 +62,6 @@ public class GerenciarAluno extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         bntVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -93,11 +94,11 @@ public class GerenciarAluno extends javax.swing.JFrame {
         txtCEP = new javax.swing.JFormattedTextField();
         lblLogradouro = new javax.swing.JLabel();
         txtLogradouro = new javax.swing.JTextField();
+        lblTurma = new javax.swing.JLabel();
+        txtIdTurma = new javax.swing.JTextField();
         lblCancelar = new javax.swing.JLabel();
         lblSalvar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-
-        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -277,6 +278,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         txtLogradouro.setToolTipText("Insira o endereço do estudante");
 
+        lblTurma.setText("Id da turma:");
+
         javax.swing.GroupLayout pnlDadosAlunoLayout = new javax.swing.GroupLayout(pnlDadosAluno);
         pnlDadosAluno.setLayout(pnlDadosAlunoLayout);
         pnlDadosAlunoLayout.setHorizontalGroup(
@@ -334,7 +337,12 @@ public class GerenciarAluno extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(21, 21, 21))))
+                        .addGap(21, 21, 21))
+                    .addGroup(pnlDadosAlunoLayout.createSequentialGroup()
+                        .addGroup(pnlDadosAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTurma)
+                            .addComponent(txtIdTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         pnlDadosAlunoLayout.setVerticalGroup(
             pnlDadosAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,26 +378,32 @@ public class GerenciarAluno extends javax.swing.JFrame {
                     .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTurma)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(pnlDadosAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 71, 650, 190));
+        jPanel1.add(pnlDadosAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 71, 650, 230));
 
+        lblCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         lblCancelar.setText("Cancelar");
         lblCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCancelarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, -1, -1));
+        jPanel1.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
+        lblSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         lblSalvar.setText("Salvar");
         lblSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSalvarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+        jPanel1.add(lblSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, -1, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 630));
 
@@ -522,7 +536,6 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCorRaca;
     private javax.swing.JComboBox<String> cmbGenero;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -543,6 +556,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JLabel lblRemover;
     private javax.swing.JLabel lblSalvar;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTurma;
     private javax.swing.JPanel pnlDadosAluno;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JTable tblAluno;
@@ -551,6 +565,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JTextField txtCurso;
     private javax.swing.JFormattedTextField txtDataNascimento;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtIdTurma;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtTelefone;
@@ -630,4 +645,10 @@ public class GerenciarAluno extends javax.swing.JFrame {
     public JTextField getTxtCurso(){
         return txtCurso;
     }
+    
+    public JTextField getTxtIdTurma(){
+        return txtIdTurma;
+    }
+    
+    
 }
