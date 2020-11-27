@@ -2,6 +2,7 @@ package dao;
 
 import model.Aluno;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 /*Classe de conexão do banco com a tabela alunos*/
 public class AlunosDAO {
@@ -122,23 +124,24 @@ public class AlunosDAO {
 
     // Tipo data
     public void update(Aluno aluno) throws SQLException{    
-        String sql = "update aluno set nome = ?, CPF = ?, " /*data_nascimento = ?,*/+ " telefone = ?, endereco = ?, genero = ?,"
+        String sql = "update aluno set nome = ?, CPF = ?, data_nascimento = ?, telefone = ?, endereco = ?, genero = ?,"
                 + " cep = ?, cor_raca = ?, id_turma = ?, email = ?, curso = ? where  id = ?; ";
         
         PreparedStatement statement = connection.prepareStatement(sql);
         
         statement.setString(1, aluno.getNome());
+        JOptionPane.showMessageDialog(null, "HAHAHAHAHAHAAHAHAHAHAHAHAHAHAH"); 
         statement.setString(2, aluno.getCPF());
-        //statement.setString(3, );
-        statement.setString(3, aluno.getTelefone());
-        statement.setString(4, aluno.getEndereco());
-        statement.setString(5, Character.toString(aluno.getGenero()));
-        statement.setString(6, aluno.getCEP());
-        statement.setString(7, aluno.getCorRaca());
-        statement.setInt(8, aluno.getTurmaId());
-        statement.setString(9, aluno.getEmail());
-        statement.setString(10, aluno.getCurso());
-        statement.setInt(11, aluno.getId());
+        //statement.setDate(3, aluno.getDataNascimento().getTime());
+        statement.setString(4, aluno.getTelefone());
+        statement.setString(5, aluno.getEndereco());
+        statement.setString(6, Character.toString(aluno.getGenero()));
+        statement.setString(7, aluno.getCEP());
+        statement.setString(8, aluno.getCorRaca());
+        statement.setInt(9, aluno.getTurmaId());
+        statement.setString(10, aluno.getEmail());
+        statement.setString(11, aluno.getCurso());
+        statement.setInt(12, aluno.getId());
         statement.execute();
     }
     

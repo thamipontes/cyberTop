@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -37,7 +38,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         controller.desativarCampos();
-        
+        lblRemover.setEnabled(false);
+        lblEditar.setEnabled(false);
         
         
         try {
@@ -64,7 +66,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAluno = new javax.swing.JTable();
         lblEditar = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblCadastrar = new javax.swing.JLabel();
         lblBuscar = new javax.swing.JLabel();
         lblRemover = new javax.swing.JLabel();
         pnlTitulo = new javax.swing.JPanel();
@@ -91,6 +93,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
         txtCEP = new javax.swing.JFormattedTextField();
         lblLogradouro = new javax.swing.JLabel();
         txtLogradouro = new javax.swing.JTextField();
+        lblCancelar = new javax.swing.JLabel();
+        lblSalvar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
@@ -148,14 +152,14 @@ public class GerenciarAluno extends javax.swing.JFrame {
         });
         jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
-        jLabel2.setText("Cadastrar");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
+        lblCadastrar.setText("Cadastrar");
+        lblCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                lblCadastrarMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
+        jPanel1.add(lblCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
         lblBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         lblBuscar.setText("Buscar");
@@ -371,6 +375,22 @@ public class GerenciarAluno extends javax.swing.JFrame {
 
         jPanel1.add(pnlDadosAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 71, 650, 190));
 
+        lblCancelar.setText("Cancelar");
+        lblCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCancelarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, -1, -1));
+
+        lblSalvar.setText("Salvar");
+        lblSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSalvarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 630));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
@@ -381,7 +401,12 @@ public class GerenciarAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
-        controller.ativarCampos();
+        try {
+            //Chamar metodo editar
+            controller.editar();
+        } catch (ParseException | SQLException ex) {
+            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
@@ -395,12 +420,12 @@ public class GerenciarAluno extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblRemoverMouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
         // TODO add your handling code here:
         new CadastroAluno().setVisible(true);
         
         
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_lblCadastrarMouseClicked
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
         // TODO add your handling code here:
@@ -432,11 +457,30 @@ public class GerenciarAluno extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            controller.editar();
+            
+            controller.inserirCampos();
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tblAlunoMouseClicked
+
+    private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
+        try {
+            // TODO add your handling code here:
+            controller.cancelarEditar();
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_lblCancelarMouseClicked
+
+    private void lblSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarMouseClicked
+        try {
+            // TODO add your handling code here:
+            controller.salvarEditar();
+        } catch (ParseException ex) {
+            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_lblSalvarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -478,7 +522,6 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCorRaca;
     private javax.swing.JComboBox<String> cmbGenero;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -489,6 +532,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblCadastrar;
+    private javax.swing.JLabel lblCancelar;
     private javax.swing.JLabel lblCorTitulo;
     private javax.swing.JLabel lblCurso;
     private javax.swing.JLabel lblEditar;
@@ -496,6 +541,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogradouro;
     private javax.swing.JLabel lblNomeAluno;
     private javax.swing.JLabel lblRemover;
+    private javax.swing.JLabel lblSalvar;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlDadosAluno;
     private javax.swing.JPanel pnlTitulo;
@@ -513,6 +559,36 @@ public class GerenciarAluno extends javax.swing.JFrame {
     public JTable getTblAluno(){
         return tblAluno;
     }
+    
+    //Getters dos botoes gerenciar alunos
+    public JLabel getLblEditar(){
+        return lblEditar;
+    }
+    public JLabel getLblRemover(){
+        return lblRemover;
+    }
+    
+    public JLabel getLblBuscar(){
+        return lblBuscar;
+    }
+    
+    public JLabel getLblCancelar(){
+        return lblCancelar;
+    }
+    
+    public JLabel getLblSalvar(){
+        return lblSalvar;
+    }
+    
+    public JLabel getLblCadastrar(){
+        return lblCadastrar;
+    }
+    
+    
+    
+    
+    
+    
     
     //Getters dos campos da tela cadastro aluno
     public JComboBox<String> getCmbCorRaca() {

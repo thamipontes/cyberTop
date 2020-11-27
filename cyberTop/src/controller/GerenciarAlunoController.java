@@ -6,7 +6,9 @@ import dao.TurmaDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,37 +31,139 @@ public class GerenciarAlunoController {
     public GerenciarAlunoController(GerenciarAluno view){
         this.view = view;
     }
-    // Metodo que vai setar as informações do aluno selecionado na tabela para o campo de dados
-    public void editar() throws SQLException, ParseException{
+    
+    
+    public void editar() throws ParseException, SQLException{
         if(view.getTblAluno().getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder remover.");
+            JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder editar.");
         }else{
+            ativarCampos();
+            view.getLblCadastrar().setVisible(false);
+            view.getLblEditar().setVisible(false);
+            view.getLblRemover().setVisible(false);
+            view.getLblBuscar().setVisible(false);
+            view.getLblCancelar().setVisible(true);
+            view.getLblSalvar().setVisible(true);
+        }
         
-            ArrayList<Aluno> alunoBanco = carregarDadosAluno();
-            int linha = view.getTblAluno().getSelectedRow();
+    }
+    
+    
+    public void salvarEditar() throws ParseException{
+        
+        /*Pegas as informações passadas nos campos da tela*/
+        String nome = view.getTxtNome().getText();
+        String cpf = view.getTxtCPF().getText();
+        String telefone = view.getTxtTelefone().getText();
+        String endereco = view.getTxtLogradouro().getText();
+        String cep = view.getTxtCEP().getText();
+        String email = view.getTxtEmail().getText();
+        String curso = view.getTxtCurso().getText();
+        
+        /*Tratando o dado Data de Nascimento*/   
+        //Pega o texto que está no campo data de nascimento
+        String dataNascimentoString = view.getTxtDataNascimento().getText();
+        //define padrão que a data deve obedecer
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy"); 
+        //Transforma o atributo em tipo calendar
+        Calendar dataNascimento = Calendar.getInstance();
+        try {
+            //Seta a data no atributo data nascimento
+            dataNascimento.setTime(sdf.parse(dataNascimentoString));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroAlunoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+       /*Tratando o dado Genero*/  
+       //Variável que recebe o return do método formatarGenero que está implementado no final do código
+        char genero = formatarGenero((view.getCmbGenero().getSelectedIndex()));        
+    
+       /*Tratando o dado Cor Raça*/
+       //Transforma o o texto do item selecionado em string e guarda na variável
+        String corRaca = view.getCmbCorRaca().getSelectedItem().toString();
+        
+       /*Tratando o dado da turma*/
+       //Transforma String em inteiro
+        //int turmaId = Integer.parseInt(view.getTxtTurma().getText());
+        
+        
+    
+       /*Instaciando o objeto aluno com os dados recebidos pela tela*/
+       Aluno aluno = new Aluno(nome, cpf, dataNascimento, telefone, endereco, genero, cep, corRaca, 2, email, curso);
+                
+                
+                // Editar calendar
+                //aluno.setDataNascimento(dataNascimento);
+                /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
+                Connection conexao;        
+                try {
+                    //Faz a conexão com o banco
+                    conexao = new Conexao().getConnection();
+                    //Passa a conexão para a classe AlunosDAO que possui o CRUD
+                    AlunosDAO alunoDAO = new AlunosDAO(conexao);
+                    //Chama o método de inserção            
+                    alunoDAO.update(aluno);
+                    //Mensagem de aluno cadastrado com sucesso
+                    JOptionPane.showMessageDialog(null, "Aluno editado com sucesso");
+                    inserirDadosAlunoTabela();
 
-            if(linha >= 0 && linha < alunoBanco.size()){
-                Aluno aluno = alunoBanco.get(linha);
-                
-                view.getTxtNome().setText(aluno.getNome());
-                view.getTxtCPF().setText(aluno.getCPF());
-                view.getTxtEmail().setText(aluno.getEmail());
-                view.getTxtTelefone().setText(aluno.getTelefone());
-                view.getTxtCEP().setText(aluno.getCEP());
-                view.getTxtLogradouro().setText(aluno.getEndereco());
-                view.getTxtCurso().setText(aluno.getCurso());
-                view.getCmbGenero().setSelectedItem(tratarGenero(aluno));
-                view.getCmbCorRaca().setSelectedItem(tratarCorRaca(aluno));
-                
-                
-                view.getTxtDataNascimento().setText("00/00/0000");
-                
-                
-                
+                    //aumentarVagasTurma(aluno.getTurmaId());
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+                    //Caso dê erro mostra essa tela
+                    JOptionPane.showMessageDialog(null, "Falha ao editar dado no banco");
+                }  
+
             
 
-            }
+        
+        
+    }
+    
+    public void cancelarEditar() throws SQLException, ParseException{
+        view.getLblCadastrar().setVisible(true);
+        view.getLblEditar().setVisible(true);
+        view.getLblEditar().setEnabled(false);
+        view.getLblRemover().setVisible(true);
+        view.getLblRemover().setEnabled(false);
+        view.getLblBuscar().setVisible(true);
+        view.getLblCancelar().setVisible(false);
+        view.getLblSalvar().setVisible(false);
+        limparCampos();
+        inserirDadosAlunoTabela();
+        
+    }
+    
+    
+    
+    // Metodo que vai setar as informações do aluno selecionado na tabela para o campo de dados
+    public void inserirCampos() throws SQLException, ParseException{
+        
+        view.getLblRemover().setEnabled(true);
+        view.getLblEditar().setEnabled(true);
+        ArrayList<Aluno> alunoBanco = carregarDadosAluno();
+        int linha = view.getTblAluno().getSelectedRow();
+
+        if(linha >= 0 && linha < alunoBanco.size()){
+            Aluno aluno = alunoBanco.get(linha);
+                
+            view.getTxtNome().setText(aluno.getNome());
+            view.getTxtCPF().setText(aluno.getCPF());
+            view.getTxtEmail().setText(aluno.getEmail());
+            view.getTxtTelefone().setText(aluno.getTelefone());
+            view.getTxtCEP().setText(aluno.getCEP());
+            view.getTxtLogradouro().setText(aluno.getEndereco());
+            view.getTxtCurso().setText(aluno.getCurso());
+            view.getCmbGenero().setSelectedItem(tratarGenero(aluno));
+            view.getCmbCorRaca().setSelectedItem(tratarCorRaca(aluno));
+                
+                
+            view.getTxtDataNascimento().setText("00/00/0000");
+            
+
         }
+        
    }
     //Limpas todos os campos de texto
     public void limparCampos(){
@@ -74,6 +178,21 @@ public class GerenciarAlunoController {
         view.getCmbCorRaca().setSelectedItem("Selecione");
         view.getTxtDataNascimento().setText("  /  /    ");
     }
+    
+    /*
+        Método: formatarGenero
+        Parâmetros: index do tipo inteiro
+        Descrição: Confere qual index foi selecionado na tela cadastro aluno do campo gênero 
+    e retorna um char que indica se o gênero é não informado, masculino, feminino e outros    
+    */
+    public static char formatarGenero(int index){        
+        if(index == 1) return 'I'; //Prefiro não informar
+        if(index == 2) return 'M'; //Masculino
+        if(index == 3) return 'F'; //Feminino
+        if(index == 4) return 'O'; //Outros       
+        return ' '; 
+    }
+    
     
     
     //Tratar Dados para inserir nos campos 
@@ -140,7 +259,7 @@ public class GerenciarAlunoController {
         if(view.getTblAluno().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder remover.");
         }else{
-        
+            
             ArrayList<Aluno> alunoBanco = carregarDadosAluno();
             int linha = view.getTblAluno().getSelectedRow();
 
@@ -171,6 +290,7 @@ public class GerenciarAlunoController {
         }
         limparCampos();
         desativarCampos();
+        view.getLblRemover().setEnabled(false);
     }
     
     
