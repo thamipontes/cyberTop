@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import model.Aluno;
@@ -14,20 +9,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import model.Turmas;
-import telas.CadastroAluno;
 
-/**
- *
- * @author thamires
- */
+/*Classe de conexão do banco com a tabela alunos*/
 public class AlunosDAO {
-    
+    //Atributo que recebe a conexão
     private final Connection connection;
-
+    //Construtor
     public AlunosDAO(Connection connection) {
         this.connection = connection;
     }
@@ -41,7 +28,11 @@ public class AlunosDAO {
         statement.execute();
     }
 
-    
+    /*
+        Método: insert
+        Parâmetros: classe turmas
+        Descrição: insere os dados coletado do sistema no banco de dados   
+    */
     public void insert(Aluno aluno) throws SQLException{
        
             String sql = "insert into aluno (nome, cpf, data_nascimento, telefone, endereco, genero, CEP, cor_raca, id_turma, email, curso) "
@@ -65,8 +56,13 @@ public class AlunosDAO {
        
     }
     
-    
+     /*
+        Método: findAll
+        Parâmetros: vazio
+        Descrição: retorna uma lista com todos os dados da tabela
+    */
     public ArrayList<Aluno> findAll() throws SQLException, ParseException{
+        //comando sql que será executado no banco de dados
         String sql = "select id, nome, CPF, data_nascimento, telefone, endereco, genero, cep, cor_raca, id_turma, email, curso from aluno";
         
         PreparedStatement statement = connection.prepareStatement(sql);

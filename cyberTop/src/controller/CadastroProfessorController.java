@@ -145,10 +145,13 @@ public class CadastroProfessorController implements Cadastrar{
         no combo box que representa a turma que ele irá administrar a aula.
     */
     public void inserirDadosTurmaCmB() throws SQLException{
-        
+        //Salva em uma variavel a lista de todas as turmas que estão no banco de dados
         ArrayList<Turmas> turmas = CadastroAlunoController.carregarDadosTurma();
+        //Remove todos os itens antigos que estão na combo box para não acumular os dados ao adicionar novos dados.
         view.getCmbTurmaProfessor().removeAllItems();
+        //Adiciona como primeiro item a palavra selecione
         view.getCmbTurmaProfessor().addItem("Selecione");
+        //Percorre a lista de turmas e adiciona o nome da universidade na combo box
         turmas.forEach(t -> {
             view.getCmbTurmaProfessor().addItem(t.getNome());        
         });  

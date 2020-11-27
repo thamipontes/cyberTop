@@ -21,10 +21,6 @@ import javax.swing.table.DefaultTableModel;
 import model.Turmas;
 import telas.CadastroTurma;
 
-/**
- *
- * @author thamires
- */
 
 /*Classe que controla todas as regras de negócios do cadastro do Aluno*/
 public class CadastroAlunoController implements Cadastrar{
