@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Turmas;
 import telas.CadastroAluno;
 
 /**
@@ -31,7 +32,7 @@ public class AlunosDAO {
         this.connection = connection;
     }
     
-    
+    /**/
     public  void remove(Aluno aluno) throws SQLException{
         String sql = "delete from aluno where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -143,6 +144,14 @@ public class AlunosDAO {
         statement.setString(10, aluno.getCurso());
         statement.setInt(11, aluno.getId());
         statement.execute();
+    }
+    
+    public Aluno findById(int idAluno) throws SQLException, ParseException{
+    
+        String sql = "select * from aluno where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, idAluno);        
+        return pesquisar(statement).get(0);     
     
     }
     
