@@ -137,7 +137,8 @@ public class AlunosDAO {
     
         String sql = "select * from aluno where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, idAluno);        
+        statement.setInt(1, idAluno);
+        JOptionPane.showMessageDialog(null, pesquisar(statement).get(0));
         return pesquisar(statement).get(0);     
     
     }

@@ -146,6 +146,7 @@ public class GerenciarAlunoController {
         view.getLblCancelar().setVisible(false);
         view.getLblSalvar().setVisible(false);
         limparCampos();
+        desativarCampos();
         inserirDadosAlunoTabela();
         
     }
@@ -220,6 +221,7 @@ public class GerenciarAlunoController {
         view.getCmbGenero().setSelectedItem("Selecione");
         view.getCmbCorRaca().setSelectedItem("Selecione");
         view.getTxtDataNascimento().setText("");
+        view.getTxtIdTurma().setText("");
     }
     
     /*
@@ -397,6 +399,7 @@ public class GerenciarAlunoController {
         view.getCmbCorRaca().setEnabled(true);
         view.getTxtEmail().setEnabled(true);
         view.getTxtTelefone().setEnabled(true);
+        view.getTxtIdTurma().setEnabled(true);
 
     }
     
@@ -411,22 +414,74 @@ public class GerenciarAlunoController {
         view.getCmbCorRaca().setEnabled(false);
         view.getTxtEmail().setEnabled(false);
         view.getTxtTelefone().setEnabled(false);
+        view.getTxtIdTurma().setEnabled(false);
     }
     
+    //Desativar e ativar botoes
+    public void ativarTodosBotoes(){
+        view.getLblBuscar().setEnabled(true);
+        view.getLblCadastrar().setEnabled(true);
+        view.getLblEditar().setEnabled(true);
+        view.getLblRemover().setEnabled(true);
+    }
     
+    public void buscarAluno() throws SQLException, ParseException{
+        String idString = (JOptionPane.showInputDialog("Digite o id do aluno:"));
+        int id;
+        
+        // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
+        if(idString != null){
+            id = Integer.parseInt(idString);
+            
+            if(posicaoAlunoLista(id)  != -1){
+                Aluno aluno = buscarAlunoPorId(id);
+                inserirBuscarDadosAluno(aluno);
+                desativarCampos();
+                ativarTodosBotoes();
+                view.getTblAluno().addRowSelectionInterval(posicaoAlunoLista(id),posicaoAlunoLista(id));
+           
+            }else{
+                JOptionPane.showMessageDialog(null, "Aluno não matriculado!");
+            } 
+        }
+    }
     
-    /*
-    public void buscarAlunoPorId() throws SQLException{
+    public int posicaoAlunoLista(int id) throws SQLException, ParseException{
+        ArrayList<Aluno> alunos = carregarDadosAluno();
+        
+        for(int i = 0; i <alunos.size(); i++){
+            if(id == alunos.get(i).getId()){
+                return i;
+            }
+            
+        }
+        return -1;
+    }
+    
+    public Aluno buscarAlunoPorId(int id) throws SQLException, ParseException{
         //Faz a conexão com o banco 
         Connection conexao;
         conexao = new Conexao().getConnection();
         //Passa a conexão para a classe TurmaDAO para realizar o CRUD
         AlunosDAO alunoDAO = new AlunosDAO(conexao);
         //Chama o método findAll que retorna uma lista de turmas que está no banco de dados
-        Turmas turma = alunoDAO.findById(Integer.parseInt(view.getTxtTurma().getText())); 
-            
-        return turma; 
-        
+        Aluno aluno = alunoDAO.findById(id); 
+        return aluno;
     }
-    */
+    
+    public void inserirBuscarDadosAluno(Aluno aluno){
+        view.getTxtIdTurma().setText(Integer.toString(aluno.getTurmaId()));
+        view.getTxtNome().setText(aluno.getNome());
+        view.getTxtCPF().setText(aluno.getCPF());
+        view.getTxtEmail().setText(aluno.getEmail());
+        view.getTxtTelefone().setText(aluno.getTelefone());
+        view.getTxtCEP().setText(aluno.getCEP());
+        view.getTxtLogradouro().setText(aluno.getEndereco());
+        view.getTxtCurso().setText(aluno.getCurso());
+        view.getCmbGenero().setSelectedItem(tratarGenero(aluno));
+        view.getCmbCorRaca().setSelectedItem(tratarCorRaca(aluno));
+                
+            //Editar isso aqui    
+        view.getTxtDataNascimento().setText("00/00/0000");
+    }
 }

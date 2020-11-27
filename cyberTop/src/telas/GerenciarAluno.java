@@ -96,8 +96,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
         txtLogradouro = new javax.swing.JTextField();
         lblTurma = new javax.swing.JLabel();
         txtIdTurma = new javax.swing.JTextField();
-        lblCancelar = new javax.swing.JLabel();
         lblSalvar = new javax.swing.JLabel();
+        lblCancelar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -160,7 +160,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
                 lblCadastrarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
+        jPanel1.add(lblCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
 
         lblBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         lblBuscar.setText("Buscar");
@@ -169,7 +169,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
                 lblBuscarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
+        jPanel1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
         lblRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/eraser.png"))); // NOI18N
         lblRemover.setText("Descadastrar");
@@ -382,19 +382,10 @@ public class GerenciarAluno extends javax.swing.JFrame {
                 .addComponent(lblTurma)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtIdTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel1.add(pnlDadosAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 71, 650, 230));
-
-        lblCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        lblCancelar.setText("Cancelar");
-        lblCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCancelarMouseClicked(evt);
-            }
-        });
-        jPanel1.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
         lblSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         lblSalvar.setText("Salvar");
@@ -403,7 +394,16 @@ public class GerenciarAluno extends javax.swing.JFrame {
                 lblSalvarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, -1, 40));
+        jPanel1.add(lblSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, -1, 40));
+
+        lblCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        lblCancelar.setText("Cancelar");
+        lblCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCancelarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 630));
 
@@ -447,8 +447,12 @@ public class GerenciarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
-        // TODO add your handling code here:
-        //controller.
+        try {
+            // TODO add your handling code here:
+            controller.buscarAluno();
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
