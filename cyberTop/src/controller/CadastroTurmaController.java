@@ -72,6 +72,7 @@ public class CadastroTurmaController implements Cadastrar{
         Descrição: confere se teve algum campo que ficou sem ser preenchido e mostra na tela
         uma mensagem para preencher todos os campos.
     */
+    @Override
     public boolean exibirAlertarCampos(){
         if(view.getCampoNomeTurma().getText().equals("")   ||
            view.getCampoHorario().getSelectedItem().equals("Selecione")  
@@ -201,11 +202,6 @@ public class CadastroTurmaController implements Cadastrar{
         //Ativa o combo box para inserção do nome da Universidade
         view.getCampoUniversidade().setEnabled(true);    
     
-    }
-
-    @Override
-    public void removerCadastro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
