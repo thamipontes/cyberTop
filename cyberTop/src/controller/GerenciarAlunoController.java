@@ -80,31 +80,16 @@ public class GerenciarAlunoController {
             /*Tratando o dado Cor Raça*/
             //Transforma o o texto do item selecionado em string e guarda na variável
             String corRaca = view.getCmbCorRaca().getSelectedItem().toString();
-
-            /*Tratando o dado da turma*/
-            //Transforma String em inteiro
-            int turmaIdVelho = 0;
-            ArrayList<Aluno> alunoBanco = carregarDadosAluno();
             
-            int linha = view.getTblAluno().getSelectedRow();
- 
-            int id=0;
-            if(linha >= 0 && linha < alunoBanco.size()){
-                 Aluno alun = alunoBanco.get(linha);
-                id = alun.getId();
-                
-                turmaIdVelho = pesquisarTurmaPorId(alun.getTurmaId()).getId();
-                diminuirVagasTurma(turmaIdVelho);
-                aumentarVagasTurma(idTurmaNovo);
-            }
+             /*Tratando o dado da turma*/
+            int id = tratarIdAlunoIdTurma(idTurmaNovo);
 
 
             /*Instaciando o objeto aluno com os dados recebidos pela tela*/
             Aluno aluno = new Aluno(id, nome, cpf, dataNascimento, telefone, endereco, genero, idTurmaNovo, cep, corRaca, email, curso);
 
-
-            // Editar calendar
-            //aluno.setDataNascimento(dataNascimento);
+    
+            
             /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
             Connection conexao;        
             try {
@@ -130,6 +115,22 @@ public class GerenciarAlunoController {
                 desativarCampos();
                 cancelarEditar();
         }
+    }
+
+    private int tratarIdAlunoIdTurma(int idTurmaNovo) throws SQLException, ParseException {
+                       
+        ArrayList<Aluno> alunoBanco = carregarDadosAluno();
+        int linha = view.getTblAluno().getSelectedRow();
+        int id = 0;
+        if(linha >= 0 && linha < alunoBanco.size()){
+            Aluno alun = alunoBanco.get(linha);
+            id = alun.getId();
+            
+            int turmaIdVelho = pesquisarTurmaPorId(alun.getTurmaId()).getId();
+            diminuirVagasTurma(turmaIdVelho);
+            aumentarVagasTurma(idTurmaNovo);
+        }
+        return id;
     }
     
     public void cancelarEditar() throws SQLException, ParseException{
@@ -171,8 +172,10 @@ public class GerenciarAlunoController {
             view.getCmbGenero().setSelectedItem(tratarGenero(aluno));
             view.getCmbCorRaca().setSelectedItem(tratarCorRaca(aluno));
                 
-            //Editar isso aqui    
-            view.getTxtDataNascimento().setText("00/00/0000");
+            /*Tratando data nascimento*/
+            SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+            String dataNascimento = s.format(aluno.getDataNascimento().getTime());
+            view.getTxtDataNascimento().setText(dataNascimento);
             
 
         }

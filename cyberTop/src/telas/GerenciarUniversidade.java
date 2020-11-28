@@ -305,7 +305,6 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
         
         try {
-            // TODO add your handling code here:
             controller.removerCadastro();
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
@@ -316,8 +315,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     private void lblSalvarEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarEditarMouseClicked
         
         
-        try {
-            // TODO add your handling code here:
+        try {            
             controller.editarCadastro();
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
