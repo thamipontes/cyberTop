@@ -15,6 +15,14 @@ public class Professor extends Pessoa{
         this.materia = materia;
         this.turma = turma;
     }
+    
+    //Insere do banco
+    public Professor(int id, String nome, String CPF, Calendar dataNascimento, String telefone, String endereco, char genero, String materia, String nomeTurma) {
+        super(nome, CPF, dataNascimento, telefone, endereco, genero);
+        this.id = id;
+        this.materia = materia;
+        this.nomeTurma = nomeTurma;
+    }
 
     public Professor(String nome, String CPF, Calendar dataNascimento, String telefone, String endereco, char genero, String materia, Turmas turma) {
         super(nome, CPF, dataNascimento, telefone, endereco, genero);

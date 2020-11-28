@@ -188,7 +188,7 @@ public class GerenciarUniversidadeController {
     
     public void botaoEditarCadastro(){
         if(view.getTblUniversidade().getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(view, "Selecione alguma universidade para poder editar.");
+            JOptionPane.showMessageDialog(view, "Selecione alguma universidade para editar.");
         }else{
             ativarCampos();
             regraBotoesEditar();
@@ -205,7 +205,7 @@ public class GerenciarUniversidadeController {
     
     public void removerCadastro() throws SQLException{
         if(view.getTblUniversidade().getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(view, "Selecione alguma universidade para poder descadastrar.");
+            JOptionPane.showMessageDialog(view, "Selecione alguma universidade paara descadastrar.");
         }else{
             
             ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
