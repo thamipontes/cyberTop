@@ -73,6 +73,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CyberTop - Universidade");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -89,7 +90,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         jPanel1.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Universidades"));
 
         tblUniversidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

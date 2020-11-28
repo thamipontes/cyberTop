@@ -109,6 +109,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de aluno");
+        setResizable(false);
         setSize(new java.awt.Dimension(1200, 620));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -256,7 +257,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(pnlDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel2)
                                         .addGap(19, 19, 19))
                                     .addGroup(pnlDadosPessoaisLayout.createSequentialGroup()
@@ -384,14 +385,11 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ScrollTabelaTurmas)
+                    .addComponent(lblIdTurma)
                     .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
-                        .addGroup(pnlDadosTurmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIdTurma)
-                            .addGroup(pnlDadosTurmaLayout.createSequentialGroup()
-                                .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bntBuscar)))
-                        .addGap(0, 0, 0)))
+                        .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntBuscar)))
                 .addContainerGap())
         );
         pnlDadosTurmaLayout.setVerticalGroup(

@@ -48,7 +48,7 @@ public class TurmaDAO {
     */
     public void update(Turmas turma) throws SQLException{
         //comando sql que será executado no banco de dados
-        String sql = "update turma set nome = ?, horario = ?, tipo = ?, periodo = ?, vagas = ? where id = ?; ";
+        String sql = "update turma set nome = ?, horario = ?, tipo = ?, periodo = ?, vagas = ?, universidade = ? where id = ?; ";
         PreparedStatement statement = connection.prepareStatement(sql);
         
         //Substitui cada interrogação, na ordem, pelo valor capturado do sistema (getters)
@@ -57,7 +57,8 @@ public class TurmaDAO {
         statement.setBoolean(3, turma.getTipo());
         statement.setBoolean(4, turma.getPeriodo());
         statement.setInt(5, turma.getVagas());
-        statement.setInt(6, turma.getId());
+        statement.setString(6, turma.getNomeUniversidade());
+        statement.setInt(7, turma.getId());
         
         //Executa o comando sql
         statement.execute(); 
@@ -90,7 +91,7 @@ public class TurmaDAO {
     */
     public ArrayList<Turmas> findAll() throws SQLException{
         //comando sql que será executado no banco de dados
-        String sql = "select id, nome, horario, tipo, periodo, vagas from turma";
+        String sql = "select id, nome, horario, tipo, periodo, vagas, universidade from turma";
         
         PreparedStatement statement = connection.prepareStatement(sql); 
         
@@ -120,9 +121,10 @@ public class TurmaDAO {
             boolean tipo = resultSet.getBoolean("tipo");
             boolean periodo = resultSet.getBoolean("periodo");
             int vagas = resultSet.getInt("vagas");
+            String nomeUniversidade = resultSet.getString("universidade");
             
             //Instancia o objeto de acordo com os dados trazidos do banco
-            Turmas turmaBanco = new Turmas(id, nome, horario, tipo, periodo, vagas);
+            Turmas turmaBanco = new Turmas(id, nome, horario, tipo, periodo, vagas, nomeUniversidade);
             //Adiciona o objeto instanciado na lista
             turmas.add(turmaBanco);         
         }
