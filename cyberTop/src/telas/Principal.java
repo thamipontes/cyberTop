@@ -200,8 +200,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bntProfessorMouseClicked
 
     private void bntTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntTurmaMouseClicked
-        // TODO add your handling code here:
-        new CadastroTurma().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new GerenciarTurma().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bntTurmaMouseClicked
 
     private void bntAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntAlunoMouseClicked

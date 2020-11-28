@@ -346,7 +346,7 @@ public class GerenciarUniversidadeController {
         
         view.getTblUniversidade().setModel(modelo);
         
-    }
+    } 
 
     private void inserirBuscarDadosUniversidade(Universidade universidade) {
         view.getTxtNome().setText(universidade.getNome());

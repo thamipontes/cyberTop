@@ -36,6 +36,9 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         // Regra inicial para botoes//
         controller.configuracaoInicialBotoes();
         
+        // Centraliza a janela do programa no centro da tela
+        setLocationRelativeTo(null);
+        
     }
 
     /**

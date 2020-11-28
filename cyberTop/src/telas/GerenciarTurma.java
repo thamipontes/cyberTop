@@ -30,6 +30,9 @@ public class GerenciarTurma extends javax.swing.JFrame {
         controller.configuracaoInicialBotoes();
         //Desativa os campos de dados
         controller.desativarCampos();
+        
+        // Centraliza a tela no centro do monitor
+        setLocationRelativeTo(null);
     }
 
     
@@ -83,7 +86,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
                 bntVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 560, -1, -1));
+        jPanel1.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 550, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
@@ -166,7 +169,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
 
         lblCorTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/grey.png"))); // NOI18N
         lblCorTitulo.setText("jLabel6");
-        pnlTitulo.add(lblCorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 60));
+        pnlTitulo.add(lblCorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 60));
 
         jPanel1.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
@@ -200,14 +203,20 @@ public class GerenciarTurma extends javax.swing.JFrame {
         pnlInformacoes.setBackground(new java.awt.Color(255, 255, 255));
         pnlInformacoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações da nova turma"));
         pnlInformacoes.setToolTipText("");
+        pnlInformacoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNomeTurma.setText("Nome:");
+        pnlInformacoes.add(lblNomeTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, -1, -1));
+        pnlInformacoes.add(txtNomeTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 36, 210, -1));
 
         lblUniversidade.setText("Universidade:");
+        pnlInformacoes.add(lblUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 16, -1, -1));
 
         lblTipo.setText("Tipo:");
+        pnlInformacoes.add(lblTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 16, -1, -1));
 
         lblPeriodo.setText("Período:");
+        pnlInformacoes.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 16, -1, -1));
 
         rdbEnem.setBackground(new java.awt.Color(255, 255, 255));
         rdbEnem.setText("Enem");
@@ -216,6 +225,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
                 rdbEnemActionPerformed(evt);
             }
         });
+        pnlInformacoes.add(rdbEnem, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 35, -1, -1));
 
         rdbVestibular.setBackground(new java.awt.Color(255, 255, 255));
         rdbVestibular.setText("Vestibular");
@@ -224,8 +234,10 @@ public class GerenciarTurma extends javax.swing.JFrame {
                 rdbVestibularActionPerformed(evt);
             }
         });
+        pnlInformacoes.add(rdbVestibular, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 58, -1, -1));
 
         lblHorario.setText("Horários:");
+        pnlInformacoes.add(lblHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 77, -1, -1));
 
         rdbSemestral.setBackground(new java.awt.Color(255, 255, 255));
         rdbSemestral.setText("Semestral");
@@ -235,6 +247,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
                 rdbSemestralActionPerformed(evt);
             }
         });
+        pnlInformacoes.add(rdbSemestral, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 58, -1, -1));
 
         rdbAnual.setBackground(new java.awt.Color(255, 255, 255));
         rdbAnual.setText("Anual");
@@ -243,6 +256,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
                 rdbAnualActionPerformed(evt);
             }
         });
+        pnlInformacoes.add(rdbAnual, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 35, -1, -1));
 
         cmbUniversidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Universidade de Brasília" }));
         cmbUniversidade.addActionListener(new java.awt.event.ActionListener() {
@@ -250,84 +264,22 @@ public class GerenciarTurma extends javax.swing.JFrame {
                 cmbUniversidadeActionPerformed(evt);
             }
         });
+        pnlInformacoes.add(cmbUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 36, -1, -1));
 
         cmbHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Matutino", "Vespertino", "Noturno" }));
+        pnlInformacoes.add(cmbHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 97, -1, -1));
 
-        javax.swing.GroupLayout pnlInformacoesLayout = new javax.swing.GroupLayout(pnlInformacoes);
-        pnlInformacoes.setLayout(pnlInformacoesLayout);
-        pnlInformacoesLayout.setHorizontalGroup(
-            pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInformacoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlInformacoesLayout.createSequentialGroup()
-                        .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlInformacoesLayout.createSequentialGroup()
-                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNomeTurma)
-                            .addComponent(txtNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHorario))
-                        .addGap(24, 24, 24)
-                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rdbEnem)
-                            .addComponent(rdbVestibular)
-                            .addComponent(lblTipo))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlInformacoesLayout.createSequentialGroup()
-                                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rdbAnual)
-                                    .addComponent(lblPeriodo))
-                                .addGap(53, 53, 53)
-                                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUniversidade)
-                                    .addComponent(cmbUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(rdbSemestral))
-                        .addContainerGap(59, Short.MAX_VALUE))))
-        );
-        pnlInformacoesLayout.setVerticalGroup(
-            pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInformacoesLayout.createSequentialGroup()
-                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblNomeTurma)
-                        .addComponent(lblUniversidade))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblPeriodo)
-                        .addComponent(lblTipo)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rdbEnem)
-                        .addComponent(cmbUniversidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(rdbAnual, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlInformacoesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rdbVestibular)
-                            .addComponent(rdbSemestral)))
-                    .addGroup(pnlInformacoesLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lblHorario)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
+        jPanel1.add(pnlInformacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 660, 150));
 
-        jPanel1.add(pnlInformacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 650, 140));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 640));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 590));
 
         background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
         background1.setText("jLabel1");
-        getContentPane().add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 690, 500));
+        getContentPane().add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 690, 420));
 
         background2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
         background2.setText("jLabel1");
-        getContentPane().add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 510));
+        getContentPane().add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -362,31 +314,31 @@ public class GerenciarTurma extends javax.swing.JFrame {
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
         // TODO add your handling code here:
         //new CadastroUniversidade().setVisible(true);
-        /*
-        controller.botaoSalvarCadastro();
-        */
+        
+        controller.botaoCadastrar();
+        
     }//GEN-LAST:event_lblCadastrarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
-        /*
+        
         try {
             controller.buscarCadastro();
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarTurma.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
         
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
-        /*
+        
         try {
             // TODO add your handling code here:
             controller.removerCadastro();
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarTurma.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_lblRemoverMouseClicked
 
     private void lblSalvarEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarEditarMouseClicked
@@ -402,41 +354,37 @@ public class GerenciarTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSalvarEditarMouseClicked
 
     private void lblSalvarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarCadastroMouseClicked
-        /*
-        try {
-            // TODO add your handling code here:
-            controller.salvarCadastro();
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarTurma.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+        
+        // TODO add your handling code here:
+        controller.salvarCadastro();
+        
     }//GEN-LAST:event_lblSalvarCadastroMouseClicked
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
-        /*
+        
         try {
             controller.cancelar();
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarTurma.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_lblCancelarMouseClicked
 
     private void rdbEnemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbEnemActionPerformed
-        //controller.selecionarTipoEnem();
+        controller.selecionarTipoEnem();
     }//GEN-LAST:event_rdbEnemActionPerformed
 
     private void rdbVestibularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbVestibularActionPerformed
-        //controller.selecionarTipoVestibular();
+        controller.selecionarTipoVestibular();
     }//GEN-LAST:event_rdbVestibularActionPerformed
 
     private void rdbSemestralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbSemestralActionPerformed
-        //controller.selecionarPeriodoSemestral();
+        controller.selecionarPeriodoSemestral();
     }//GEN-LAST:event_rdbSemestralActionPerformed
 
     private void rdbAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAnualActionPerformed
 
-        //controller.selecionarPeriodoAnual();
+        controller.selecionarPeriodoAnual();
     }//GEN-LAST:event_rdbAnualActionPerformed
 
     private void cmbUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUniversidadeActionPerformed
@@ -454,7 +402,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

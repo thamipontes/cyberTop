@@ -45,10 +45,12 @@ public class UniversidadeDAO {
         Descrição: deleta os dados coletado do sistema no banco de dados   
     */ 
     public  void remove(Universidade universidade) throws SQLException{
+        //comando sql que será executado no banco de dados
         String sql = "delete from universidade where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
-        
+        //Substitui cada interrogação, na ordem, pelo valor capturado do sistema (getters)
         statement.setInt(1,universidade.getId());
+        //Executa o comando sql
         statement.execute();
     }
     
