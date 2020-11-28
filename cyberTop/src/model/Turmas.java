@@ -38,6 +38,15 @@ public class Turmas {
         this.vagas = vagas;
         this.nomeUniversidade = nomeUniversidade;
     }
+    // Atualizar somente
+    public Turmas(int id,String nome, String horario, Boolean tipo, Boolean periodo, String nomeUniversidade) {
+        this.id = id;
+        this.nome = nome;
+        this.horario = horario;
+        this.tipo = tipo;
+        this.periodo = periodo;
+        this.nomeUniversidade = nomeUniversidade;
+    }
   
     public Turmas(int id, String nome, String horario, Boolean tipo, Boolean periodo, int vagas) {
         this.id = id;

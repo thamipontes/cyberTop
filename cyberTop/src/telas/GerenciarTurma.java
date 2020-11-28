@@ -3,6 +3,7 @@ package telas;
 
 import controller.GerenciarTurmaController;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -24,6 +25,11 @@ public class GerenciarTurma extends javax.swing.JFrame {
         
         //Carrega a lista de universidades do banco e insere na combo box universidades
         controller.inserirDadosUniversidadeCmb();
+        
+        // Seta as regras dos botoes
+        controller.configuracaoInicialBotoes();
+        //Desativa os campos de dados
+        controller.desativarCampos();
     }
 
     
@@ -346,10 +352,10 @@ public class GerenciarTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_tblTurmaMouseClicked
 
     private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
-        /*
+        
         //Chamar metodo editar
         controller.botaoEditarCadastro();
-        */
+        
 
     }//GEN-LAST:event_lblEditarMouseClicked
 
@@ -384,14 +390,14 @@ public class GerenciarTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRemoverMouseClicked
 
     private void lblSalvarEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarEditarMouseClicked
-        /*
+        
         try {
             // TODO add your handling code here:
             controller.editarCadastro();
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
 
     }//GEN-LAST:event_lblSalvarEditarMouseClicked
 
