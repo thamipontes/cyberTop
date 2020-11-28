@@ -37,18 +37,62 @@ public class GerenciarUniversidadeController {
         return false;
     }
     
+    public void buscar() throws SQLException, ParseException{
+        String idString = (JOptionPane.showInputDialog("Digite o id da universidade:"));
+        int id;
+        
+        // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
+        if(idString != null){
+            id = Integer.parseInt(idString);
+            
+            if(posicaoUniversidadeLista(id)  != -1){
+                Universidade universidade = buscarUniversidadePorId(id);
+                inserirBuscarDadosUniversidade(universidade);
+                desativarCampos();
+                //ativarTodosBotoes();
+                view.getTblUniversidade().addRowSelectionInterval(posicaoUniversidadeLista(id),posicaoUniversidadeLista(id));
+           
+            }else{
+                JOptionPane.showMessageDialog(null, "Universidade não cadastrada!");
+            } 
+        }
+    }
+    
+    public int posicaoUniversidadeLista(int id) throws SQLException, ParseException{
+        ArrayList<Universidade> universidade = carregarDadosUniversidade();
+        
+        for(int i = 0; i <universidade.size(); i++){
+            if(id == universidade.get(i).getId()){
+                return i;
+            }
+            
+        }
+        return -1;
+    }
+    
+    public Universidade buscarUniversidadePorId(int id) throws SQLException, ParseException{
+        //Faz a conexão com o banco 
+        Connection conexao;
+        conexao = new Conexao().getConnection();
+        //Passa a conexão para a classe TurmaDAO para realizar o CRUD
+        UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
+        //Chama o método findAll que retorna uma lista de turmas que está no banco de dados
+        Universidade universidade = universidadeDAO.findById(id); 
+        return universidade;
+    }
     
     
-    
-    public void cancelar(){
+    public void cancelar() throws SQLException{
         limparCampos();
         desativarCampos();
         configuracaoInicialBotoes();
+        inserirDadosUniversidadeTabela();
     }
     
     public void salvarEditar() throws ParseException, SQLException{
         
         if(!exibirAlertarCampos()){
+            
                 /*Pega as informações passadas nos campos da tela*/
             String nome = view.getTxtNome().getText();
             String estado = view.getCmbEstado().getSelectedItem().toString();
@@ -115,11 +159,24 @@ public class GerenciarUniversidadeController {
     
     public void editar(){
         if(view.getTblUniversidade().getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder editar.");
+            JOptionPane.showMessageDialog(view, "Selecione alguma universidade para poder editar.");
         }else{
             ativarCampos();
             regraBotoesEditar();
         }
+    }
+    
+    public void regraBotoesBuscar(){
+        view.getLblRemover().setEnabled(true);
+        view.getLblRemover().setVisible(true);
+        view.getLblEditar().setEnabled(true);
+        view.getLblEditar().setVisible(true);
+        view.getLblBuscar().setEnabled(true);
+        view.getLblBuscar().setVisible(true);
+        view.getLblCadastrar().setEnabled(true);
+        view.getLblCadastrar().setVisible(true);
+        view.getLblCancelar().setVisible(false);
+        view.getLblSalvar().setVisible(false);
     }
     
     public void regraBotoesEditar(){
@@ -208,6 +265,14 @@ public class GerenciarUniversidadeController {
         
         view.getTblUniversidade().setModel(modelo);
         
+    }
+
+    private void inserirBuscarDadosUniversidade(Universidade universidade) {
+        view.getTxtNome().setText(universidade.getNome());
+        view.getTxtCampus().setText(universidade.getCampus());
+        view.getCmbEstado().setSelectedItem(universidade.getEstado());
+        ativarCampos();
+        regraBotoesBuscar();
     }
     
 }

@@ -269,6 +269,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         
         
         
+        
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
@@ -278,14 +279,13 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCadastrarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
-        /*
+        
+       
         try {
-            // TODO add your handling code here:
-            controller.buscarAluno();
+            controller.buscar();
         } catch (SQLException | ParseException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
@@ -313,7 +313,11 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
         
-        controller.cancelar();
+        try {
+            controller.cancelar();
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_lblCancelarMouseClicked
 
