@@ -40,7 +40,11 @@ public class GerenciarUniversidadeController {
     
     
     
-    
+    public void cancelar(){
+        limparCampos();
+        desativarCampos();
+        configuracaoInicialBotoes();
+    }
     
     public void salvarEditar() throws ParseException, SQLException{
         
@@ -96,7 +100,7 @@ public class GerenciarUniversidadeController {
                 
                 limparCampos();
                 desativarCampos();
-                //cancelarEditar();
+                cancelar();
         }
     }
     
@@ -117,6 +121,7 @@ public class GerenciarUniversidadeController {
             regraBotoesEditar();
         }
     }
+    
     public void regraBotoesEditar(){
         view.getLblRemover().setVisible(false);
         view.getLblEditar().setVisible(false);
@@ -129,9 +134,13 @@ public class GerenciarUniversidadeController {
     // Regra especial para ativar e desativar botoes
     public void configuracaoInicialBotoes(){
         view.getLblRemover().setEnabled(false);
+        view.getLblRemover().setVisible(true);
         view.getLblEditar().setEnabled(false);
+        view.getLblEditar().setVisible(true);
         view.getLblBuscar().setEnabled(true);
+        view.getLblBuscar().setVisible(true);
         view.getLblCadastrar().setEnabled(true);
+        view.getLblCadastrar().setVisible(true);
         view.getLblCancelar().setVisible(false);
         view.getLblSalvar().setVisible(false);
         

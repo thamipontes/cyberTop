@@ -312,14 +312,9 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSalvarMouseClicked
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
-        /*
-        try {
-            // TODO add your handling code here:
-            controller.cancelarEditar();
-        } catch (SQLException | ParseException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+        
+        controller.cancelar();
+        
     }//GEN-LAST:event_lblCancelarMouseClicked
 
     /**
