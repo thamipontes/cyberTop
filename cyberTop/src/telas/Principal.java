@@ -9,6 +9,7 @@ import controller.GerenciarAlunoController;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -87,6 +88,11 @@ public class Principal extends javax.swing.JFrame {
         bntUniversidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/school.png"))); // NOI18N
         bntUniversidade.setText("Universidade");
         bntUniversidade.setToolTipText("Gerenciar universidade");
+        bntUniversidade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntUniversidadeMouseClicked(evt);
+            }
+        });
         jPanel1.add(bntUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
         bntTurma.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -201,6 +207,15 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new GerenciarAluno().setVisible(true);
     }//GEN-LAST:event_bntAlunoMouseClicked
+
+    private void bntUniversidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntUniversidadeMouseClicked
+        try {
+            // TODO add your handling code here:
+            new GerenciarUniversidade().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bntUniversidadeMouseClicked
 
     /**
      * @param args the command line arguments

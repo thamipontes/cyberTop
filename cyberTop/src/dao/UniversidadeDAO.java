@@ -40,6 +40,19 @@ public class UniversidadeDAO {
     }
     
     /*
+        Método: remove
+        Parâmetros: classe universidade
+        Descrição: deleta os dados coletado do sistema no banco de dados   
+    */ 
+    public  void remove(Universidade universidade) throws SQLException{
+        String sql = "delete from universidade where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        
+        statement.setInt(1,universidade.getId());
+        statement.execute();
+    }
+    
+    /*
         Método: findAll
         Parâmetros: vazio
         Descrição: retorna uma lista com todos os dados da tabela

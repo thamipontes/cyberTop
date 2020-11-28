@@ -293,7 +293,7 @@ public class GerenciarAlunoController {
         view.getTblAluno().setModel(modelo);
         
     }
-    
+    //Mudar nome do metodo para remover
     public  void removerLinhaAluno() throws SQLException, ParseException{
         
         
@@ -307,31 +307,37 @@ public class GerenciarAlunoController {
             if(linha >= 0 && linha < alunoBanco.size()){
                 Aluno aluno = alunoBanco.get(linha);
                 /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
-            Connection conexao;        
-            try {
-                //Faz a conexão com o banco
-                conexao = new Conexao().getConnection();
-                //Passa a conexão para a classe AlunosDAO que possui o CRUD
-                AlunosDAO alunoDAO = new AlunosDAO(conexao);
-                //Chama o método de inserção            
-                alunoDAO.remove(aluno);
-                //Mensagem de aluno cadastrado com sucesso
-                JOptionPane.showMessageDialog(null, "Aluno descadastrado com sucesso");
-                inserirDadosAlunoTabela();
+                Connection conexao;        
+                try {
+                    //Faz a conexão com o banco
+                    conexao = new Conexao().getConnection();
+                    //Passa a conexão para a classe AlunosDAO que possui o CRUD
+                    AlunosDAO alunoDAO = new AlunosDAO(conexao);
+                    //Chama o método de remoção            
+                    alunoDAO.remove(aluno);
+                    //Mensagem de aluno cadastrado com sucesso
+                    JOptionPane.showMessageDialog(null, "Aluno descadastrado com sucesso");
+                    inserirDadosAlunoTabela();
 
-                aumentarVagasTurma(aluno.getTurmaId());
+                    aumentarVagasTurma(aluno.getTurmaId());
 
-            } catch (SQLException ex) {
-                Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
-                //Caso dê erro mostra essa tela
-                JOptionPane.showMessageDialog(null, "Falha ao descadastrar dado no banco");
-            }  
-
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+                    //Caso dê erro mostra essa tela
+                    JOptionPane.showMessageDialog(null, "Falha ao descadastrar dado no banco");
+                }
+                
+                limparCampos();
+                desativarCampos();
+                view.getLblRemover().setEnabled(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
             }
         }
-        limparCampos();
-        desativarCampos();
-        view.getLblRemover().setEnabled(false);
+        // VERSAO Q DAVA CERTO E FUNCIONAVA
+        //limparCampos();
+        //desativarCampos();
+        //view.getLblRemover().setEnabled(false);
     }
     
     

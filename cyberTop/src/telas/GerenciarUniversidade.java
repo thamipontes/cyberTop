@@ -58,7 +58,8 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblCorTitulo = new javax.swing.JLabel();
-        lblSalvar = new javax.swing.JLabel();
+        lblSalvarEditar = new javax.swing.JLabel();
+        lblSalvarCadastro = new javax.swing.JLabel();
         lblCancelar = new javax.swing.JLabel();
         pnlInformacoesUniversidade = new javax.swing.JPanel();
         lblNomeUniversidade = new javax.swing.JLabel();
@@ -67,9 +68,10 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         txtNomeUniversidade = new javax.swing.JTextField();
         cmbEstado = new javax.swing.JComboBox<>();
         txtCampus = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        background1 = new javax.swing.JLabel();
+        background2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CyberTop - Universidade");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -84,7 +86,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
                 bntVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, -1, -1));
+        jPanel1.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Turmas"));
@@ -112,7 +114,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblUniversidade);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 520, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 520, 220));
 
         lblEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lapis.png"))); // NOI18N
         lblEditar.setText("Editar");
@@ -121,7 +123,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
                 lblEditarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, -1));
+        jPanel1.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
 
         lblCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
         lblCadastrar.setText("Cadastrar");
@@ -130,7 +132,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
                 lblCadastrarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
+        jPanel1.add(lblCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
 
         lblBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         lblBuscar.setText("Buscar");
@@ -139,7 +141,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
                 lblBuscarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
+        jPanel1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
 
         lblRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/eraser.png"))); // NOI18N
         lblRemover.setText("Descadastrar");
@@ -148,7 +150,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
                 lblRemoverMouseClicked(evt);
             }
         });
-        jPanel1.add(lblRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
+        jPanel1.add(lblRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
 
         pnlTitulo.setBackground(new java.awt.Color(255, 153, 0));
         pnlTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -164,14 +166,23 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
 
         jPanel1.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        lblSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
-        lblSalvar.setText("Salvar");
-        lblSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblSalvarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        lblSalvarEditar.setText("Salvar");
+        lblSalvarEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSalvarMouseClicked(evt);
+                lblSalvarEditarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, 40));
+        jPanel1.add(lblSalvarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, 40));
+
+        lblSalvarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
+        lblSalvarCadastro.setText("Salvar");
+        lblSalvarCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSalvarCadastroMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, 40));
 
         lblCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         lblCancelar.setText("Cancelar");
@@ -180,7 +191,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
                 lblCancelarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, -1, -1));
+        jPanel1.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
 
         pnlInformacoesUniversidade.setBackground(new java.awt.Color(255, 255, 255));
         pnlInformacoesUniversidade.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações da Universidade"));
@@ -236,11 +247,15 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
 
         jPanel1.add(pnlInformacoesUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 650, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 580));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 560));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 510));
+        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
+        background1.setText("jLabel1");
+        getContentPane().add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 690, 500));
+
+        background2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
+        background2.setText("jLabel1");
+        getContentPane().add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -264,13 +279,15 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
         
         //Chamar metodo editar
-        controller.editar();
+        controller.botaoEditarCadastro();
         
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
         // TODO add your handling code here:
         //new CadastroUniversidade().setVisible(true);
+        
+        controller.botaoSalvarCadastro();
 
     }//GEN-LAST:event_lblCadastrarMouseClicked
 
@@ -278,34 +295,34 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         
        
         try {
-            controller.buscar();
+            controller.buscarCadastro();
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
-        /*
+        
         try {
             // TODO add your handling code here:
-            controller.removerLinhaAluno();
-        } catch (SQLException | ParseException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+            controller.removerCadastro();
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_lblRemoverMouseClicked
 
-    private void lblSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarMouseClicked
+    private void lblSalvarEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarEditarMouseClicked
         
         
         try {
             // TODO add your handling code here:
-            controller.salvarEditar();
+            controller.editarCadastro();
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }//GEN-LAST:event_lblSalvarMouseClicked
+    }//GEN-LAST:event_lblSalvarEditarMouseClicked
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
         
@@ -316,6 +333,15 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_lblCancelarMouseClicked
+
+    private void lblSalvarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarCadastroMouseClicked
+        try {
+            // TODO add your handling code here:
+            controller.salvarCadastro();
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_lblSalvarCadastroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -357,9 +383,10 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background1;
+    private javax.swing.JLabel background2;
     private javax.swing.JButton bntVoltar;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscar;
@@ -371,7 +398,8 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblNomeUniversidade;
     private javax.swing.JLabel lblRemover;
-    private javax.swing.JLabel lblSalvar;
+    private javax.swing.JLabel lblSalvarCadastro;
+    private javax.swing.JLabel lblSalvarEditar;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlInformacoesUniversidade;
     private javax.swing.JPanel pnlTitulo;
@@ -412,8 +440,12 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         return lblCancelar;
     }
     
-    public JLabel getLblSalvar(){
-        return lblSalvar;
+    public JLabel getLblSalvarEditar(){
+        return lblSalvarEditar;
+    }
+    
+    public JLabel getLblSalvarCadastro(){
+        return lblSalvarCadastro;
     }
     
     public JLabel getLblCadastrar(){

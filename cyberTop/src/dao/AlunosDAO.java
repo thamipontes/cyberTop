@@ -22,7 +22,11 @@ public class AlunosDAO {
         this.connection = connection;
     }
     
-    /**/
+    /*
+        Método: insert
+        Parâmetros: classe aluno
+        Descrição: insere os dados coletado do sistema no banco de dados   
+    */ 
     public  void remove(Aluno aluno) throws SQLException{
         String sql = "delete from aluno where id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);

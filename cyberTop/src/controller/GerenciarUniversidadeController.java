@@ -37,7 +37,7 @@ public class GerenciarUniversidadeController {
         return false;
     }
     
-    public void buscar() throws SQLException, ParseException{
+    public void buscarCadastro() throws SQLException, ParseException{
         String idString = (JOptionPane.showInputDialog("Digite o id da universidade:"));
         int id;
         
@@ -90,7 +90,7 @@ public class GerenciarUniversidadeController {
         inserirDadosUniversidadeTabela();
     }
     
-    public void salvarEditar() throws ParseException, SQLException{
+    public void editarCadastro() throws ParseException, SQLException{
         
         if(!exibirAlertarCampos()){
             
@@ -156,14 +156,79 @@ public class GerenciarUniversidadeController {
         view.getCmbEstado().setSelectedItem("Selecione");
     }
     
+    public void salvarCadastro() throws SQLException{
+        if(!exibirAlertarCampos()){
+            
+            String nome = view.getTxtNome().getText();
+            String estado = view.getCmbEstado().getSelectedItem().toString();
+            String campus = view.getTxtCampus().getText();        
+        
+            Universidade universidade = new Universidade(nome, estado, campus);
+        
+            try{
+                Connection conexao;
+                conexao = new Conexao().getConnection();
+                UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
+                universidadeDAO.insert(universidade);
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            } catch (SQLException ex) {
+                Logger.getLogger(GerenciarUniversidadeController.class.getName()).log(Level.SEVERE, null, ex);
+                //Caso dê erro mostra essa tela
+                JOptionPane.showMessageDialog(null, "Falha ao cadastrar dado no banco");
+            }    
+        
+            inserirDadosUniversidadeTabela();
+            limparCampos();
+            configuracaoInicialBotoes();
+            
+            
+        }
     
+    }
     
-    public void editar(){
+    public void botaoEditarCadastro(){
         if(view.getTblUniversidade().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione alguma universidade para poder editar.");
         }else{
             ativarCampos();
             regraBotoesEditar();
+            
+        }
+    }
+    
+    public void botaoSalvarCadastro(){
+        
+        limparCampos();
+        ativarCampos();
+        regraBotoesCadastrar();
+    }
+    
+    public void removerCadastro() throws SQLException{
+        if(view.getTblUniversidade().getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(view, "Selecione alguma universidade para poder descadastrar.");
+        }else{
+            
+            ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
+            int linha = view.getTblUniversidade().getSelectedRow();
+            
+            if(linha >= 0 && linha < universidadeBanco.size()){
+                
+                Universidade universidade = universidadeBanco.get(linha);
+                
+                Connection conexao = new Conexao().getConnection();
+                UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
+                
+                universidadeDAO.remove(universidade);
+                
+                inserirDadosUniversidadeTabela();
+                limparCampos();
+                
+                JOptionPane.showMessageDialog(null, "Universidade descadastrada!");
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
+            }
+            
         }
     }
     
@@ -177,7 +242,8 @@ public class GerenciarUniversidadeController {
         view.getLblCadastrar().setEnabled(true);
         view.getLblCadastrar().setVisible(true);
         view.getLblCancelar().setVisible(false);
-        view.getLblSalvar().setVisible(false);
+        view.getLblSalvarEditar().setVisible(false);
+        view.getLblSalvarCadastro().setVisible(false);
     }
     
     public void regraBotoesEditar(){
@@ -186,7 +252,19 @@ public class GerenciarUniversidadeController {
         view.getLblBuscar().setVisible(false);
         view.getLblCadastrar().setVisible(false);
         view.getLblCancelar().setVisible(true);
-        view.getLblSalvar().setVisible(true);
+        view.getLblSalvarEditar().setVisible(true);
+        view.getLblSalvarCadastro().setVisible(false);
+    }
+    
+    public void regraBotoesCadastrar(){
+        view.getLblRemover().setVisible(false);
+        view.getLblEditar().setVisible(false);
+        view.getLblBuscar().setVisible(false);
+        view.getLblCadastrar().setVisible(false);
+        view.getLblCancelar().setVisible(true);
+        view.getLblSalvarEditar().setVisible(false);
+        view.getLblSalvarCadastro().setVisible(true);
+        view.getTblUniversidade().setVisible(false);
     }
     
     // Regra especial para ativar e desativar botoes
@@ -200,7 +278,9 @@ public class GerenciarUniversidadeController {
         view.getLblCadastrar().setEnabled(true);
         view.getLblCadastrar().setVisible(true);
         view.getLblCancelar().setVisible(false);
-        view.getLblSalvar().setVisible(false);
+        view.getLblSalvarEditar().setVisible(false);
+        view.getLblSalvarCadastro().setVisible(false);
+        view.getTblUniversidade().setVisible(true);
         
     }
     
