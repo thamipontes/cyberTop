@@ -130,10 +130,6 @@ public class GerenciarAlunoController {
                 desativarCampos();
                 cancelarEditar();
         }
-        
-
-        
-        
     }
     
     public void cancelarEditar() throws SQLException, ParseException{

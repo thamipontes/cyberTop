@@ -7,9 +7,13 @@ package telas;
 
 import controller.GerenciarUniversidadeController;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -27,6 +31,10 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         controller = new GerenciarUniversidadeController(this);
         
         controller.inserirDadosUniversidadeTabela();
+        controller.desativarCampos();
+        
+        // Regra inicial para botoes//
+        controller.configuracaoInicialBotoes();
         
     }
 
@@ -243,27 +251,24 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void tblUniversidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUniversidadeMouseClicked
-        // TODO add your handling code here:
-        /*
         try {
             // TODO add your handling code here:
 
             controller.inserirCampos();
-        } catch (SQLException | ParseException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_tblUniversidadeMouseClicked
 
     private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
-        /*
-        try {
-            //Chamar metodo editar
-            controller.editar();
-        } catch (ParseException | SQLException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+        
+        //Chamar metodo editar
+        controller.editar();
+        
+        
+        
+        
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
@@ -296,14 +301,14 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
 
     private void lblSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarMouseClicked
         
-        /*
+        
         try {
             // TODO add your handling code here:
             controller.salvarEditar();
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_lblSalvarMouseClicked
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
@@ -379,8 +384,46 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     private javax.swing.JTextField txtCampus;
     private javax.swing.JTextField txtNomeUniversidade;
     // End of variables declaration//GEN-END:variables
-
+    //Getters e Setters dos campos de inserção
     public JTable getTblUniversidade(){
         return tblUniversidade;
     }
+    
+    public JTextField getTxtNome(){
+        return txtNomeUniversidade;
+    }
+    
+    public JTextField getTxtCampus(){
+        return txtCampus;
+    }
+    
+    public JComboBox getCmbEstado(){
+        return cmbEstado;
+    }
+    
+    //Getters dos botoes gerenciar alunos
+    public JLabel getLblEditar(){
+        return lblEditar;
+    }
+    public JLabel getLblRemover(){
+        return lblRemover;
+    }
+    
+    public JLabel getLblBuscar(){
+        return lblBuscar;
+    }
+    
+    public JLabel getLblCancelar(){
+        return lblCancelar;
+    }
+    
+    public JLabel getLblSalvar(){
+        return lblSalvar;
+    }
+    
+    public JLabel getLblCadastrar(){
+        return lblCadastrar;
+    }
+    
+    
 }

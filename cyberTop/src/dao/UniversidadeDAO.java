@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Aluno;
 import model.Turmas;
 import model.Universidade;
@@ -82,7 +83,21 @@ public class UniversidadeDAO {
         return universidades;
     }
     
+    public void update(Universidade universidade) throws SQLException{
+        //comando sql que será executado no banco de dados
+        String sql = "update universidade set nome = ?, campus = ?, estado = ? where id = ?;";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        JOptionPane.showMessageDialog(null, universidade.toString());
+        //Substitui cada interrogação, na ordem, pelo valor capturado do sistema (getters)
+        statement.setString(1, universidade.getNome());
+        statement.setString(2, universidade.getCampus());
+        statement.setString(3, universidade.getEstado());
+        statement.setInt(4, universidade.getId());
+        
+        //Executa o comando sql
+        statement.execute(); 
     
+    }
        
     
 }

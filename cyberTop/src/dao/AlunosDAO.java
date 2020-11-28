@@ -76,11 +76,13 @@ public class AlunosDAO {
     // Revisar funcao especialmente o data de nascimento
     
     public ArrayList<Aluno> pesquisar(PreparedStatement statement) throws SQLException, ParseException{
-        ArrayList<Aluno> alunos = new ArrayList<>();;
+        //Cria uma lista vazia de universidades
+        ArrayList<Aluno> alunos = new ArrayList<>();
+        //Executa o comando sql
         statement.execute();
-        
+        //Armazena o resultado da pesquisa sql na variável
         ResultSet resultSet = statement.getResultSet();
-        
+        //Enquanto tiver uma próxima linha, seta os dados do banco de acordo com o campo na variável
         while(resultSet.next()){
             int id = resultSet.getInt("id");
             String nome = resultSet.getString("nome");
@@ -99,12 +101,13 @@ public class AlunosDAO {
             int turmaId = resultSet.getInt("id_turma");
             String email = resultSet.getString("email");
             String curso = resultSet.getString("curso");
-            
+            //Instancia o objeto de acordo com os dados trazidos do banco
             Aluno alunoBanco = new Aluno(id, nome, cpf, dataNascimento, telefone, endereco, genero, turmaId, CEP, corRaca, email, curso);
-            
+            //Adiciona o objeto instanciado na lista
             alunos.add(alunoBanco);
             
         }
+        //Retorna a lista 
         return alunos;
     }
     
@@ -117,8 +120,7 @@ public class AlunosDAO {
         
         PreparedStatement statement = connection.prepareStatement(sql);
         
-        statement.setString(1, aluno.getNome());
-        JOptionPane.showMessageDialog(null, aluno); 
+        statement.setString(1, aluno.getNome()); 
         statement.setString(2, aluno.getCPF());
         statement.setDate(3, new java.sql.Date(aluno.getDataNascimento().getTimeInMillis()));
         statement.setString(4, aluno.getTelefone());
