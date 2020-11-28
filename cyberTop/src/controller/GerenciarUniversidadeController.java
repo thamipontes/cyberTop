@@ -50,6 +50,7 @@ public class GerenciarUniversidadeController {
                 inserirBuscarDadosUniversidade(universidade);
                 desativarCampos();
                 //ativarTodosBotoes();
+                inserirDadosUniversidadeTabela();
                 view.getTblUniversidade().addRowSelectionInterval(posicaoUniversidadeLista(id),posicaoUniversidadeLista(id));
            
             }else{

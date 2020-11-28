@@ -434,6 +434,7 @@ public class GerenciarAlunoController {
                 inserirBuscarDadosAluno(aluno);
                 desativarCampos();
                 ativarTodosBotoes();
+                inserirDadosAlunoTabela();
                 view.getTblAluno().addRowSelectionInterval(posicaoAlunoLista(id),posicaoAlunoLista(id));
            
             }else{

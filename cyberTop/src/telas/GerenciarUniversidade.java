@@ -266,10 +266,6 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         //Chamar metodo editar
         controller.editar();
         
-        
-        
-        
-        
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
