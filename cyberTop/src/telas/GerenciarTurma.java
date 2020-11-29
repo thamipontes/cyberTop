@@ -332,23 +332,14 @@ public class GerenciarTurma extends javax.swing.JFrame {
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
         
-        try {
-            // TODO add your handling code here:
-            controller.removerCadastro();
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarTurma.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // TODO add your handling code here:
+        controller.removerCadastro();
         
     }//GEN-LAST:event_lblRemoverMouseClicked
 
     private void lblSalvarEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarEditarMouseClicked
         
-        try {
-            // TODO add your handling code here:
-            controller.editarCadastro();
-        } catch (ParseException | SQLException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controller.editarCadastro();
         
 
     }//GEN-LAST:event_lblSalvarEditarMouseClicked
@@ -383,7 +374,6 @@ public class GerenciarTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_rdbSemestralActionPerformed
 
     private void rdbAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAnualActionPerformed
-
         controller.selecionarPeriodoAnual();
     }//GEN-LAST:event_rdbAnualActionPerformed
 

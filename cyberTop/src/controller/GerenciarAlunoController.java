@@ -3,6 +3,7 @@ package controller;
 import dao.AlunosDAO;
 import dao.Conexao;
 import dao.TurmaDAO;
+import interfaces.Cadastrar;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -22,7 +23,7 @@ import telas.CadastroTurma;
 import telas.GerenciarAluno;
 
 
-public class GerenciarAlunoController {
+public class GerenciarAlunoController{
     private final GerenciarAluno view;
     
     public GerenciarAlunoController(GerenciarAluno view){
