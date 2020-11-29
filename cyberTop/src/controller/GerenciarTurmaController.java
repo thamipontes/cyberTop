@@ -4,14 +4,14 @@ package controller;
 import dao.Conexao;
 import dao.TurmaDAO;
 import dao.UniversidadeDAO;
+import interfaces.Cadastrar;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Turmas;
@@ -20,7 +20,7 @@ import telas.GerenciarTurma;
 
 
 
-public class GerenciarTurmaController {
+public class GerenciarTurmaController implements Cadastrar{
     //Declaração do atributo que possui a tela CadastroTurma
     private final GerenciarTurma view;
     
@@ -29,94 +29,121 @@ public class GerenciarTurmaController {
         this.view = view;
     }
     
-    public void inserirCampos() throws SQLException{
-        int linha = view.getTblTurma().getSelectedRow();
-        ArrayList<Turmas> turmaBanco = carregarDadosTurma();
+    
+     /*
+        Método: salvarCadastro
+        Parâmetros: vazio
+        Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
+    */  
+    @Override
+    public void salvarCadastro(){  
         
-        if(linha >= 0 && linha < turmaBanco.size()){
-            Turmas turma = turmaBanco.get(linha);
-            
-            view.getTxtNome().setText(turma.getNome());
-            //Regras para selecionar o tipo da turma
-            
-            // Se a expressao for positiva o tipo da turma é Enem,  senao vestibular
-            if(turma.getTipo()){
-                view.getRdbEnem().setSelected(true);
-                view.getRdbVestibular().setSelected(false);
-            }else{
-                view.getRdbEnem().setSelected(false);
-                view.getRdbVestibular().setSelected(true);
+        if(!exibirAlertarCampos()){
+            /*Pega as informações passadas nos campos da tela*/
+            String nome = view.getTxtNome().getText();
+            String universidade = view.getCampoUniversidade().getSelectedItem().toString();
+            String horario = view.getCampoHorario().getSelectedItem().toString();
+            //Se for verdadeiro é enem, senão é vestibular
+            boolean tipo = view.getRdbEnem().isSelected();
+            //Se for verdadeiro é anual, senão é semestral
+            boolean periodo = view.getRdbAnual().isSelected();
+        
+            /*Instaciando o objeto turma com os dados recebidos pela tela*/
+            Turmas turma = new Turmas(nome, horario, tipo , periodo, 60, universidade);
+        
+            /*Conexão com o banco de dados para salvar os dados da turma na tabela turma*/
+            Connection conexao;
+            try {
+                //Faz a conexão com o banco
+                conexao = new Conexao().getConnection();
+                //Passa a conexão para a classe TurmaDAO que possui o CRUD
+                TurmaDAO turmaDAO = new TurmaDAO(conexao);
+                //Chama o método de inserção 
+                turmaDAO.insert(turma);
+                //Mensagem de turma cadastrada com sucesso
+                JOptionPane.showMessageDialog(null, "Turma criada com sucesso");     
+                // Atualiza a tabela com a nova turma
+                inserirDadosTurmaTabela();
+                            
+            } catch (SQLException ex) {
+                Logger.getLogger(GerenciarTurmaController.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Falha ao criar turma!");
             }
-            
-            // Se a expressao for positiva o periodo da turma é Anual,  senao Semestral
-            if(turma.getPeriodo()){
-                view.getRdbAnual().setSelected(true);
-                view.getRdbSemestral().setSelected(false);
-            }else{
-                view.getRdbAnual().setSelected(false);
-                view.getRdbSemestral().setSelected(true);
-            }
-            
-            view.getCampoUniversidade().setSelectedItem(turma.getNomeUniversidade());
-            view.getCampoHorario().setSelectedItem(turma.getHorario());
-            
-            //Regras de botoes
-            view.getLblEditar().setEnabled(true);
-            view.getLblRemover().setEnabled(true);
-            
-            
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Seelcione uma linha válida.");
         }
         
     }
-    //Cancela a ação
-    public void cancelar() throws SQLException{
-        limparCampos();
-        desativarCampos();
-        configuracaoInicialBotoes();
-        inserirDadosTurmaTabela();
-    }
     
-    public void configuracaoInicialBotoes(){
-            view.getLblRemover().setEnabled(false);
-            view.getLblRemover().setVisible(true);
-            view.getLblEditar().setEnabled(false);
-            view.getLblEditar().setVisible(true);
-            view.getLblBuscar().setEnabled(true);
-            view.getLblBuscar().setVisible(true);
-            view.getLblCadastrar().setEnabled(true);
-            view.getLblCadastrar().setVisible(true);
-            view.getLblCancelar().setVisible(false);
-            view.getLblSalvarEditar().setVisible(false);
-            view.getLblSalvarCadastro().setVisible(false);
-            view.getTblTurma().setVisible(true);
+    
+    /*
+        Método: editarCadastro
+        Parâmetros: vazio
+        Descrição: pega os novos dados inseridos na tela e atualiza a turma   
+    */
+    @Override
+    public void editarCadastro(){
+        //Se não tiver aparecido alerta de campos vazios
+        if(!exibirAlertarCampos()){            
+            try {
+                
+                /*Pega as informações passadas nos campos da tela*/
+                String nome = view.getTxtNome().getText();
+                String universidade = view.getCampoUniversidade().getSelectedItem().toString();
+                String horario = view.getCampoHorario().getSelectedItem().toString();
+                boolean tipo = view.getRdbEnem().isSelected();
+                boolean periodo = view.getRdbAnual().isSelected();
+                /*Acha o id da turma na tabela*/
+                int id = buscarIdTurmaTabela();                
+                
+                /*Instaciando o objeto turma com os dados recebidos pela tela para atualizar*/
+                Turmas turma = new Turmas(id,nome, horario, tipo, periodo, universidade);     
+  
+                /*Conexão com o banco de dados para salvar os dados da universidade na tabela e banco de dados*/
+                Connection conexao;
+                try {
+                    //Faz a conexão com o banco
+                    conexao = new Conexao().getConnection();
+                    //Passa a conexão para a classe TurmaDAO que possui o CRUD
+                    TurmaDAO turmaDAO = new TurmaDAO(conexao);
+                    //Chama o método update e atualiza no banco de dados e na tabela
+                    turmaDAO.update(turma);
+                    //Mensagem de turma editada com sucesso
+                    JOptionPane.showMessageDialog(null, "Turma editada com sucesso");
+                    //Volta a tela para como era no inicio
+                    cancelar();
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(GerenciarTurmaController.class.getName()).log(Level.SEVERE, null, ex);
+                    //Caso dê erro mostra essa tela
+                    JOptionPane.showMessageDialog(null, "Falha ao editar dado no banco");
+                }
 
+            } catch (SQLException ex) {
+                Logger.getLogger(GerenciarTurmaController.class.getName()).log(Level.SEVERE, null, ex);
+                }  
         }
-    //Desativa todos os campos de inserção de dados
-    public void desativarCampos(){
-        view.getTxtNome().setEnabled(false);
-        view.getCampoHorario().setEnabled(false);
-        view.getCampoUniversidade().setEnabled(false);
-        view.getRdbAnual().setEnabled(false);
-        view.getRdbEnem().setEnabled(false);
-        view.getRdbSemestral().setEnabled(false);
-        view.getRdbVestibular().setEnabled(false);
-    }
-    // Ativa todos os campos de inserção de dados
-    public void ativarCampos(){
-        view.getTxtNome().setEnabled(true);
-        view.getCampoHorario().setEnabled(true);
-        view.getCampoUniversidade().setEnabled(true);
-        view.getRdbAnual().setEnabled(true);
-        view.getRdbEnem().setEnabled(true);
-        view.getRdbSemestral().setEnabled(true);
-        view.getRdbVestibular().setEnabled(true);
-        
     }
     
-    // Avisa se algum campo esta em branco
+    
+    /*
+        Método: limparCampos
+        Parâmetros: vazio
+        Descrição: limpa todos os campos da tela
+    */
+    @Override
+    public void limparCampos(){
+        
+        view.getTxtNome().setText("");
+        view.getCampoHorario().setSelectedItem("Selecione");
+        view.getCampoUniversidade().setSelectedItem("Selecione");
+        view.getRdbEnem().setSelected(false);
+        view.getRdbAnual().setSelected(false);
+        view.getRdbSemestral().setSelected(false);
+        view.getRdbVestibular().setSelected(false);
+    }
+    
+    
+      // Avisa se algum campo esta em branco
+    @Override
     public boolean exibirAlertarCampos(){        
         //Descobre se algum dos campos ficou vazio
         if(view.getTxtNome().getText().equals("")                               ||
@@ -137,230 +164,217 @@ public class GerenciarTurmaController {
         return false;
     }
     
+    
     /*
-        Método: salvarCadastro
+        Método: removerCadastro
         Parâmetros: vazio
-        Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
-    */  
-    public void salvarCadastro(){  
-        
-        if(!exibirAlertarCampos()){
-            /*Pega as informações passadas nos campos da tela*/
-            String nome = view.getTxtNome().getText();
-            String universidade = view.getCampoUniversidade().getSelectedItem().toString();
-            String horario = view.getCampoHorario().getSelectedItem().toString();
-            boolean enem = view.getRdbEnem().isSelected();
-            boolean vestibular = view.getRdbVestibular().isSelected();
-            boolean anual = view.getRdbAnual().isSelected();
-            boolean semestral = view.getRdbSemestral().isSelected();
-            boolean tipo;
-            boolean periodo;
-            // Verificação para definir o tipo da turma, se verdadeiro for é do tipo enem senao vestibular
-            if(enem){
-               tipo = enem;
-            }else{
-               tipo = vestibular;
-            }
-            // Verificação para definir o tipo da turma, se verdadeiro for é do tipo enem senao vestibular
-            if(anual){
-                periodo = anual;
-            }else{
-                periodo = semestral;
-                
-            }
-        
-            /*Instaciando o objeto turma com os dados recebidos pela tela*/
-            Turmas turma = new Turmas(nome, horario, tipo , periodo, 60, universidade);
-        
-            /*Conexão com o banco de dados para salvar os dados da turma na tabela turma*/
-            Connection conexao;
-            try {
-                //Faz a conexão com o banco
-                conexao = new Conexao().getConnection();
-                //Chama o método de inserção 
-                TurmaDAO turmaDAO = new TurmaDAO(conexao);
-                //Chama o método de inserção 
-                turmaDAO.insert(turma);
-                //Mensagem de professor cadastrado com sucesso
-                JOptionPane.showMessageDialog(null, "Turma criada com sucesso");
-                // Ativa os campos para o usuario poder inserir dados
-                
-                // Atualiza a tabela com a nova turma
-                inserirDadosTurmaTabela();
-            
-            } catch (SQLException ex) {
-                Logger.getLogger(GerenciarTurmaController.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null, "Falha ao criar turma!");
-            }
-        }
-        
-    }
-    
- 
-    
-    //Edita o cadastro da selecionada
-    public void editarCadastro() throws ParseException, SQLException{
-        
-        if(!exibirAlertarCampos()){
-            
-            /*Pega as informações passadas nos campos da tela*/
-            String nome = view.getTxtNome().getText();
-            String universidade = view.getCampoUniversidade().getSelectedItem().toString();
-            String horario = view.getCampoHorario().getSelectedItem().toString();
-            boolean enem = view.getRdbEnem().isSelected();
-            boolean vestibular = view.getRdbVestibular().isSelected();
-            boolean anual = view.getRdbAnual().isSelected();
-            boolean semestral = view.getRdbSemestral().isSelected();
-            boolean tipo;
-            boolean periodo;
-            // Verificação para definir o tipo da turma, se verdadeiro for é do tipo enem senao vestibular
-            if(enem){
-               tipo = enem;
-            }else{
-               tipo = vestibular;
-            }
-            // Verificação para definir o tipo da turma, se verdadeiro for é do tipo enem senao vestibular
-            if(anual){
-                periodo = anual;
-            }else{
-                periodo = semestral;
-                
-            }
-            
-            
-            // Criar uma lista de todas as universidades cadastradas
-            ArrayList<Turmas> turmaBanco = carregarDadosTurma();
-            // Captura qual a linha selecionada da tabela de universidades
-            int linha = view.getTblTurma().getSelectedRow();
-            
-            // 
-            int id=0;
-            // Verificação se alguma linha da tabela de universidade foi selecionada
-            if(linha >= 0 && linha < turmaBanco.size()){
-                // Captura o objeto selecionado na tabela universidade
-                Turmas turma = turmaBanco.get(linha);
-                // Captura o id da turma selecionada
-                id = turma.getId();
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione uma linha valida na tabela!");
-            }
-            
-            
-            
-            /*Instaciando o objeto turma com os dados recebidos pela tela para atualizar*/
-            Turmas turma = new Turmas(id,nome, horario, tipo, periodo, universidade);
-            JOptionPane.showMessageDialog(null, universidade);
-            
-            
-            
-
-            
-            /*Conexão com o banco de dados para salvar os dados da universidade na tabela e banco de dados*/
-            Connection conexao;        
-            try {
-            //Faz a conexão com o banco
-                conexao = new Conexao().getConnection();
-                //Passa a conexão para a classe TurmaDAO que possui o CRUD
-                TurmaDAO turmaDAO = new TurmaDAO(conexao);
-               //Chama o método de inserção e atualiza no banco de dados e na tabela           
-                turmaDAO.update(turma);
-                //Mensagem de turma cadastrado com sucesso
-                JOptionPane.showMessageDialog(null, "Turma editada com sucesso");
-                inserirDadosTurmaTabela();
-
-                  
-
-            } catch (SQLException ex) {
-                Logger.getLogger(GerenciarTurmaController.class.getName()).log(Level.SEVERE, null, ex);
-                //Caso dê erro mostra essa tela
-                JOptionPane.showMessageDialog(null, "Falha ao editar dado no banco");
-                }  
-                
-                limparCampos();
-                desativarCampos();
-                configuracaoInicialBotoes();
-                //implementar
-                //cancelar();
-        }
-    }
-    
-    // Remove a turma cadastarda
-    public void removerCadastro() throws SQLException{
+        Descrição: remove a turma do banco de dados  
+    */
+    public void removerCadastro(){
+        //Verifica se selecionou alguma linha da tabela
         if(view.getTblTurma().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione alguma turma para descadastrar.");
         }else{
-            
-            ArrayList<Turmas> turmaBanco = carregarDadosTurma();
-            int linha = view.getTblTurma().getSelectedRow();
-            
-            if(linha >= 0 && linha < turmaBanco.size()){
-                
-                Turmas turma = turmaBanco.get(linha);
-                
-                Connection conexao = new Conexao().getConnection();
-                TurmaDAO turmaDAO = new TurmaDAO(conexao);
-                
-                turmaDAO.delete(turma);
-                
-                inserirDadosTurmaTabela();
-                limparCampos();
-                configuracaoInicialBotoes();
-                
-                JOptionPane.showMessageDialog(null, "Turma descadastrada!");
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
+            try {
+                // Criar uma lista de todas as turmas cadastradas
+                ArrayList<Turmas> turmaBanco = carregarDadosTurma();
+                // Captura qual a linha selecionada da tabela de turmas
+                int linha = view.getTblTurma().getSelectedRow();
+                // Verifica se a linha selecionada é válida
+                if(linha >= 0 && linha < turmaBanco.size()){
+                    // Captura o objeto selecionado na tabela turma
+                    Turmas turma = turmaBanco.get(linha);
+                    //Faz a conexão com o banco
+                    Connection conexao = new Conexao().getConnection();
+                    //Passa a conexão para a classe TurmaDAO para realizar o CRUD
+                    TurmaDAO turmaDAO = new TurmaDAO(conexao);
+                    //Chama o método delete
+                    turmaDAO.delete(turma);
+                    //Mensagem de sucesso
+                    JOptionPane.showMessageDialog(null, "Turma descadastrada!");
+                    //Retornar as configurações padrões de inicio
+                    cancelar();
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GerenciarTurmaController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
     }
     
     
-    // Pesquisa turma no banco e retorna as informações para os campos de edição
+    /*
+        Método: inserirCampos
+        Parâmetros: vazio
+        Descrição: pega os dados do banco e insere na tela   
+    */  
+    public void inserirCampos() throws SQLException{
+        //Descobre qual linha da tabela o mouse clicou
+        int linha = view.getTblTurma().getSelectedRow();
+        //Salva na variável a lista de todas as turmas do banco
+        ArrayList<Turmas> turmaBanco = carregarDadosTurma();
+        //Verifica se a linha é válida
+        if(linha >= 0 && linha < turmaBanco.size()){
+            //Pega a turma da lista de acordo com a linha clicada
+            Turmas turma = turmaBanco.get(linha);
+            /*Inserção de dados nos campos*/
+            view.getTxtNome().setText(turma.getNome());
+            view.getCampoUniversidade().setSelectedItem(turma.getNomeUniversidade());
+            view.getCampoHorario().setSelectedItem(turma.getHorario());
+            
+            /*Regras para inserir o periodo da turma*/
+            view.getRdbAnual().setSelected(turma.getPeriodo());
+            view.getRdbSemestral().setSelected(!turma.getPeriodo());
+            
+            /*Regras para inserir o tipo da turma*/
+            view.getRdbEnem().setSelected(turma.getTipo());
+            view.getRdbVestibular().setSelected(!turma.getTipo());
+         
+            //Ao clicar em uma linha os botões editar e remover agora podem ser selecionados
+            view.getLblEditar().setEnabled(true);
+            view.getLblRemover().setEnabled(true);
+      
+        }else{
+            JOptionPane.showMessageDialog(null, "Seelcione uma linha válida.");
+        }
+        
+    }
+   
+    
+    /*
+        Método: cancelar
+        Parâmetros: vazio
+        Descrição: volta a tela como estavam antes   
+    */
+    public void cancelar() throws SQLException{
+        limparCampos();
+        desativarCampos();
+        configuracaoInicialBotoes();
+        inserirDadosTurmaTabela();
+    }
+    
+    
+    /*
+        Método: configuracaoInicialBotoes
+        Parâmetros: vazio
+        Descrição: seta o padrão de botões para inicio da tela   
+    */
+    public void configuracaoInicialBotoes(){
+            
+            view.getLblRemover().setEnabled(false);
+            view.getLblRemover().setVisible(true);
+            view.getLblEditar().setEnabled(false);
+            view.getLblEditar().setVisible(true);
+            view.getLblBuscar().setEnabled(true);
+            view.getLblBuscar().setVisible(true);
+            view.getLblCadastrar().setEnabled(true);
+            view.getLblCadastrar().setVisible(true);
+            view.getLblCancelar().setVisible(false);
+            view.getLblSalvarEditar().setVisible(false);
+            view.getLblSalvarCadastro().setVisible(false);
+            view.getTblTurma().setVisible(true);
+
+        }
+    
+    
+
+     /*
+        Método: desativarCampos
+        Parâmetros: vazio
+        Descrição: Desativa todos os campos de inserção de dados   
+    */
+    public void desativarCampos(){
+        view.getTxtNome().setEnabled(false);
+        view.getCampoHorario().setEnabled(false);
+        view.getCampoUniversidade().setEnabled(false);
+        view.getRdbAnual().setEnabled(false);
+        view.getRdbEnem().setEnabled(false);
+        view.getRdbSemestral().setEnabled(false);
+        view.getRdbVestibular().setEnabled(false);
+    }
+    
+    
+
+    /*
+        Método: desativarCampos
+        Parâmetros: vazio
+        Descrição: Ativa todos os campos de inserção de dados   
+    */
+    public void ativarCampos(){
+        view.getTxtNome().setEnabled(true);
+        view.getCampoHorario().setEnabled(true);
+        view.getCampoUniversidade().setEnabled(true);
+        view.getRdbAnual().setEnabled(true);
+        view.getRdbEnem().setEnabled(true);
+        view.getRdbSemestral().setEnabled(true);
+        view.getRdbVestibular().setEnabled(true);
+        
+    }
+     
+      
+    /*
+        Método: buscarIdTurmaTabela
+        Parâmetros: vazio
+        Descrição: acha qual o id da turma clicada na tabela  
+    */
+    private int buscarIdTurmaTabela() throws HeadlessException, SQLException {
+        // Criar uma lista de todas as turmas cadastradas
+        ArrayList<Turmas> turmaBanco = carregarDadosTurma();
+        // Captura qual a linha selecionada da tabela de turmas
+        int linha = view.getTblTurma().getSelectedRow();
+
+        int id = 0;
+        // Verifica se a linha selecionada é válida
+        if(linha >= 0 && linha < turmaBanco.size()){
+            // Captura o objeto selecionado na tabela turma
+            Turmas turma = turmaBanco.get(linha);
+            // Captura o id da turma selecionada
+            id = turma.getId();
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma linha valida na tabela!");
+        }
+        return id;
+    }
+    
+    
+    /*
+        Método: buscarCadastro
+        Parâmetros: vazio
+        Descrição: busca uma turma específica ao pedir o id e insere os dados na tela
+    */
     public void buscarCadastro() throws SQLException, ParseException{
-        String idString = (JOptionPane.showInputDialog("Digite o id da turma:"));
-        int id;
+        String idString = (JOptionPane.showInputDialog("Digite o id da turma:"));        
         
         // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
         if(idString != null){
-            id = Integer.parseInt(idString);
+            int id = Integer.parseInt(idString);
             
-            if(posicaoTurmaLista(id)  != -1){
+            if(posicaoTurmaLista(id) != -1){
                 Turmas turma = buscarTurmaPorId(id);
-                boolean tipo;
-                boolean periodo;
-                
+               
                 //Insere os dados encontrados nos campos para edição
                 view.getTxtNome().setText(turma.getNome());
                 view.getCampoHorario().setSelectedItem(turma.getHorario());
                 view.getCampoUniversidade().setSelectedItem(turma.getNomeUniversidade());
-                
-                if(turma.getTipo()){
-                    view.getRdbEnem().setSelected(true);
-                    view.getRdbVestibular().setSelected(false);
-                }else{
-                    view.getRdbEnem().setSelected(false);
-                    view.getRdbVestibular().setSelected(true);
-                }
-            
-                // Se a expressao for positiva o periodo da turma é Anual,  senao Semestral
-                if(turma.getPeriodo()){
-                    view.getRdbAnual().setSelected(true);
-                    view.getRdbSemestral().setSelected(false);
-                }else{
-                    view.getRdbAnual().setSelected(false);
-                    view.getRdbSemestral().setSelected(true);
-                }
-                
-                
-                
+                // Se a expressao for verdaeira o tipo da turma é enem, senao vestibular
+                view.getRdbEnem().setSelected(turma.getTipo());
+                view.getRdbVestibular().setSelected(!turma.getTipo());          
+                // Se a expressao for verdadeira o periodo da turma é Anual, senao Semestral
+                view.getRdbAnual().setSelected(turma.getPeriodo());
+                view.getRdbSemestral().setSelected(!turma.getPeriodo());       
+               
                 desativarCampos();
                 //Ativa todos os botoes principais da tela
-               regraBotoesBuscar();
+                regraBotoesBuscar();
                 
-                
+                //TODO Pq carrega novamente a tabela?
                 inserirDadosTurmaTabela();
-                view.getTblTurma().addRowSelectionInterval(posicaoTurmaLista(id),posicaoTurmaLista(id));
+                int intervalo = posicaoTurmaLista(id);
+                
+                view.getTblTurma().addRowSelectionInterval(intervalo, intervalo);
            
             }else{
                 JOptionPane.showMessageDialog(null, "Turma não cadastrada!");
@@ -368,7 +382,12 @@ public class GerenciarTurmaController {
         }
     }
     
-    // Ativa os botoes principais da tela
+
+    /*
+        Método: regraBotoesBuscar
+        Parâmetros: vazio
+        Descrição: Ativa os botoes principais da tela
+    */
     public void regraBotoesBuscar(){
         view.getLblRemover().setVisible(true);
         view.getLblRemover().setEnabled(true);
@@ -383,7 +402,12 @@ public class GerenciarTurmaController {
         view.getLblSalvarCadastro().setVisible(false);
     }
     
-    // Segue a regra de negocio para salvar a turma
+
+    /*
+        Método: regraBotoesBuscar
+        Parâmetros: vazio
+        Descrição: Segue a regra de negocio para salvar a turma
+    */
     public void regraBotoesCadastrar(){
         view.getLblRemover().setVisible(false);
         view.getLblEditar().setVisible(false);
@@ -408,7 +432,13 @@ public class GerenciarTurmaController {
         }
         return -1;
     }
-    // Busca uma turma por id
+    
+    
+    /*
+        Método: buscarTurmaPorId
+        Parâmetros: inteiro
+        Descrição: busca os dados de uma turma de acordo com o id dela
+    */
     public Turmas buscarTurmaPorId(int id) throws SQLException, ParseException{
         //Faz a conexão com o banco 
         Connection conexao;
@@ -420,39 +450,38 @@ public class GerenciarTurmaController {
         return turma;
     }
     
-    
-    // Limpar todo os campos da tela
-    public void limparCampos(){
-        
-        view.getTxtNome().setText("");
-        view.getCampoHorario().setSelectedItem("Selecione");
-        view.getCampoUniversidade().setSelectedItem("Selecione");
-        view.getRdbEnem().setSelected(false);
-        view.getRdbAnual().setSelected(false);
-        view.getRdbSemestral().setSelected(false);
-        view.getRdbVestibular().setSelected(false);
-    }
-    
-    
-    // Verifica se tem alguma linha da tabela selecionada para que seja possivel editar
+  
+    /*
+        Método: botaoEditarCadastro
+        Parâmetros: vazio
+        Descrição: Verifica se tem alguma linha da tabela selecionada para que seja possivel editar
+    */
     public void botaoEditarCadastro(){
         if(view.getTblTurma().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione alguma turma para poder editar.");
         }else{
             ativarCampos();
-            regraBotoesEditar();
-            
+            regraBotoesEditar();            
         }
     }
     
-    // 
+    
+    /*
+        Método: botaoCadastrar
+        Parâmetros: vazio
+        Descrição: ativa os campos e seta o padrão dos botões ao se cadastrar uma turma
+    */ 
     public void botaoCadastrar(){
         regraBotoesCadastrar();
         ativarCampos();
     }
     
     
-    // Deixa apenas os botoes de salvar e cancelar ativos;
+    /*
+        Método: regraBotoesEditar
+        Parâmetros: vazio
+        Descrição: Deixa apenas os botoes de salvar e cancelar ativos;
+    */ 
     public void regraBotoesEditar(){
         view.getLblRemover().setVisible(false);
         view.getLblEditar().setVisible(false);
@@ -462,7 +491,13 @@ public class GerenciarTurmaController {
         view.getLblSalvarEditar().setVisible(true);
         view.getLblSalvarCadastro().setVisible(false);
     }
-     //Insere todas as universidades na tabela
+    
+    
+    /*
+        Método: inserirDadosTurmaTabela
+        Parâmetros: vazio
+        Descrição: insere as informações da tabela turma do banco de dados na tabela da tela
+    */
     public void inserirDadosTurmaTabela() throws SQLException{
         // Variavel que recebe uma lista de turmas
         ArrayList<Turmas> turmaBanco = carregarDadosTurma();
@@ -478,6 +513,7 @@ public class GerenciarTurmaController {
         view.getTblTurma().setModel(modelo);
         
     }
+    
     
    /*
         Método: inserirDadosUniversidadeCmb
@@ -515,7 +551,12 @@ public class GerenciarTurmaController {
         return universidades;    
     }
     
-    // Carrega as informações a partir do banco de dados e retorna uma lista de turmas
+    
+    /*
+        Método: carregarDadosTurma
+        Parâmetros: vazio
+        Descrição: retorna a lista de turmas que está persistido no banco de dados
+    */
     public ArrayList<Turmas> carregarDadosTurma() throws SQLException{
         Connection conexao;
         conexao = new Conexao().getConnection();
