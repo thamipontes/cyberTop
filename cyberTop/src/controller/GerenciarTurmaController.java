@@ -458,7 +458,7 @@ public class GerenciarTurmaController implements Cadastrar{
     */
     public void botaoEditarCadastro(){
         if(view.getTblTurma().getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(view, "Selecione alguma turma para poder editar.");
+            JOptionPane.showMessageDialog(view, "Selecione alguma turma para editar.");
         }else{
             ativarCampos();
             regraBotoesEditar();            

@@ -40,6 +40,10 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         controller.inserirDadosProfessorTabela();
         // Insere os dados no campo da combobox
         controller.inserirDadosProfessorCmB();
+        // Desativa os campos
+        controller.desativarCampos();
+        // seta o padrão de botões para inicio da tela   
+        controller.configuracaoInicialBotoes();
         
         
         
@@ -88,6 +92,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         background1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CyberTop - Professor");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -297,18 +302,17 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
                                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(44, 44, 44)
                                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(cmbGeneroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
-                                        .addComponent(lblLogradouro)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE))
-                                    .addComponent(txtLogradouroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblLogradouro)
+                                    .addComponent(txtLogradouroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDadosPessoais4Layout.createSequentialGroup()
                                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblNomeAluno4, javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,10 +391,10 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_tblProfessorMouseClicked
 
     private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
-        /*
+        
         //Chamar metodo editar
         controller.botaoEditarCadastro();
-        */
+        
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
@@ -422,13 +426,15 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRemoverMouseClicked
 
     private void lblSalvarEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarEditarMouseClicked
-        /*
+        
         try {
             controller.editarCadastro();
-        } catch (ParseException | SQLException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarProfessor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(GerenciarProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
-    */
+    
     }//GEN-LAST:event_lblSalvarEditarMouseClicked
 
     private void lblSalvarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarCadastroMouseClicked
@@ -443,13 +449,15 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSalvarCadastroMouseClicked
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
-        /*
+        
         try {
             controller.cancelar();
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(GerenciarProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_lblCancelarMouseClicked
 
     private void cmbGeneroProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroProfessorActionPerformed

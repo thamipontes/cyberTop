@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import model.Professor;
-import model.Turmas;
 
 /*Classe de conexão do banco com a tabela professor*/
 public class ProfessorDAO {
@@ -54,6 +53,32 @@ public class ProfessorDAO {
         
         return pesquisar(statement);
                 
+    }
+    
+    
+    /*
+        Método: update
+        Parâmetros: classe professor
+        Descrição: atualiza os dados no banco de dados  
+    */
+    public void update(Professor professor) throws SQLException{
+        //comando sql que será executado no banco de dados
+        String sql = "update professor set nome = ?, cpf = ?, data_nascimento = ?, telefone = ?, endereco = ?, genero = ?, materia = ?, turma = ? where id = ?; ";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        
+        statement.setString(1, professor.getNome()); 
+        statement.setString(2, professor.getCPF());
+        statement.setDate(3, new java.sql.Date(professor.getDataNascimento().getTimeInMillis()));
+        statement.setString(4, professor.getTelefone());
+        statement.setString(5, professor.getEndereco());
+        statement.setString(6, Character.toString(professor.getGenero()));
+        statement.setString(7, professor.getMateria());
+        statement.setString(8, professor.getNomeTurma());
+        
+        statement.setInt(9, professor.getId());
+        // Executa o comando no banco de dados
+        statement.execute();
+    
     }
     
     
