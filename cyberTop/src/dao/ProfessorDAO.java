@@ -2,8 +2,14 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import model.Professor;
+import model.Turmas;
 
 /*Classe de conexão do banco com a tabela professor*/
 public class ProfessorDAO {
@@ -41,6 +47,48 @@ public class ProfessorDAO {
        
     }
     
+    public ArrayList<Professor> findAll() throws SQLException, ParseException{
+        String sql = "select id, nome, cpf, data_nascimento, telefone, endereco, genero, materia, turma from professor;";
+        
+        PreparedStatement statement = connection.prepareStatement(sql);
+        
+        return pesquisar(statement);
+                
+    }
     
+    
+    
+    public ArrayList<Professor> pesquisar(PreparedStatement statement) throws SQLException, ParseException{
+        //Cria uma lista vazia de universidades
+        ArrayList<Professor> professor = new ArrayList<>();
+        //Executa o comando sql
+        statement.execute();
+        //Armazena o resultado da pesquisa sql na variável
+        ResultSet resultSet = statement.getResultSet();
+        //Enquanto tiver uma próxima linha, seta os dados do banco de acordo com o campo na variável
+        while(resultSet.next()){
+            int id = resultSet.getInt("id");
+            String nome = resultSet.getString("nome");
+            String cpf = resultSet.getString("cpf");
+            Date dataNascimentoBanco = resultSet.getDate("data_nascimento");
+            Calendar dataNascimento = Calendar.getInstance();             
+            dataNascimento.setTime(dataNascimentoBanco); 
+            
+            String telefone = resultSet.getString("telefone");
+            String endereco = resultSet.getString("endereco");
+            String genero1 = resultSet.getString("genero");
+            char genero = genero1.charAt(0);
+   
+            String materia = resultSet.getString("materia");
+            String turma = resultSet.getString("turma");
+            //Instancia o objeto de acordo com os dados trazidos do banco
+            Professor professorBanco = new Professor(id, nome, cpf, dataNascimento, telefone, endereco, genero, materia, turma);
+            //Adiciona o objeto instanciado na lista
+            professor.add(professorBanco);
+            
+        }
+        //Retorna a lista 
+        return professor;
+    }
     
 }
