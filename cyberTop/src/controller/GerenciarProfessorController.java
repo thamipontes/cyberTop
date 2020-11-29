@@ -37,6 +37,12 @@ public class GerenciarProfessorController {
         return ' '; 
     }
     
+    
+    /*
+        Método: editarCadastro
+        Parâmetros: vazio
+        Descrição: edita o professor no banco de dados  
+    */
     public void editarCadastro() throws SQLException, ParseException{
         
         
@@ -96,6 +102,71 @@ public class GerenciarProfessorController {
         }
         cancelar();
         
+    }
+    
+    
+    /*
+        Método: buscarCadastro
+        Parâmetros: vazio
+        Descrição: busca um professor específico ao pedir o id e insere os dados na tela
+    */
+    public void buscarCadastro() throws SQLException, ParseException{
+        String idString = (JOptionPane.showInputDialog("Digite o id do professor:"));        
+        
+        // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
+        if(idString != null){
+            int id = Integer.parseInt(idString);
+            
+            if(posicaoTurmaLista(id) != -1){
+                Professor professor = buscarProfessorPorId(id);
+                
+                
+                
+               
+                desativarCampos();
+                //Ativa todos os botoes principais da tela
+                //regraBotoesBuscar();
+                
+                //TODO Pq carrega novamente a tabela?
+                inserirDadosProfessorTabela();
+                int intervalo = posicaoTurmaLista(id);
+                
+                view.getTblProfessor().addRowSelectionInterval(intervalo, intervalo);
+                inserirCampos();
+           
+            }else{
+                JOptionPane.showMessageDialog(null, "Turma não cadastrada!");
+            } 
+        }
+    }
+    
+    public int posicaoTurmaLista(int id) throws SQLException, ParseException{
+        ArrayList<Professor> professor = carregarDadosProfessor();
+        
+        for(int i = 0; i <professor.size(); i++){
+            if(id == professor.get(i).getId()){
+                return i;
+            }
+            
+        }
+        return -1;
+    }
+    
+    
+    /*
+        Método: buscarProfessorPorId
+        Parâmetros: inteiro
+        Descrição: busca os dados de um professor de acordo com o id dele
+    */
+    public Professor buscarProfessorPorId(int id) throws SQLException, ParseException{
+        //Faz a conexão com o banco 
+        Connection conexao;
+        conexao = new Conexao().getConnection();
+        //Passa a conexão para a classe TurmaDAO para realizar o CRUD
+        ProfessorDAO professorDAO = new ProfessorDAO(conexao);
+        //Chama o método findAll que retorna uma lista de turmas que está no banco de dados
+        Professor professor = professorDAO.findById(id); 
+        return professor;
     }
     
     

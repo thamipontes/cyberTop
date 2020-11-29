@@ -130,4 +130,14 @@ public class ProfessorDAO {
         return professor;
     }
     
+    
+    public Professor findById(int id) throws SQLException, ParseException{
+    
+        String sql = "select * from professor where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        //JOptionPane.showMessageDialog(null, pesquisar(statement).get(0));
+        return pesquisar(statement).get(0);     
+    
+    }
 }

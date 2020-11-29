@@ -406,13 +406,13 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCadastrarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
-        /*
+        
         try {
             controller.buscarCadastro();
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
