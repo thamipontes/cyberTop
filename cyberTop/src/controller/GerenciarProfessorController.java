@@ -100,6 +100,49 @@ public class GerenciarProfessorController {
     
     
     /*
+        Método: removerCadastro
+        Parâmetros: vazio
+        Descrição: remove o professor do banco de dados  
+    */
+    public void removerCadastro() throws ParseException{
+        //Verifica se selecionou alguma linha da tabela
+        if(view.getTblProfessor().getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(view, "Selecione algum professor para descadastrar.");
+        }else{
+            try {
+                // Criar uma lista de todas os professores cadastrados
+                ArrayList<Professor> professorBanco = carregarDadosProfessor();
+                // Captura qual a linha selecionada da tabela de professor
+                int linha = view.getTblProfessor().getSelectedRow();
+                // Verifica se a linha selecionada é válida
+                if(linha >= 0 && linha < professorBanco.size()){
+                    // Captura o objeto selecionado na tabela professor
+                    Professor professor = professorBanco.get(linha);
+                    
+                    //Faz a conexão com o banco
+                    Connection conexao = new Conexao().getConnection();
+                    //Passa a conexão para a classe ProfessorDAO para realizar o CRUD
+                    ProfessorDAO professorDAO = new ProfessorDAO(conexao);
+                    //Chama o método delete
+                    professorDAO.remove(professor);
+                    //Mensagem de sucesso
+                    JOptionPane.showMessageDialog(null, "Professor descadastrado!");
+                    
+                    //Retornar as configurações padrões de inicio
+                    cancelar();
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GerenciarProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }
+    
+    
+    /*
         Método: buscarIdTurmaTabela
         Parâmetros: vazio
         Descrição: acha qual o id da turma clicada na tabela  

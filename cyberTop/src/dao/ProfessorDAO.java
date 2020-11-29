@@ -46,6 +46,20 @@ public class ProfessorDAO {
        
     }
     
+    /*
+        Método: insert
+        Parâmetros: classe Professor
+        Descrição: deleta os dados coletado do sistema no banco de dados   
+    */ 
+    public  void remove(Professor professor) throws SQLException{
+        String sql = "delete from professor where id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        
+        statement.setInt(1,professor.getId());
+        statement.execute();
+    }
+
+    
     public ArrayList<Professor> findAll() throws SQLException, ParseException{
         String sql = "select id, nome, cpf, data_nascimento, telefone, endereco, genero, materia, turma from professor;";
         
