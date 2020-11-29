@@ -90,6 +90,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         cmbTurmaProfessor = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         background1 = new javax.swing.JLabel();
+        background2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CyberTop - Professor");
@@ -107,10 +108,10 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 bntVoltarActionPerformed(evt);
             }
         });
-        pnlCentral.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 650, -1, -1));
+        pnlCentral.add(bntVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 630, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Universidades"));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Professores"));
 
         tblProfessor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,7 +136,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblProfessor);
 
-        pnlCentral.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 520, 220));
+        pnlCentral.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 520, 220));
 
         lblEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lapis.png"))); // NOI18N
         lblEditar.setText("Editar");
@@ -144,7 +145,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 lblEditarMouseClicked(evt);
             }
         });
-        pnlCentral.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, -1, -1));
+        pnlCentral.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, -1, -1));
 
         lblCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
         lblCadastrar.setText("Cadastrar");
@@ -153,7 +154,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 lblCadastrarMouseClicked(evt);
             }
         });
-        pnlCentral.add(lblCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, -1, -1));
+        pnlCentral.add(lblCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
         lblBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         lblBuscar.setText("Buscar");
@@ -162,7 +163,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 lblBuscarMouseClicked(evt);
             }
         });
-        pnlCentral.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
+        pnlCentral.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, -1, -1));
 
         lblRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/eraser.png"))); // NOI18N
         lblRemover.setText("Descadastrar");
@@ -171,7 +172,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 lblRemoverMouseClicked(evt);
             }
         });
-        pnlCentral.add(lblRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+        pnlCentral.add(lblRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, -1));
 
         pnlTitulo.setBackground(new java.awt.Color(255, 153, 0));
         pnlTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -194,7 +195,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 lblSalvarEditarMouseClicked(evt);
             }
         });
-        pnlCentral.add(lblSalvarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, 20));
+        pnlCentral.add(lblSalvarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, 20));
 
         lblSalvarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
         lblSalvarCadastro.setText("Salvar");
@@ -203,7 +204,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 lblSalvarCadastroMouseClicked(evt);
             }
         });
-        pnlCentral.add(lblSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, 40));
+        pnlCentral.add(lblSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, -1, 40));
 
         lblCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         lblCancelar.setText("Cancelar");
@@ -212,7 +213,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 lblCancelarMouseClicked(evt);
             }
         });
-        pnlCentral.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
+        pnlCentral.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, -1, -1));
 
         pnlDadosPessoais4.setBackground(new java.awt.Color(255, 255, 255));
         pnlDadosPessoais4.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Professor"));
@@ -357,16 +358,20 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTurmaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78))
+                .addGap(0, 0, 0))
         );
 
-        pnlCentral.add(pnlDadosPessoais4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 670, 250));
+        pnlCentral.add(pnlDadosPessoais4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 670, 220));
 
-        getContentPane().add(pnlCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 690, 700));
+        getContentPane().add(pnlCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 690, 670));
 
         background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
         background1.setText("jLabel1");
-        getContentPane().add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 500));
+        getContentPane().add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 710, 500));
+
+        background2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/background-2.png"))); // NOI18N
+        background2.setText("jLabel1");
+        getContentPane().add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -400,9 +405,9 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
         // TODO add your handling code here:
         //new CadastroUniversidade().setVisible(true);
-/*
-        controller.botaoSalvarCadastro();
-        */
+
+        controller.botaoCadastrar();
+        
     }//GEN-LAST:event_lblCadastrarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
@@ -429,23 +434,17 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         
         try {
             controller.editarCadastro();
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarProfessor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }//GEN-LAST:event_lblSalvarEditarMouseClicked
 
     private void lblSalvarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarCadastroMouseClicked
-        /*
-        try {
-            // TODO add your handling code here:
-            controller.salvarCadastro();
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+        
+        // TODO add your handling code here:
+        controller.salvarCadastro();
+        
     }//GEN-LAST:event_lblSalvarCadastroMouseClicked
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
@@ -487,20 +486,16 @@ public class GerenciarProfessor extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GerenciarProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GerenciarProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GerenciarProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GerenciarProfessor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -517,6 +512,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background1;
+    private javax.swing.JLabel background2;
     private javax.swing.JButton bntVoltar;
     private javax.swing.JComboBox<String> cmbGeneroProfessor;
     private javax.swing.JComboBox<String> cmbTurmaProfessor;

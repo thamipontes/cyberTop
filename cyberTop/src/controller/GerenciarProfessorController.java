@@ -125,7 +125,7 @@ public class GerenciarProfessorController {
                
                 desativarCampos();
                 //Ativa todos os botoes principais da tela
-                //regraBotoesBuscar();
+                regraBotoesBuscar();
                 
                 //TODO Pq carrega novamente a tabela?
                 inserirDadosProfessorTabela();
@@ -135,7 +135,7 @@ public class GerenciarProfessorController {
                 inserirCampos();
            
             }else{
-                JOptionPane.showMessageDialog(null, "Turma não cadastrada!");
+                JOptionPane.showMessageDialog(null, "Professor não cadastrado!");
             } 
         }
     }
@@ -212,11 +212,72 @@ public class GerenciarProfessorController {
         }
     }
     
+    /*
+        Método: salvarCadastro
+        Parâmetros: vazio
+        Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
+    */    
+    //@Override
+    public void salvarCadastro() {
+        
+        
+        if(!exibirAlertarCampos()){
+            /*Pegas as informações passadas nos campos da tela*/
+            String nome = view.getTxtNome().getText();
+            String cpf = view.getTxtCPF().getText();
+            String telefone = view.getTxtTelefone().getText();
+            String endereco = view.getTxtLogradouro().getText();
+            String materia = view.getTxtMateria().getText();
+            String nomeTurma = view.getCmbTurmaProfessor().getSelectedItem().toString();
+
+
+            /*Tratando o dado Data de Nascimento*/
+            String dataNascimentoString = view.getTxtDataNascimento().getText();
+            //define padrão que a data deve obedecer
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy"); 
+            //Transforma o atributo em tipo calendar
+            Calendar dataNascimento = Calendar.getInstance();        
+            try {
+                //Seta a data no atributo data nascimento
+                dataNascimento.setTime(sdf.parse(dataNascimentoString));
+            } catch (ParseException ex) {
+                Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+
+            /*Tratando o dado Genero*/  
+           //Variável que recebe o return do método formatarGenero que está implementado no final do código
+            char genero = CadastroAlunoController.formatarGenero((view.getCmbGenero().getSelectedIndex()));
+
+            /*Instaciando o objeto professor com os dados recebidos pela tela*/
+            Professor professor = new Professor(nome, cpf, dataNascimento, telefone, endereco, genero, materia, nomeTurma);
+
+             /*Conexão com o banco de dados para salvar os dados do aluno na tabela professor*/
+            Connection conexao;
+            try {
+                //Faz a conexão com o banco
+                conexao = new Conexao().getConnection();
+                //Passa a conexão para a classe ProfessorDAO que possui o CRUD
+                ProfessorDAO professorDAO = new ProfessorDAO(conexao);
+                //Chama o método de inserção 
+                professorDAO.insert(professor);
+                //Mensagem de professor cadastrado com sucesso
+                JOptionPane.showMessageDialog(null, "Professor criado com sucesso");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Falha ao criar professor!");
+            }
+        }
+        
+ 
+        
+    }
     
     /*
         Método: buscarIdTurmaTabela
         Parâmetros: vazio
-        Descrição: acha qual o id da turma clicada na tabela  
+        Descrição: acha qual o id do professor clicada na tabela  
     */
     private int buscarIdProfessorTabela() throws HeadlessException, SQLException, ParseException {
         // Criar uma lista de todas as turmas cadastradas
@@ -341,6 +402,52 @@ public class GerenciarProfessorController {
         view.getLblCancelar().setVisible(true);
         view.getLblSalvarEditar().setVisible(true);
         view.getLblSalvarCadastro().setVisible(false);
+    }
+    
+    /*
+        Método: regraBotoesBuscar
+        Parâmetros: vazio
+        Descrição: Ativa os botoes principais da tela
+    */
+    public void regraBotoesBuscar(){
+        view.getLblRemover().setVisible(true);
+        view.getLblRemover().setEnabled(true);
+        view.getLblEditar().setVisible(true);
+        view.getLblEditar().setEnabled(true);
+        view.getLblBuscar().setVisible(true);
+        view.getLblBuscar().setEnabled(true);
+        view.getLblCadastrar().setVisible(true);
+        view.getLblCadastrar().setEnabled(true);
+        view.getLblCancelar().setVisible(false);
+        view.getLblSalvarEditar().setVisible(false);
+        view.getLblSalvarCadastro().setVisible(false);
+    }
+    
+    
+    /*
+        Método: regraBotoesBuscar
+        Parâmetros: vazio
+        Descrição: Segue a regra de negocio para salvar a turma
+    */
+    public void regraBotoesCadastrar(){
+        view.getLblRemover().setVisible(false);
+        view.getLblEditar().setVisible(false);
+        view.getLblBuscar().setVisible(false);
+        view.getLblCadastrar().setVisible(false);
+        view.getLblCancelar().setVisible(true);
+        view.getLblSalvarEditar().setVisible(false);
+        view.getLblSalvarCadastro().setVisible(true);
+        view.getTblProfessor().setVisible(false);
+    }
+    
+     /*
+        Método: botaoCadastrar
+        Parâmetros: vazio
+        Descrição: ativa os campos e seta o padrão dos botões ao se cadastrar uma turma
+    */ 
+    public void botaoCadastrar(){
+        regraBotoesCadastrar();
+        ativarCampos();
     }
     
     /*
@@ -494,5 +601,7 @@ public class GerenciarProfessorController {
         });  
    
     }
+
+    
     
 }
