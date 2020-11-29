@@ -251,7 +251,7 @@ public class GerenciarAlunoController {
     }
     
     
-    public String tratarGenero(Aluno alun){
+    public static String tratarGenero(Aluno alun){
         if(alun.getGenero() == 'I') return "Prefiro não informar";
         if(alun.getGenero() == 'M')return "Masculino";
         if(alun.getGenero() == 'F') return "Feminino";

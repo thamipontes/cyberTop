@@ -10,8 +10,11 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -21,6 +24,8 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     public final GerenciarProfessorController controller;
     /**
      * Creates new form GerenciarProfessor
+     * @throws java.sql.SQLException
+     * @throws java.text.ParseException
      */
     public GerenciarProfessor() throws SQLException, ParseException {
         initComponents();
@@ -33,6 +38,8 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         
         // Carrega a lista de professores
         controller.inserirDadosProfessorTabela();
+        // Insere os dados no campo da combobox
+        controller.inserirDadosProfessorCmB();
         
         
         
@@ -72,8 +79,6 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         txtDataNascimentoProfessor = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         txtTelefoneProfessor = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
-        cmbCorRacaProfessor = new javax.swing.JComboBox<>();
         lblLogradouro = new javax.swing.JLabel();
         txtLogradouroProfessor = new javax.swing.JTextField();
         lblMateria = new javax.swing.JLabel();
@@ -257,15 +262,6 @@ public class GerenciarProfessor extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Cor/Raça");
-
-        cmbCorRacaProfessor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Não declarar", "Preta", "Parda", "Indígena", "Amarela" }));
-        cmbCorRacaProfessor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCorRacaProfessorActionPerformed(evt);
-            }
-        });
-
         lblLogradouro.setText("Endereço:");
 
         txtLogradouroProfessor.setToolTipText("Insira o endereço do estudante");
@@ -289,39 +285,6 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
-                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNomeAluno4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCPF)
-                            .addComponent(txtCPFProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtDataNascimentoProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20))
-                    .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
-                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(cmbGeneroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbCorRacaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(lblLogradouro))
-                            .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtLogradouroProfessor)
-                                .addGap(20, 20, 20))))
-                    .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMateria)
                             .addComponent(txtMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -329,7 +292,36 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                         .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbTurmaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosPessoais4Layout.createSequentialGroup()
+                        .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
+                                .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(cmbGeneroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29)
+                                .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlDadosPessoais4Layout.createSequentialGroup()
+                                        .addComponent(lblLogradouro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE))
+                                    .addComponent(txtLogradouroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDadosPessoais4Layout.createSequentialGroup()
+                                .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNomeAluno4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                                .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCPF)
+                                    .addComponent(txtCPFProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14)
+                                .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtDataNascimentoProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(20, 20, 20))))
         );
         pnlDadosPessoais4Layout.setVerticalGroup(
             pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,13 +339,11 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel4)
                     .addComponent(lblLogradouro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefoneProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbGeneroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCorRacaProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLogradouroProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDadosPessoais4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -366,7 +356,7 @@ public class GerenciarProfessor extends javax.swing.JFrame {
                 .addGap(78, 78, 78))
         );
 
-        pnlCentral.add(pnlDadosPessoais4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 670, 190));
+        pnlCentral.add(pnlDadosPessoais4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 670, 250));
 
         getContentPane().add(pnlCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 690, 700));
 
@@ -383,15 +373,17 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void tblProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProfessorMouseClicked
-        /*
+        
         try {
             // TODO add your handling code here:
 
             controller.inserirCampos();
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(GerenciarProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_tblProfessorMouseClicked
 
     private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
@@ -472,10 +464,6 @@ public class GerenciarProfessor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneProfessorActionPerformed
 
-    private void cmbCorRacaProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCorRacaProfessorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCorRacaProfessorActionPerformed
-
     private void cmbTurmaProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTurmaProfessorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTurmaProfessorActionPerformed
@@ -522,13 +510,11 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background1;
     private javax.swing.JButton bntVoltar;
-    private javax.swing.JComboBox<String> cmbCorRacaProfessor;
     private javax.swing.JComboBox<String> cmbGeneroProfessor;
     private javax.swing.JComboBox<String> cmbTurmaProfessor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscar;
@@ -560,6 +546,45 @@ public class GerenciarProfessor extends javax.swing.JFrame {
     public JTable getTblProfessor(){
         return tblProfessor;
     }
+    
+   //Getters dos campos da tela cadastro aluno
+    
+
+    public JComboBox<String> getCmbGenero() {
+        return cmbGeneroProfessor;
+    }
+
+    public JFormattedTextField getTxtCPF() {
+        return txtCPFProfessor;
+    }
+
+    public JFormattedTextField getTxtDataNascimento() {
+        return txtDataNascimentoProfessor;
+    }
+
+    public JTextField getTxtLogradouro() {
+        return txtLogradouroProfessor;
+    }
+
+    public JTextField getTxtNome() {
+        return txtNomeProfessor;
+    }
+
+    public JFormattedTextField getTxtTelefone() {
+        return txtTelefoneProfessor;
+    }
+    
+    public JTextField getTxtMateria(){
+        return txtMateria;
+    }
+
+    public JComboBox<String> getCmbTurmaProfessor() {
+        return cmbTurmaProfessor;
+    }
+
+    public void setCmbTurmaProfessor(JComboBox<String> cmbTurmaProfessor) {
+        this.cmbTurmaProfessor = cmbTurmaProfessor;
+    }    
     
     
     
