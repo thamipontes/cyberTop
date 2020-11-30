@@ -485,7 +485,8 @@ public class CadastroAluno extends javax.swing.JFrame {
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
+        new GerenciarAluno().setVisible(true);
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void txtTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTurmaActionPerformed

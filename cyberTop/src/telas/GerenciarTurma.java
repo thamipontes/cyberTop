@@ -188,6 +188,9 @@ public class GerenciarTurma extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSalvarCadastroMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSalvarCadastroMouseEntered(evt);
+            }
         });
         jPanel1.add(lblSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, 40));
 
@@ -285,8 +288,8 @@ public class GerenciarTurma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
+        // Função que elimina o objeto(tela) da memoria
+        this.dispose();
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void tblTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurmaMouseClicked
@@ -316,6 +319,8 @@ public class GerenciarTurma extends javax.swing.JFrame {
 
 
             controller.botaoCadastrar();
+            // Ss campos sao limpos e voltam para configuracao inicial
+            controller.limparCampos();
         } catch (SQLException ex) {
             Logger.getLogger(GerenciarTurma.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -383,6 +388,10 @@ public class GerenciarTurma extends javax.swing.JFrame {
     private void cmbUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUniversidadeActionPerformed
 
     }//GEN-LAST:event_cmbUniversidadeActionPerformed
+
+    private void lblSalvarCadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarCadastroMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblSalvarCadastroMouseEntered
 
     /**
      * @param args the command line arguments

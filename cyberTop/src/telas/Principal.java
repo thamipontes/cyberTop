@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -138,6 +139,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 410));
 
         mnAjuda.setText("Ajuda");
+        mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnAjudaMouseClicked(evt);
+            }
+        });
         mnAjuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnAjudaActionPerformed(evt);
@@ -180,13 +186,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnSairActionPerformed
 
     private void mnAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAjudaActionPerformed
-        try {
-            // TODO add your handling code here:
 
-            java.awt.Desktop.getDesktop().browse( new java.net.URI( "http://www.google.com" ) );
-        } catch (URISyntaxException | IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }//GEN-LAST:event_mnAjudaActionPerformed
 
@@ -195,8 +195,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_LOGOMouseClicked
 
     private void bntProfessorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntProfessorMouseClicked
-        // TODO add your handling code here:
-        new CadastroProfessor().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new GerenciarProfessor().setVisible(true);
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bntProfessorMouseClicked
 
     private void bntTurmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntTurmaMouseClicked
@@ -221,6 +225,16 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bntUniversidadeMouseClicked
+
+    private void mnAjudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnAjudaMouseClicked
+        try {
+            // TODO add your handling code here:
+
+            java.awt.Desktop.getDesktop().browse( new java.net.URI( "https://www.facebook.com/Suporte-CyberTop-104782918137245" ) );
+        } catch (URISyntaxException | IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnAjudaMouseClicked
 
     /**
      * @param args the command line arguments

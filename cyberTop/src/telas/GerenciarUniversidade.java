@@ -40,7 +40,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -265,8 +265,8 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
+        // Função que elimina o objeto(tela) da memoria
+        this.dispose();
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void tblUniversidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUniversidadeMouseClicked
@@ -307,22 +307,14 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
 
     private void lblRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRemoverMouseClicked
         
-        try {
-            controller.removerCadastro();
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controller.removerCadastro();
         
     }//GEN-LAST:event_lblRemoverMouseClicked
 
     private void lblSalvarEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarEditarMouseClicked
         
         
-        try {            
-            controller.editarCadastro();
-        } catch (ParseException | SQLException ex) {
-            Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controller.editarCadastro();
         
     }//GEN-LAST:event_lblSalvarEditarMouseClicked
 
@@ -337,12 +329,8 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCancelarMouseClicked
 
     private void lblSalvarCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalvarCadastroMouseClicked
-        try {
-            // TODO add your handling code here:
-            controller.salvarCadastro();
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarUniversidade.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // TODO add your handling code here:
+        controller.salvarCadastro();
     }//GEN-LAST:event_lblSalvarCadastroMouseClicked
 
     /**

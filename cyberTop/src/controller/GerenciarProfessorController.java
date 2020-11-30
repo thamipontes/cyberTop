@@ -1,6 +1,7 @@
 
 package controller;
 
+import static controller.GerenciarAlunoController.carregarDadosTurma;
 import dao.Conexao;
 import dao.ProfessorDAO;
 import interfaces.Cadastrar;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Professor;
+import model.Turmas;
 
 import telas.CadastroProfessor;
 import telas.GerenciarProfessor;
@@ -282,6 +284,8 @@ public class GerenciarProfessorController implements Cadastrar{
                 Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Falha ao criar professor!");
             }
+            // Limpa os campos depois de salvar o aluno
+            limparCampos();
         }
         
  
@@ -584,17 +588,17 @@ public class GerenciarProfessorController implements Cadastrar{
         Parâmetros: vazio
         Descrição: insere os dados das turmas vindos do banco de dados
         no combo box que representa a turma que ele irá administrar a aula.
-    */
+    */ //Carregar turmas
     public void inserirDadosProfessorCmB() throws SQLException, ParseException{
         //Salva em uma variavel a lista de todas as turmas que estão no banco de dados
-        ArrayList<Professor> professor = carregarDadosProfessor();
+        ArrayList<Turmas> turma = carregarDadosTurma();
         //Remove todos os itens antigos que estão na combo box para não acumular os dados ao adicionar novos dados.
         view.getCmbTurmaProfessor().removeAllItems();
         //Adiciona como primeiro item a palavra selecione
         view.getCmbTurmaProfessor().addItem("Selecione");
         //Percorre a lista de turmas e adiciona o nome da universidade na combo box
-        professor.forEach(t -> {
-            view.getCmbTurmaProfessor().addItem(t.getNomeTurma());        
+        turma.forEach(t -> {
+            view.getCmbTurmaProfessor().addItem(t.getNome());        
         });  
    
     }

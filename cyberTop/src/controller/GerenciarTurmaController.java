@@ -64,11 +64,16 @@ public class GerenciarTurmaController implements Cadastrar{
                 JOptionPane.showMessageDialog(null, "Turma criada com sucesso");     
                 // Atualiza a tabela com a nova turma
                 inserirDadosTurmaTabela();
+                // Se a turma foi cadastrada com sucesso os campos sao limpos e voltam para configuracao inicial
+                limparCampos();
+                configuracaoInicialBotoes();
                             
             } catch (SQLException ex) {
                 Logger.getLogger(GerenciarTurmaController.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Falha ao criar turma!");
             }
+            
+            
         }
         
     }
@@ -575,7 +580,7 @@ public class GerenciarTurmaController implements Cadastrar{
         Parâmetros: vazio
         Descrição: retorna a lista de turmas que está persistido no banco de dados
     */
-    public ArrayList<Turmas> carregarDadosTurma() throws SQLException{
+    public static ArrayList<Turmas> carregarDadosTurma() throws SQLException{
         Connection conexao;
         conexao = new Conexao().getConnection();
         

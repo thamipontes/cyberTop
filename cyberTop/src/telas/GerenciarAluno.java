@@ -436,15 +436,18 @@ public class GerenciarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRemoverMouseClicked
 
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
-        // TODO add your handling code here:
+        
+        // Função que elimina o objeto(tela) da memoria
+        this.dispose();
+         // Instacia uma nova tela de cadastrio
         new CadastroAluno().setVisible(true);
         
         
     }//GEN-LAST:event_lblCadastrarMouseClicked
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
+        // Função que elimina o objeto(tela) da memoria
+        this.dispose();
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
