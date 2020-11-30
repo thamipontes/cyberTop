@@ -102,7 +102,6 @@ public class UniversidadeDAO {
         //comando sql que será executado no banco de dados
         String sql = "update universidade set nome = ?, campus = ?, estado = ? where id = ?;";
         PreparedStatement statement = connection.prepareStatement(sql);
-        JOptionPane.showMessageDialog(null, universidade.toString());
         //Substitui cada interrogação, na ordem, pelo valor capturado do sistema (getters)
         statement.setString(1, universidade.getNome());
         statement.setString(2, universidade.getCampus());
