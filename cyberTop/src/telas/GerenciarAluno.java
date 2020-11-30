@@ -429,7 +429,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
         
         try {
             // TODO add your handling code here:
-            controller.removerLinhaAluno();
+            controller.removerCadastro();
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -450,7 +450,7 @@ public class GerenciarAluno extends javax.swing.JFrame {
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
         try {
             // TODO add your handling code here:
-            controller.buscarAluno();
+            controller.buscarCadastro();
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -484,9 +484,8 @@ public class GerenciarAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_tblAlunoMouseClicked
 
     private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
-        try {
-            // TODO add your handling code here:
-            controller.cancelarEditar();
+        try {            
+            controller.cancelar();
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
         }

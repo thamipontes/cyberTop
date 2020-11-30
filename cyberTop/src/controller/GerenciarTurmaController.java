@@ -142,27 +142,41 @@ public class GerenciarTurmaController implements Cadastrar{
     }
     
     
-      // Avisa se algum campo esta em branco
+
+    /*
+        Método: exibirAlertarCampos
+        Parâmetros: vazio
+        Descrição: Avisa se algum campo esta em branco
+    */
     @Override
     public boolean exibirAlertarCampos(){        
-        //Descobre se algum dos campos ficou vazio
-        if(view.getTxtNome().getText().equals("")                               ||
-            view.getCampoHorario().getSelectedItem().equals("Selecione")        ||
-            view.getCampoUniversidade().getSelectedItem().equals("Selecione")   //||
-            //!view.getRdbAnual().isSelected()                                    ||
-            //!view.getRdbSemestral().isSelected()                                ||
-            //!view.getRdbEnem().isSelected()                                     ||
-            //!view.getRdbVestibular().isSelected()
+        //Se o enem tiver selecionado 
+        if(!view.getCampoUniversidade().isEnabled()){
+            
+            if(view.getTxtNome().getText().equals("")  ||
+            view.getCampoHorario().getSelectedItem().equals("Selecione")){         
+            
+            //Mostra a mensagem para preencher todos os campos
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+
+            return true; } else return false;
+        }else{
+                
+            if(view.getTxtNome().getText().equals("")                      ||
+            view.getCampoHorario().getSelectedItem().equals("Selecione")   ||
+            view.getCampoUniversidade().getSelectedItem().equals("Selecione")   
                 ){            
             
             //Mostra a mensagem para preencher todos os campos
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
 
             return true;
-        }
+                } else return false;
+            }
+         }
         
-        return false;
-    }
+        
+ 
     
     
     /*
@@ -170,6 +184,7 @@ public class GerenciarTurmaController implements Cadastrar{
         Parâmetros: vazio
         Descrição: remove a turma do banco de dados  
     */
+    @Override
     public void removerCadastro(){
         //Verifica se selecionou alguma linha da tabela
         if(view.getTblTurma().getSelectedRow() == -1){
@@ -299,7 +314,7 @@ public class GerenciarTurmaController implements Cadastrar{
     
 
     /*
-        Método: desativarCampos
+        Método: ativarCampos
         Parâmetros: vazio
         Descrição: Ativa todos os campos de inserção de dados   
     */
@@ -351,10 +366,11 @@ public class GerenciarTurmaController implements Cadastrar{
         // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
         if(idString != null){
             int id = Integer.parseInt(idString);
+            int posicaoAlunoLista = posicaoTurmaLista(id);
             
-            if(posicaoTurmaLista(id) != -1){
+            if(posicaoAlunoLista != -1){
                 Turmas turma = buscarTurmaPorId(id);
-               
+                
                 //Insere os dados encontrados nos campos para edição
                 view.getTxtNome().setText(turma.getNome());
                 view.getCampoHorario().setSelectedItem(turma.getHorario());
@@ -368,13 +384,11 @@ public class GerenciarTurmaController implements Cadastrar{
                
                 desativarCampos();
                 //Ativa todos os botoes principais da tela
-                regraBotoesBuscar();
+                regraBotoesBuscar();                
                 
-                //TODO Pq carrega novamente a tabela?
-                inserirDadosTurmaTabela();
-                int intervalo = posicaoTurmaLista(id);
+                inserirDadosTurmaTabela();                
                 
-                view.getTblTurma().addRowSelectionInterval(intervalo, intervalo);
+                view.getTblTurma().addRowSelectionInterval(posicaoAlunoLista, posicaoAlunoLista);
            
             }else{
                 JOptionPane.showMessageDialog(null, "Turma não cadastrada!");
@@ -420,7 +434,11 @@ public class GerenciarTurmaController implements Cadastrar{
     }
     
     
-    
+    /*
+        Método: posicaoTurmaLista
+        Parâmetros: inteiro
+        Descrição: pesquisa a posição da turma na lista vindo do banco
+    */
     public int posicaoTurmaLista(int id) throws SQLException, ParseException{
         ArrayList<Turmas> turma = carregarDadosTurma();
         
@@ -471,7 +489,7 @@ public class GerenciarTurmaController implements Cadastrar{
         Parâmetros: vazio
         Descrição: ativa os campos e seta o padrão dos botões ao se cadastrar uma turma
     */ 
-    public void botaoCadastrar(){
+    public void botaoCadastrar() throws SQLException{
         regraBotoesCadastrar();
         ativarCampos();
     }

@@ -312,10 +312,13 @@ public class GerenciarTurma extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEditarMouseClicked
 
     private void lblCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastrarMouseClicked
-        // TODO add your handling code here:
-        //new CadastroUniversidade().setVisible(true);
-        
-        controller.botaoCadastrar();
+        try {
+
+
+            controller.botaoCadastrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarTurma.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_lblCadastrarMouseClicked
 

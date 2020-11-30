@@ -320,7 +320,7 @@
                                           <Component id="lblNomeAluno4" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtNomeProfessor" alignment="1" min="-2" pref="408" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lblCPF" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtCPFProfessor" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>

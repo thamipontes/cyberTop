@@ -15,5 +15,6 @@ public interface Cadastrar {
     void limparCampos();
     boolean exibirAlertarCampos();
     void editarCadastro();
+    void removerCadastro();
     
 }

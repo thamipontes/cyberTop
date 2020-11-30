@@ -13,7 +13,7 @@ import model.Universidade;
 import telas.CadastroUniversidade;
 
 // Classe que controla toda regras e negocios do cadastro de universidades
-public class CadastroUniversidadeController implements Cadastrar{
+public class CadastroUniversidadeController {
     
     //Declaração do atributo que possui a tela CadastroUniversidade
     private final CadastroUniversidade view;
@@ -29,7 +29,7 @@ public class CadastroUniversidadeController implements Cadastrar{
         Parâmetros: vazio
         Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
     */ 
-    @Override
+    
     public void salvarCadastro(){
     
         String nome = view.getTxtNomeUniversidade().getText();
@@ -60,7 +60,7 @@ public class CadastroUniversidadeController implements Cadastrar{
         Descrição: confere se teve algum campo que ficou sem ser preenchido e mostra na tela
         uma mensagem para preencher todos os campos.
     */
-    @Override
+    
     public boolean exibirAlertarCampos(){
         if(view.getTxtNomeUniversidade().getText().equals("")   ||
             view.getTxtCampus().getText().equals("")            ||
@@ -80,7 +80,7 @@ public class CadastroUniversidadeController implements Cadastrar{
         Descrição: deixa todos os campos da tela vazio
         Retorno: void
     */
-    @Override
+    
     public void limparCampos(){        
         
     //Insere o cursor no txtNome e o deixa em foco
@@ -94,7 +94,7 @@ public class CadastroUniversidadeController implements Cadastrar{
     }    
 
 
-    @Override
+    
     public void editarCadastro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

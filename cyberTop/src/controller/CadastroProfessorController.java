@@ -18,7 +18,7 @@ import model.Turmas;
 import telas.CadastroProfessor;
 
 /*Classe que controla todas as regras de negócios do cadastro do Professor*/
-public class CadastroProfessorController implements Cadastrar{
+public class CadastroProfessorController {
     
     //Declaração do atributo que possui a tela CadastroProfessor
     private final CadastroProfessor view;
@@ -33,7 +33,7 @@ public class CadastroProfessorController implements Cadastrar{
         Parâmetros: vazio
         Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
     */    
-    @Override
+    
     public void salvarCadastro() {
         
         /*Pegas as informações passadas nos campos da tela*/
@@ -93,7 +93,7 @@ public class CadastroProfessorController implements Cadastrar{
         Descrição: confere se teve algum campo que ficou sem ser preenchido e mostra na tela
         uma mensagem para preencher todos os campos.
     */
-    @Override
+    
     public boolean exibirAlertarCampos(){
         if(view.getTxtNome().getText().equals("")                       ||
             view.getTxtCPF().getText().equals("   .   .   -  ")         || 
@@ -120,7 +120,7 @@ public class CadastroProfessorController implements Cadastrar{
         Parâmetros: vazio
         Descrição: deixa todos os campos da tela vazio
     */
-    @Override
+    
     public void limparCampos(){    
     //Insere o cursor no txtNome e o deixa em foco
         view.getTxtNome().requestFocus();
@@ -160,7 +160,7 @@ public class CadastroProfessorController implements Cadastrar{
     }
 
 
-    @Override
+    
     public void editarCadastro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

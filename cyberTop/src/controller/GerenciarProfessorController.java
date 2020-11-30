@@ -3,7 +3,8 @@ package controller;
 
 import dao.Conexao;
 import dao.ProfessorDAO;
-import dao.UniversidadeDAO;
+import interfaces.Cadastrar;
+
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,12 +17,16 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Professor;
-import model.Universidade;
+
 import telas.CadastroProfessor;
 import telas.GerenciarProfessor;
 
-public class GerenciarProfessorController {
-    private final GerenciarProfessor view;
+public class GerenciarProfessorController implements Cadastrar{
+    private final GerenciarProfessor view; 
+
+    public GerenciarProfessorController(GerenciarProfessor view){
+        this.view = view;
+    }
     
     /*
         Método: formatarGenero
@@ -43,64 +48,70 @@ public class GerenciarProfessorController {
         Parâmetros: vazio
         Descrição: edita o professor no banco de dados  
     */
-    public void editarCadastro() throws SQLException, ParseException{
+    @Override
+    public void editarCadastro(){
         
         
         if(!exibirAlertarCampos()){
+            try {
                 /*Pegas as informações passadas nos campos da tela*/
-            String nome = view.getTxtNome().getText();
-            String cpf = view.getTxtCPF().getText();
-            String telefone = view.getTxtTelefone().getText();
-            String endereco = view.getTxtLogradouro().getText();
-            String materia = view.getTxtMateria().getText();
-            String turma = view.getCmbTurmaProfessor().getSelectedItem().toString();
-            
-            
-
-            /*Tratando o dado Data de Nascimento*/   
-            //Pega o texto que está no campo data de nascimento
-            String dataNascimentoString = view.getTxtDataNascimento().getText();
-            //define padrão que a data deve obedecer
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy"); 
-            //Transforma o atributo em tipo calendar
-            Calendar dataNascimento = Calendar.getInstance();
-            try {
-                //Seta a data no atributo data nascimento
-                dataNascimento.setTime(sdf.parse(dataNascimentoString));
-            } catch (ParseException ex) {
-                Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-           /*Tratando o dado Genero*/  
-           //Variável que recebe o return do método formatarGenero que está implementado no final do código
-            char genero = formatarGenero((view.getCmbGenero().getSelectedIndex()));        
-            
-            /*Acha o id do professor na tabela*/
+                String nome = view.getTxtNome().getText();
+                String cpf = view.getTxtCPF().getText();
+                String telefone = view.getTxtTelefone().getText();
+                String endereco = view.getTxtLogradouro().getText();
+                String materia = view.getTxtMateria().getText();
+                String turma = view.getCmbTurmaProfessor().getSelectedItem().toString();
+                
+                
+                
+                /*Tratando o dado Data de Nascimento*/
+                //Pega o texto que está no campo data de nascimento
+                String dataNascimentoString = view.getTxtDataNascimento().getText();
+                //define padrão que a data deve obedecer
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+                //Transforma o atributo em tipo calendar
+                Calendar dataNascimento = Calendar.getInstance();
+                try {
+                    //Seta a data no atributo data nascimento
+                    dataNascimento.setTime(sdf.parse(dataNascimentoString));
+                } catch (ParseException ex) {
+                    Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                /*Tratando o dado Genero*/
+                //Variável que recebe o return do método formatarGenero que está implementado no final do código
+                char genero = formatarGenero((view.getCmbGenero().getSelectedIndex()));
+                
+                /*Acha o id do professor na tabela*/
                 int id = buscarIdProfessorTabela();
-
-
-           /*Instaciando o objeto aluno com os dados recebidos pela tela*/
-           Professor professor = new Professor(id, nome, cpf, dataNascimento, telefone, endereco, genero, materia, turma);
-
-           /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
-            Connection conexao;        
-            try {
-                //Faz a conexão com o banco
-                conexao = new Conexao().getConnection();
-                //Passa a conexão para a classe AlunosDAO que possui o CRUD
-                ProfessorDAO professorDAO = new ProfessorDAO(conexao);
-                //Chama o método de inserção            
-                professorDAO.update(professor);
-                //Mensagem de aluno cadastrado com sucesso
-                JOptionPane.showMessageDialog(null, "Professor editado com sucesso");            
-
-            } catch (SQLException ex) {
-                Logger.getLogger(CadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
-                //Caso dê erro mostra essa tela
-                JOptionPane.showMessageDialog(null, "Falha ao cadastrar dado no banco");
-            }  
+                
+                
+                /*Instaciando o objeto aluno com os dados recebidos pela tela*/
+                Professor professor = new Professor(id, nome, cpf, dataNascimento, telefone, endereco, genero, materia, turma);
+                
+                /*Conexão com o banco de dados para salvar os dados do aluno na tabela aluno*/
+                Connection conexao;
+                try {
+                    //Faz a conexão com o banco
+                    conexao = new Conexao().getConnection();
+                    //Passa a conexão para a classe AlunosDAO que possui o CRUD
+                    ProfessorDAO professorDAO = new ProfessorDAO(conexao);
+                    //Chama o método de inserção
+                    professorDAO.update(professor);
+                    //Mensagem de aluno cadastrado com sucesso
+                    JOptionPane.showMessageDialog(null, "Professor editado com sucesso");
+                    cancelar();
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
+                    //Caso dê erro mostra essa tela
+                    JOptionPane.showMessageDialog(null, "Falha ao cadastrar dado no banco");
+                }
+            } catch (HeadlessException | SQLException | ParseException ex) {
+                Logger.getLogger(GerenciarProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        cancelar();
+        
         
     }
     
@@ -116,22 +127,19 @@ public class GerenciarProfessorController {
         // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
         if(idString != null){
             int id = Integer.parseInt(idString);
+            int posicaoProfessorLista = posicaoProfessorLista(id);
             
-            if(posicaoTurmaLista(id) != -1){
-                Professor professor = buscarProfessorPorId(id);
+            if(posicaoProfessorLista != -1){
+                Professor professor = buscarProfessorPorId(id); 
                 
-                
-                
-               
+                inserirDadosProfessor(professor);
+ 
                 desativarCampos();
                 //Ativa todos os botoes principais da tela
-                regraBotoesBuscar();
+                regraBotoesBuscar();                
+                inserirDadosProfessorTabela();            
                 
-                //TODO Pq carrega novamente a tabela?
-                inserirDadosProfessorTabela();
-                int intervalo = posicaoTurmaLista(id);
-                
-                view.getTblProfessor().addRowSelectionInterval(intervalo, intervalo);
+                view.getTblProfessor().addRowSelectionInterval(posicaoProfessorLista, posicaoProfessorLista);
                 inserirCampos();
            
             }else{
@@ -140,7 +148,12 @@ public class GerenciarProfessorController {
         }
     }
     
-    public int posicaoTurmaLista(int id) throws SQLException, ParseException{
+    /*
+        Método: posicaoProfessorLista
+        Parâmetros: inteiro
+        Descrição: pesquisa a posição do aluno na lista vindo do banco
+    */
+    public int posicaoProfessorLista(int id) throws SQLException, ParseException{
         ArrayList<Professor> professor = carregarDadosProfessor();
         
         for(int i = 0; i <professor.size(); i++){
@@ -175,7 +188,8 @@ public class GerenciarProfessorController {
         Parâmetros: vazio
         Descrição: remove o professor do banco de dados  
     */
-    public void removerCadastro() throws ParseException{
+    @Override
+    public void removerCadastro(){
         //Verifica se selecionou alguma linha da tabela
         if(view.getTblProfessor().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione algum professor para descadastrar.");
@@ -205,7 +219,7 @@ public class GerenciarProfessorController {
                 }else{
                     JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
                 }
-            } catch (SQLException ex) {
+            } catch (SQLException | ParseException ex) {
                 Logger.getLogger(GerenciarProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -217,7 +231,7 @@ public class GerenciarProfessorController {
         Parâmetros: vazio
         Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
     */    
-    //@Override
+    @Override
     public void salvarCadastro() {
         
         
@@ -308,7 +322,8 @@ public class GerenciarProfessorController {
         uma mensagem para preencher todos os campos.
     */
     
-    //@Override
+
+    @Override
     public boolean exibirAlertarCampos(){        
         //Descobre se algum dos campos ficou vazio
         if(view.getTxtNome().getText().equals("")                       ||
@@ -332,12 +347,7 @@ public class GerenciarProfessorController {
         return false;
     }
     
-    
-    
-    public GerenciarProfessorController(GerenciarProfessor view){
-        this.view = view;
-    }
-    
+
     public void inserirCampos() throws SQLException, ParseException{
         ArrayList<Professor> professorBanco = carregarDadosProfessor();
         int linha = view.getTblProfessor().getSelectedRow();
@@ -345,18 +355,7 @@ public class GerenciarProfessorController {
         if(linha >= 0 && linha < professorBanco.size()){
             Professor professor = professorBanco.get(linha);
             
-            view.getTxtNome().setText(professor.getNome());
-            view.getTxtCPF().setText(professor.getCPF());
-            view.getTxtTelefone().setText(professor.getTelefone());
-            view.getCmbGenero().setSelectedItem(tratarGenero(professor));
-            view.getTxtLogradouro().setText(professor.getEndereco());
-            view.getTxtMateria().setText(professor.getMateria());
-            view.getCmbTurmaProfessor().setSelectedItem(professor.getNomeTurma());
-            
-            /*Tratando data nascimento*/
-            SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
-            String dataNascimento = s.format(professor.getDataNascimento().getTime());
-            view.getTxtDataNascimento().setText(dataNascimento);
+            inserirDadosProfessor(professor);
             
             //Regras de botoes
             view.getLblEditar().setEnabled(true);
@@ -479,7 +478,8 @@ public class GerenciarProfessorController {
         Parâmetros: vazio
         Descrição: limpa todos os campos da tela
     */
-    //@Override
+
+    @Override
     public void limparCampos(){
         
         view.getTxtNome().setText("");
@@ -495,10 +495,7 @@ public class GerenciarProfessorController {
         view.getCmbTurmaProfessor().setSelectedItem("Selecione");
         view.getTxtMateria().setText("");
     }
-    
-    
-    
-    
+
     
     /*
         Método: cancelar
@@ -600,6 +597,27 @@ public class GerenciarProfessorController {
             view.getCmbTurmaProfessor().addItem(t.getNomeTurma());        
         });  
    
+    }
+    
+    
+    /*
+        Método: inserirDadosAluno
+        Parâmetros: inteiro
+        Descrição: insere os dados do aluno na tela
+    */
+    public void inserirDadosProfessor(Professor professor){    
+            view.getTxtNome().setText(professor.getNome());
+            view.getTxtCPF().setText(professor.getCPF());
+            view.getTxtTelefone().setText(professor.getTelefone());
+            view.getCmbGenero().setSelectedItem(tratarGenero(professor));
+            view.getTxtLogradouro().setText(professor.getEndereco());
+            view.getTxtMateria().setText(professor.getMateria());
+            view.getCmbTurmaProfessor().setSelectedItem(professor.getNomeTurma());            
+            /*Tratando data nascimento*/
+            SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+            String dataNascimento = s.format(professor.getDataNascimento().getTime());
+            view.getTxtDataNascimento().setText(dataNascimento);    
+    
     }
 
     

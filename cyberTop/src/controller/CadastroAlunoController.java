@@ -10,7 +10,6 @@ import model.Aluno;
 import telas.CadastroAluno;
 import dao.Conexao;
 import dao.TurmaDAO;
-import interfaces.Cadastrar;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,11 +18,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Turmas;
-import telas.CadastroTurma;
+
 
 
 /*Classe que controla todas as regras de negócios do cadastro do Aluno*/
-public class CadastroAlunoController implements Cadastrar{
+public class CadastroAlunoController{
     
     //Declaração do atributo que possui a tela CadastroAluno
     private final CadastroAluno view;
@@ -40,7 +39,7 @@ public class CadastroAlunoController implements Cadastrar{
         Parâmetros: vazio
         Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
     */    
-    @Override
+
     public void salvarCadastro(){
         
         /*Pegas as informações passadas nos campos da tela*/
@@ -104,7 +103,7 @@ public class CadastroAlunoController implements Cadastrar{
             JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");            
             
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
             //Caso dê erro mostra essa tela
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar dado no banco");
         }  
@@ -132,7 +131,7 @@ public class CadastroAlunoController implements Cadastrar{
         uma mensagem para preencher todos os campos.
     */
     
-    @Override
+
     public boolean exibirAlertarCampos(){        
         //Descobre se algum dos campos ficou vazio
         if(view.getTxtNome().getText().equals("")                       ||
@@ -161,7 +160,7 @@ public class CadastroAlunoController implements Cadastrar{
         Parâmetros: vazio
         Descrição: deixa todos os campos da tela vazio
     */
-    @Override
+
     public void limparCampos(){    
     //Insere o cursor no txtNome e o deixa em foco
         view.getTxtNome().requestFocus();
@@ -303,7 +302,9 @@ public class CadastroAlunoController implements Cadastrar{
         Turmas turma = pesquisarTurmaPorId();
         
         int vagasAtual = turma.getVagas(); 
-        turma.setVagas(vagasAtual -1);     
+        turma.setVagas(vagasAtual -1); 
+        
+        if(turma.getVagas() == 25) JOptionPane.showMessageDialog(null, "Turma apta para começar esse semestre!");
         
         Connection conexao;
         conexao = new Conexao().getConnection();
@@ -316,10 +317,5 @@ public class CadastroAlunoController implements Cadastrar{
  
     }
 
-
-    @Override
-    public void editarCadastro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

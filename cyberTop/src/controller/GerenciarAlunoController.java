@@ -3,7 +3,7 @@ package controller;
 import dao.AlunosDAO;
 import dao.Conexao;
 import dao.TurmaDAO;
-import interfaces.Cadastrar;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -13,33 +13,42 @@ import java.util.Calendar;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Aluno;
 import model.Turmas;
-import telas.CadastroAluno;
-import telas.CadastroTurma;
+
 import telas.GerenciarAluno;
 
 
 public class GerenciarAlunoController{
+    //Declaração do atributo que possui a tela CadastroTurma
     private final GerenciarAluno view;
     
+    //Construtor
     public GerenciarAlunoController(GerenciarAluno view){
         this.view = view;
     }
     
-    
+    /*
+        Método: editar
+        Parâmetros: vazio
+        Descrição: Ao clicar no botão editar, caso não tenha alguma linha selecionada mostra mensagem, senão
+        some com os botões principais e mostra o botão salvar e cancelar.
+    */
     public void editar() throws ParseException, SQLException{
         if(view.getTblAluno().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder editar.");
         }else{
+            //Ativa os campos para poder preencher com novos dados
             ativarCampos();
+            //Torna os botões invisiveis
             view.getLblCadastrar().setVisible(false);
             view.getLblEditar().setVisible(false);
             view.getLblRemover().setVisible(false);
             view.getLblBuscar().setVisible(false);
+            //Torna os botões visiveis
             view.getLblCancelar().setVisible(true);
             view.getLblSalvar().setVisible(true);
         }
@@ -47,10 +56,17 @@ public class GerenciarAlunoController{
     }
     
     
+    
+    /*
+        Método: salvarEditar
+        Parâmetros: vazio
+        Descrição: Ao clicar no botão editar, caso não tenha alguma linha selecionada mostra mensagem, senão
+        some com os botões principais e mostra o botão salvar e cancelar.
+    */
     public void salvarEditar() throws ParseException, SQLException{
         
         if(!exibirAlertarCampos()){
-                /*Pegas as informações passadas nos campos da tela*/
+            /*Pegas as informações passadas nos campos da tela*/
             String nome = view.getTxtNome().getText();
             String cpf = view.getTxtCPF().getText();
             String telefone = view.getTxtTelefone().getText();
@@ -75,15 +91,15 @@ public class GerenciarAlunoController{
             }
 
             /*Tratando o dado Genero*/  
-            //Variável que recebe o return do método formatarGenero que está implementado no final do código
+            //Variável que recebe o return do método formatarGenero que está implementado no codigo
             char genero = formatarGenero((view.getCmbGenero().getSelectedIndex()));        
 
             /*Tratando o dado Cor Raça*/
             //Transforma o o texto do item selecionado em string e guarda na variável
             String corRaca = view.getCmbCorRaca().getSelectedItem().toString();
             
-             /*Tratando o dado da turma*/
-            int id = tratarIdAlunoIdTurma(idTurmaNovo);
+             /*Tratando o dado da turma*/ 
+            int id = tratarVagas(idTurmaNovo);
 
 
             /*Instaciando o objeto aluno com os dados recebidos pela tela*/
@@ -104,21 +120,23 @@ public class GerenciarAlunoController{
                 JOptionPane.showMessageDialog(null, "Aluno editado com sucesso");
                 inserirDadosAlunoTabela();
 
-                  //aumentarVagasTurma(aluno.getTurmaId());
-
             } catch (SQLException ex) {
-                Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
                 //Caso dê erro mostra essa tela
                 JOptionPane.showMessageDialog(null, "Falha ao editar dado no banco");
-                }  
-
-                limparCampos();
-                desativarCampos();
-                cancelarEditar();
+                }
+                //Voltar a tela como tava inicialmente
+                cancelar();
         }
     }
-
-    private int tratarIdAlunoIdTurma(int idTurmaNovo) throws SQLException, ParseException {
+    
+    
+   /*
+        Método: tratarVagas
+        Parâmetros: inteiro
+        Descrição: aumentar e diminuir vagas caso o aluno troque de turma
+    */
+    private int tratarVagas(int idTurmaNovo) throws SQLException, ParseException {
                        
         ArrayList<Aluno> alunoBanco = carregarDadosAluno();
         int linha = view.getTblAluno().getSelectedRow();
@@ -128,13 +146,22 @@ public class GerenciarAlunoController{
             id = alun.getId();
             
             int turmaIdVelho = pesquisarTurmaPorId(alun.getTurmaId()).getId();
-            diminuirVagasTurma(turmaIdVelho);
-            aumentarVagasTurma(idTurmaNovo);
+            //Só muda as vagas se houver mudança de turma
+            if(turmaIdVelho != idTurmaNovo){
+                diminuirVagasTurma(idTurmaNovo);
+                aumentarVagasTurma(turmaIdVelho);
+            }
         }
         return id;
     }
     
-    public void cancelarEditar() throws SQLException, ParseException{
+    
+    /*
+        Método: cancelar
+        Parâmetros: vazio
+        Descrição: volta a tela como estavam antes   
+    */
+    public void cancelar() throws SQLException, ParseException{
         view.getLblCadastrar().setVisible(true);
         view.getLblEditar().setVisible(true);
         view.getLblEditar().setEnabled(false);
@@ -150,40 +177,37 @@ public class GerenciarAlunoController{
     }
     
     
-    
-    // Metodo que vai setar as informações do aluno selecionado na tabela para o campo de dados
+    /*
+        Método: inserirCampos
+        Parâmetros: vazio
+        Descrição: pega os dados do banco e insere na tela   
+    */  
     public void inserirCampos() throws SQLException, ParseException{
         
         view.getLblRemover().setEnabled(true);
         view.getLblEditar().setEnabled(true);
+        //Salva na variável a lista de todas os alunos do banco
         ArrayList<Aluno> alunoBanco = carregarDadosAluno();
+        //Descobre qual linha da tabela o mouse clicou
         int linha = view.getTblAluno().getSelectedRow();
-
+        //Verifica se a linha é válida
         if(linha >= 0 && linha < alunoBanco.size()){
-            Aluno aluno = alunoBanco.get(linha);
-            
-            view.getTxtIdTurma().setText(Integer.toString(aluno.getTurmaId()));
-            view.getTxtNome().setText(aluno.getNome());
-            view.getTxtCPF().setText(aluno.getCPF());
-            view.getTxtEmail().setText(aluno.getEmail());
-            view.getTxtTelefone().setText(aluno.getTelefone());
-            view.getTxtCEP().setText(aluno.getCEP());
-            view.getTxtLogradouro().setText(aluno.getEndereco());
-            view.getTxtCurso().setText(aluno.getCurso());
-            view.getCmbGenero().setSelectedItem(tratarGenero(aluno));
-            view.getCmbCorRaca().setSelectedItem(tratarCorRaca(aluno));
-                
-            /*Tratando data nascimento*/
-            SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
-            String dataNascimento = s.format(aluno.getDataNascimento().getTime());
-            view.getTxtDataNascimento().setText(dataNascimento);
-            
+            //Pega o aluno da lista de acordo com a linha clicada
+            Aluno aluno = alunoBanco.get(linha);            
+            //Insere os dados do aluno na tela
+            inserirDadosAluno(aluno);           
 
-        }
-        
+        }else{
+            JOptionPane.showMessageDialog(null, "Seelcione uma linha válida.");
+        }        
    }
     
-    //Alerta o usuario que todos os campos precisam ser preenchidos
+    
+    /*
+        Método: exibirAlertarCampos
+        Parâmetros: vazio
+        Descrição: Avisa se algum campo esta em branco
+    */
     public boolean exibirAlertarCampos(){        
         //Descobre se algum dos campos ficou vazio
         if(view.getTxtNome().getText().equals("")                       ||
@@ -209,7 +233,11 @@ public class GerenciarAlunoController{
     
     
     
-    //Limpas todos os campos de texto
+    /*
+        Método: limparCampos
+        Parâmetros: vazio
+        Descrição: limpa todos os campos da tela
+    */
     public void limparCampos(){
         view.getTxtNome().setText("");
         view.getTxtCPF().setText("");
@@ -238,20 +266,12 @@ public class GerenciarAlunoController{
         return ' '; 
     }
     
-    
-    
-    //Tratar Dados para inserir nos campos 
-    public String tratarCorRaca(Aluno alun){
-        if(alun.getCorRaca().equals("Não declarar")) return alun.getCorRaca();
-        if(alun.getCorRaca().equals("Preta")) return alun.getCorRaca();
-        if(alun.getCorRaca().equals("Parda")) return alun.getCorRaca();
-        if(alun.getCorRaca().equals("Indígena")) return alun.getCorRaca();
-        if(alun.getCorRaca().equals("Amarela")) return alun.getCorRaca();
-        if(alun.getCorRaca().equals("Branca")) return alun.getCorRaca();
-        return "Selecione";
-    }
-    
-    
+ 
+    /*
+        Método: tratarGenero
+        Parâmetros: classe Aluno
+        Descrição: pega os dados do banco e transforma para o formato para por na tela    
+    */
     public static String tratarGenero(Aluno alun){
         if(alun.getGenero() == 'I') return "Prefiro não informar";
         if(alun.getGenero() == 'M')return "Masculino";
@@ -261,34 +281,54 @@ public class GerenciarAlunoController{
     }
     
     
+    /*
+        Método: carregarDadosAluno
+        Parâmetros: vazio
+        Descrição: retorna a lista de alunos que está persistido no banco de dados
+    */
     public static ArrayList<Aluno> carregarDadosAluno() throws SQLException, ParseException{
+        //Faz a conexão com o banco 
         Connection conexao;
         conexao = new Conexao().getConnection();
-        
+        //Passa a conexão para a classe AlunoDAO para realizar o CRUD
         AlunosDAO alunoDAO = new AlunosDAO(conexao);
-        
+        //Chama o método findAll que retorna uma lista de alunos que está no banco de dados
         ArrayList<Aluno> alunoBanco = alunoDAO.findAll();
         
         return alunoBanco;
     }
     
+    
+    /*
+        Método: carregarDadosTurma
+        Parâmetros: vazio
+        Descrição: retorna a lista de turmas que está persistido no banco de dados
+    */
     public static ArrayList<Turmas> carregarDadosTurma() throws SQLException, ParseException{
+        //Faz a conexão com o banco 
         Connection conexao;
         conexao = new Conexao().getConnection();
-        
+        //Passa a conexão para a classe AlunoDAO para realizar o CRUD
         TurmaDAO turmaDAO = new TurmaDAO(conexao);
-        
+        //Chama o método findAll que retorna uma lista de alunos que está no banco de dados
         ArrayList<Turmas> turmaBanco = turmaDAO.findAll();
         
         return turmaBanco;
     }
     
+    
+    /*
+        Método: inserirDadosAlunoTabela
+        Parâmetros: vazio
+        Descrição: insere as informações da tabela aluno do banco de dados na tabela da tela
+    */
     public void inserirDadosAlunoTabela() throws SQLException, ParseException{
+        // Variavel que recebe uma lista de turmas
         ArrayList<Aluno> alunosBanco = carregarDadosAluno();
         
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Id", "Nome", "Turma"}, 0);
         
-        
+        //Tratar informações para inserir na tabela
         alunosBanco.forEach(e -> {        
             Object linha[] = new Object[]{e.getId(), e.getNome(), e.getTurmaId()};
             modelo.addRow(linha);        
@@ -297,10 +337,15 @@ public class GerenciarAlunoController{
         view.getTblAluno().setModel(modelo);
         
     }
-    //Mudar nome do metodo para remover
-    public  void removerLinhaAluno() throws SQLException, ParseException{
+    
+    /*
+        Método: removerCadastro
+        Parâmetros: vazio
+        Descrição: remove a turma do banco de dados  
+    */
+    public  void removerCadastro() throws SQLException, ParseException{
         
-        
+        //Verifica se selecionou alguma linha da tabela
         if(view.getTblAluno().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione algum aluno para poder remover.");
         }else{
@@ -320,33 +365,30 @@ public class GerenciarAlunoController{
                     //Chama o método de remoção            
                     alunoDAO.remove(aluno);
                     //Mensagem de aluno cadastrado com sucesso
-                    JOptionPane.showMessageDialog(null, "Aluno descadastrado com sucesso");
-                    inserirDadosAlunoTabela();
-
+                    JOptionPane.showMessageDialog(null, "Aluno descadastrado com sucesso");        
+                    //Aumenta a vaga da turma que o aluno pertencia
                     aumentarVagasTurma(aluno.getTurmaId());
+                    cancelar();
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(CadastroTurma.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GerenciarAluno.class.getName()).log(Level.SEVERE, null, ex);
                     //Caso dê erro mostra essa tela
                     JOptionPane.showMessageDialog(null, "Falha ao descadastrar dado no banco");
                 }
-                
-                limparCampos();
-                desativarCampos();
-                view.getLblRemover().setEnabled(false);
             }else{
                 JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
             }
         }
-        // VERSAO Q DAVA CERTO E FUNCIONAVA
-        //limparCampos();
-        //desativarCampos();
-        //view.getLblRemover().setEnabled(false);
     }
     
     
     
-    
+    /*
+        Método: aumentarVagasTurma()
+        Parâmetros: vazio
+        Descrição: pesquisa a turma pelo id e atualiza o campo vagas da tabela turma 
+        aumenta 1 na quantidade de vagas no banco e insere os dados da turma novamente na tabela da tela.
+    */
     public void aumentarVagasTurma(int idTurma) throws SQLException{
     
         Turmas turma = pesquisarTurmaPorId(idTurma);
@@ -364,12 +406,21 @@ public class GerenciarAlunoController{
     }
     
     
-    public void diminuirVagasTurma(int idTurma) throws SQLException{
+    /*
+        Método: diminuirVagasTurma()
+        Parâmetros: vazio
+        Descrição: pesquisa a turma pelo id e atualiza o campo vagas da tabela turma 
+        diminuindo 1 na quantidade de vagas no banco e insere os dados da turma novamente na tabela da tela.
+    */
+    public static void diminuirVagasTurma(int idTurma) throws SQLException{
     
         Turmas turma = pesquisarTurmaPorId(idTurma);
         
         int vagasAtual = turma.getVagas(); 
-        turma.setVagas(vagasAtual -1);     
+        turma.setVagas(vagasAtual -1); 
+        
+        //Caso a quantidade de vagas fique com 25 a turma pode começar as aulas
+        if(turma.getVagas() == 25) JOptionPane.showMessageDialog(null, "Turma apta para começar esse semestre!");
         
         Connection conexao;
         conexao = new Conexao().getConnection();
@@ -377,10 +428,17 @@ public class GerenciarAlunoController{
         TurmaDAO turmaDAO = new TurmaDAO(conexao);
             
         turmaDAO.update(turma);
+        
  
     }
     
-    public Turmas pesquisarTurmaPorId(int idTurma) throws SQLException{               
+    
+    /*
+        Método: pesquisarTurmaPorId
+        Parâmetros: vazio
+        Descrição: pesquisa a turma no banco referente ao id passado
+    */ 
+    public static Turmas pesquisarTurmaPorId(int idTurma) throws SQLException{               
             //Faz a conexão com o banco 
             Connection conexao;
             conexao = new Conexao().getConnection();
@@ -393,7 +451,11 @@ public class GerenciarAlunoController{
     }
     
     
-    // ativar e desativar os campos de texto na tela
+    /*
+        Método: ativarCampos
+        Parâmetros: vazio
+        Descrição: Ativa todos os campos de inserção de dados   
+    */
     public void ativarCampos(){
         view.getTxtNome().setEnabled(true);
         view.getTxtCPF().setEnabled(true);
@@ -409,6 +471,11 @@ public class GerenciarAlunoController{
 
     }
     
+    /*
+        Método: desativarCampos
+        Parâmetros: vazio
+        Descrição: Desativa todos os campos de inserção de dados   
+    */
     public void desativarCampos(){
         view.getTxtNome().setEnabled(false);
         view.getTxtCPF().setEnabled(false);
@@ -423,7 +490,12 @@ public class GerenciarAlunoController{
         view.getTxtIdTurma().setEnabled(false);
     }
     
-    //Desativar e ativar botoes
+    
+    /*
+        Método: ativarTodosBotoes
+        Parâmetros: vazio
+        Descrição: ativar todos os botões   
+    */
     public void ativarTodosBotoes(){
         view.getLblBuscar().setEnabled(true);
         view.getLblCadastrar().setEnabled(true);
@@ -431,21 +503,27 @@ public class GerenciarAlunoController{
         view.getLblRemover().setEnabled(true);
     }
     
-    public void buscarAluno() throws SQLException, ParseException{
+    
+    /*
+        Método: buscarCadastro
+        Parâmetros: vazio
+        Descrição: busca uma aluno específico ao pedir o id e insere os dados na tela
+    */
+    public void buscarCadastro() throws SQLException, ParseException{
         String idString = (JOptionPane.showInputDialog("Digite o id do aluno:"));
-        int id;
         
         // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
         if(idString != null){
-            id = Integer.parseInt(idString);
+            int id = Integer.parseInt(idString);
+            int posicaoAlunoLista = posicaoAlunoLista(id);
             
-            if(posicaoAlunoLista(id)  != -1){
+            if(posicaoAlunoLista != -1){
                 Aluno aluno = buscarAlunoPorId(id);
-                inserirBuscarDadosAluno(aluno);
+                inserirDadosAluno(aluno);
                 desativarCampos();
                 ativarTodosBotoes();
                 inserirDadosAlunoTabela();
-                view.getTblAluno().addRowSelectionInterval(posicaoAlunoLista(id),posicaoAlunoLista(id));
+                view.getTblAluno().addRowSelectionInterval(posicaoAlunoLista ,posicaoAlunoLista);
            
             }else{
                 JOptionPane.showMessageDialog(null, "Aluno não matriculado!");
@@ -453,6 +531,12 @@ public class GerenciarAlunoController{
         }
     }
     
+    
+    /*
+        Método: posicaoAlunoLista
+        Parâmetros: inteiro
+        Descrição: pesquisa a posição do aluno na lista vindo do banco
+    */
     public int posicaoAlunoLista(int id) throws SQLException, ParseException{
         ArrayList<Aluno> alunos = carregarDadosAluno();
         
@@ -465,6 +549,12 @@ public class GerenciarAlunoController{
         return -1;
     }
     
+    
+    /*
+        Método: buscarAlunoPorId
+        Parâmetros: inteiro
+        Descrição: busca os dados de um aluno de acordo com o id dela
+    */
     public Aluno buscarAlunoPorId(int id) throws SQLException, ParseException{
         //Faz a conexão com o banco 
         Connection conexao;
@@ -476,7 +566,13 @@ public class GerenciarAlunoController{
         return aluno;
     }
     
-    public void inserirBuscarDadosAluno(Aluno aluno){
+    
+    /*
+        Método: inserirDadosAluno
+        Parâmetros: inteiro
+        Descrição: insere os dados do aluno na tela
+    */
+    public void inserirDadosAluno(Aluno aluno){
         view.getTxtIdTurma().setText(Integer.toString(aluno.getTurmaId()));
         view.getTxtNome().setText(aluno.getNome());
         view.getTxtCPF().setText(aluno.getCPF());
@@ -486,9 +582,10 @@ public class GerenciarAlunoController{
         view.getTxtLogradouro().setText(aluno.getEndereco());
         view.getTxtCurso().setText(aluno.getCurso());
         view.getCmbGenero().setSelectedItem(tratarGenero(aluno));
-        view.getCmbCorRaca().setSelectedItem(tratarCorRaca(aluno));
-                
-            //Editar isso aqui    
-        view.getTxtDataNascimento().setText("00/00/0000");
+        view.getCmbCorRaca().setSelectedItem(aluno.getCorRaca());
+        /*Tratando data nascimento*/
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        String dataNascimento = s.format(aluno.getDataNascimento().getTime());
+        view.getTxtDataNascimento().setText(dataNascimento);      
     }
 }

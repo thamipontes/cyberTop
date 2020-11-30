@@ -2,6 +2,7 @@ package controller;
 
 import dao.Conexao;
 import dao.UniversidadeDAO;
+import interfaces.Cadastrar;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -13,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Universidade;
 import telas.GerenciarUniversidade;
 
-public class GerenciarUniversidadeController {
+public class GerenciarUniversidadeController implements Cadastrar{
     private final GerenciarUniversidade view;
     
     public GerenciarUniversidadeController(GerenciarUniversidade view){
@@ -22,6 +23,7 @@ public class GerenciarUniversidadeController {
     }
     
     
+    @Override
     public boolean exibirAlertarCampos(){        
         //Descobre se algum dos campos ficou vazio
         if(view.getTxtNome().getText().equals("")                       ||
@@ -44,14 +46,15 @@ public class GerenciarUniversidadeController {
         // Condição que irá garantir que o retorno do JOptionPane nao seja nulo
         if(idString != null){
             id = Integer.parseInt(idString);
+            int posicaoUniversidadeLista = posicaoUniversidadeLista(id);
             
-            if(posicaoUniversidadeLista(id)  != -1){
+            if( posicaoUniversidadeLista != -1){
                 Universidade universidade = buscarUniversidadePorId(id);
                 inserirBuscarDadosUniversidade(universidade);
                 desativarCampos();
                 //ativarTodosBotoes();
                 inserirDadosUniversidadeTabela();
-                view.getTblUniversidade().addRowSelectionInterval(posicaoUniversidadeLista(id),posicaoUniversidadeLista(id));
+                view.getTblUniversidade().addRowSelectionInterval(posicaoUniversidadeLista, posicaoUniversidadeLista);
            
             }else{
                 JOptionPane.showMessageDialog(null, "Universidade não cadastrada!");
@@ -90,73 +93,80 @@ public class GerenciarUniversidadeController {
         inserirDadosUniversidadeTabela();
     }
     
-    public void editarCadastro() throws ParseException, SQLException{
+    @Override
+    public void editarCadastro(){
         
         if(!exibirAlertarCampos()){
             
-                /*Pega as informações passadas nos campos da tela*/
-            String nome = view.getTxtNome().getText();
-            String estado = view.getCmbEstado().getSelectedItem().toString();
-            String campus = view.getTxtCampus().getText();
-
-            // Criar uma lista de todas as universidades cadastradas
-            ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
-            // Captura qual a linha selecionada da tabela de universidades
-            int linha = view.getTblUniversidade().getSelectedRow();
-            
-            // 
-            int id=0;
-            // Verificação se alguma linha da tabela de universidade foi selecionada
-            if(linha >= 0 && linha < universidadeBanco.size()){
-                // Captura o objeto selecionado na tabela universidade
-                Universidade universidade = universidadeBanco.get(linha);
-                // Captura o id da turma selecionada
-                id = universidade.getId();
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione uma linha valida na tabela!");
-            }
-            
-            
-            /*Instaciando o objeto aluno com os dados recebidos pela tela para atualizar*/
-            Universidade universidade = new Universidade(id, nome, estado, campus);
-
-
-            
-            /*Conexão com o banco de dados para salvar os dados da universidade na tabela e banco de dados*/
-            Connection conexao;        
             try {
-            //Faz a conexão com o banco
-                conexao = new Conexao().getConnection();
-                //Passa a conexão para a classe AlunosDAO que possui o CRUD
-                UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
-               //Chama o método de inserção e atualiza no banco de dados e na tabela           
-                universidadeDAO.update(universidade);
-                //Mensagem de aluno cadastrado com sucesso
-                JOptionPane.showMessageDialog(null, "Universidade editada com sucesso");
-                inserirDadosUniversidadeTabela();
+                
+                /*Pega as informações passadas nos campos da tela*/
+                String nome = view.getTxtNome().getText();
+                String estado = view.getCmbEstado().getSelectedItem().toString();
+                String campus = view.getTxtCampus().getText();
+                
+                // Criar uma lista de todas as universidades cadastradas
+                ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
+                // Captura qual a linha selecionada da tabela de universidades
+                int linha = view.getTblUniversidade().getSelectedRow();
+                
+                //
+                int id=0;
+                // Verificação se alguma linha da tabela de universidade foi selecionada
+                if(linha >= 0 && linha < universidadeBanco.size()){
+                    // Captura o objeto selecionado na tabela universidade
+                    Universidade universidade = universidadeBanco.get(linha);
+                    // Captura o id da turma selecionada
+                    id = universidade.getId();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Selecione uma linha valida na tabela!");
+                }
+                
+                
+                /*Instaciando o objeto aluno com os dados recebidos pela tela para atualizar*/
+                Universidade universidade = new Universidade(id, nome, estado, campus);
+                
+                
+                
+                /*Conexão com o banco de dados para salvar os dados da universidade na tabela e banco de dados*/
+                Connection conexao;
+                try {
+                    //Faz a conexão com o banco
+                    conexao = new Conexao().getConnection();
+                    //Passa a conexão para a classe AlunosDAO que possui o CRUD
+                    UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
+                    //Chama o método de inserção e atualiza no banco de dados e na tabela
+                    universidadeDAO.update(universidade);
+                    //Mensagem de aluno cadastrado com sucesso
+                    JOptionPane.showMessageDialog(null, "Universidade editada com sucesso");
+                    cancelar();
+                    
+                    
+                    //aumentarVagasTurma(aluno.getTurmaId());
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(GerenciarUniversidadeController.class.getName()).log(Level.SEVERE, null, ex);
+                    //Caso dê erro mostra essa tela
+                    JOptionPane.showMessageDialog(null, "Falha ao editar dado no banco");
+                }                
 
-                  //aumentarVagasTurma(aluno.getTurmaId());
-
+                
             } catch (SQLException ex) {
                 Logger.getLogger(GerenciarUniversidadeController.class.getName()).log(Level.SEVERE, null, ex);
-                //Caso dê erro mostra essa tela
-                JOptionPane.showMessageDialog(null, "Falha ao editar dado no banco");
                 }  
-                
-                limparCampos();
-                desativarCampos();
-                cancelar();
         }
     }
     
     //Limpa os campos da tela
+    @Override
     public void limparCampos(){
         view.getTxtCampus().setText("");
         view.getTxtNome().setText("");
         view.getCmbEstado().setSelectedItem("Selecione");
     }
     
-    public void salvarCadastro() throws SQLException{
+    @Override
+    public void salvarCadastro(){
         if(!exibirAlertarCampos()){
             
             String nome = view.getTxtNome().getText();
@@ -171,16 +181,12 @@ public class GerenciarUniversidadeController {
                 UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
                 universidadeDAO.insert(universidade);
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                cancelar();
             } catch (SQLException ex) {
                 Logger.getLogger(GerenciarUniversidadeController.class.getName()).log(Level.SEVERE, null, ex);
                 //Caso dê erro mostra essa tela
                 JOptionPane.showMessageDialog(null, "Falha ao cadastrar dado no banco");
-            }    
-        
-            inserirDadosUniversidadeTabela();
-            limparCampos();
-            configuracaoInicialBotoes();
-            
+            }           
             
         }
     
@@ -203,30 +209,35 @@ public class GerenciarUniversidadeController {
         regraBotoesCadastrar();
     }
     
-    public void removerCadastro() throws SQLException{
+    @Override
+    public void removerCadastro(){
         if(view.getTblUniversidade().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione alguma universidade paara descadastrar.");
         }else{
             
-            ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
-            int linha = view.getTblUniversidade().getSelectedRow();
-            
-            if(linha >= 0 && linha < universidadeBanco.size()){
+            try {
+                ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
+                int linha = view.getTblUniversidade().getSelectedRow();
                 
-                Universidade universidade = universidadeBanco.get(linha);
-                
-                Connection conexao = new Conexao().getConnection();
-                UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
-                
-                universidadeDAO.remove(universidade);
-                
-                inserirDadosUniversidadeTabela();
-                limparCampos();
-                
-                JOptionPane.showMessageDialog(null, "Universidade descadastrada!");
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
+                if(linha >= 0 && linha < universidadeBanco.size()){
+                    
+                    Universidade universidade = universidadeBanco.get(linha);
+                    
+                    Connection conexao = new Conexao().getConnection();
+                    UniversidadeDAO universidadeDAO = new UniversidadeDAO(conexao);
+                    
+                    universidadeDAO.remove(universidade);
+                    
+                    inserirDadosUniversidadeTabela();
+                    limparCampos();
+                    
+                    JOptionPane.showMessageDialog(null, "Universidade descadastrada!");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Selecione uma linha válida!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GerenciarUniversidadeController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
