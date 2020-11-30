@@ -15,14 +15,20 @@ import model.Universidade;
 import telas.GerenciarUniversidade;
 
 public class GerenciarUniversidadeController implements Cadastrar{
+    //Declaração do atributo que possui a tela CadastroTurma
     private final GerenciarUniversidade view;
     
+    //Construtor
     public GerenciarUniversidadeController(GerenciarUniversidade view){
         this.view = view;
         
     }
     
-    
+    /*
+        Método: exibirAlertarCampos
+        Parâmetros: vazio
+        Descrição: Avisa se algum campo esta em branco
+    */
     @Override
     public boolean exibirAlertarCampos(){        
         //Descobre se algum dos campos ficou vazio
@@ -39,6 +45,13 @@ public class GerenciarUniversidadeController implements Cadastrar{
         return false;
     }
     
+    
+    
+    /*
+        Método: buscarCadastro
+        Parâmetros: vazio
+        Descrição: busca uma aluno específico ao pedir o id e insere os dados na tela
+    */
     public void buscarCadastro() throws SQLException, ParseException{
         String idString = (JOptionPane.showInputDialog("Digite o id da universidade:"));
         int id;
@@ -62,6 +75,13 @@ public class GerenciarUniversidadeController implements Cadastrar{
         }
     }
     
+    
+    
+    /*
+        Método: posicaoUniversidadeLista
+        Parâmetros: inteiro
+        Descrição: pesquisa a posição do aluno na lista vindo do banco
+    */
     public int posicaoUniversidadeLista(int id) throws SQLException, ParseException{
         ArrayList<Universidade> universidade = carregarDadosUniversidade();
         
@@ -74,6 +94,13 @@ public class GerenciarUniversidadeController implements Cadastrar{
         return -1;
     }
     
+    
+    
+    /*
+        Método: buscarAlunoPorId
+        Parâmetros: inteiro
+        Descrição: busca os dados de uma universidade de acordo com o id dela
+    */
     public Universidade buscarUniversidadePorId(int id) throws SQLException, ParseException{
         //Faz a conexão com o banco 
         Connection conexao;
@@ -86,13 +113,24 @@ public class GerenciarUniversidadeController implements Cadastrar{
     }
     
     
+    /*
+        Método: cancelar
+        Parâmetros: vazio
+        Descrição: volta a tela como estavam antes   
+    */
     public void cancelar() throws SQLException{
         limparCampos();
         desativarCampos();
         configuracaoInicialBotoes();
         inserirDadosUniversidadeTabela();
     }
+ 
     
+    /*
+        Método: editarCadastro
+        Parâmetros: vazio
+        Descrição: pega os novos dados inseridos na tela e atualiza a turma   
+    */
     @Override
     public void editarCadastro(){
         
@@ -142,8 +180,6 @@ public class GerenciarUniversidadeController implements Cadastrar{
                     cancelar();
                     
                     
-                    //aumentarVagasTurma(aluno.getTurmaId());
-                    
                 } catch (SQLException ex) {
                     Logger.getLogger(GerenciarUniversidadeController.class.getName()).log(Level.SEVERE, null, ex);
                     //Caso dê erro mostra essa tela
@@ -157,7 +193,13 @@ public class GerenciarUniversidadeController implements Cadastrar{
         }
     }
     
-    //Limpa os campos da tela
+    
+    
+    /*
+        Método: limparCampos
+        Parâmetros: vazio
+        Descrição: limpa todos os campos da tela
+    */
     @Override
     public void limparCampos(){
         view.getTxtCampus().setText("");
@@ -165,6 +207,12 @@ public class GerenciarUniversidadeController implements Cadastrar{
         view.getCmbEstado().setSelectedItem("Selecione");
     }
     
+    
+    /*
+        Método: salvarCadastro
+        Parâmetros: vazio
+        Descrição: pega os dados inseridos nos campos da tela e salva no banco de dados    
+    */  
     @Override
     public void salvarCadastro(){
         if(!exibirAlertarCampos()){
@@ -192,6 +240,13 @@ public class GerenciarUniversidadeController implements Cadastrar{
     
     }
     
+    
+    
+    /*
+        Método: botaoEditarCadastro
+        Parâmetros: vazio
+        Descrição: Verifica se tem alguma linha da tabela selecionada para que seja possivel editar
+    */
     public void botaoEditarCadastro(){
         if(view.getTblUniversidade().getSelectedRow() == -1){
             JOptionPane.showMessageDialog(view, "Selecione alguma universidade para editar.");
@@ -202,13 +257,25 @@ public class GerenciarUniversidadeController implements Cadastrar{
         }
     }
     
-    public void botaoSalvarCadastro(){
-        
+    
+    /*
+        Método: botaoCadastrar
+        Parâmetros: vazio
+        Descrição: ativa os campos e seta o padrão dos botões ao se cadastrar uma turma
+    */ 
+    public void botaoSalvarCadastro(){        
         limparCampos();
         ativarCampos();
         regraBotoesCadastrar();
     }
     
+    
+    
+    /*
+        Método: removerCadastro
+        Parâmetros: vazio
+        Descrição: remove a turma do banco de dados  
+    */
     @Override
     public void removerCadastro(){
         if(view.getTblUniversidade().getSelectedRow() == -1){
@@ -243,6 +310,12 @@ public class GerenciarUniversidadeController implements Cadastrar{
         }
     }
     
+    
+    /*
+        Método: regraBotoesBuscar
+        Parâmetros: vazio
+        Descrição: Ativa os botoes principais da tela
+    */
     public void regraBotoesBuscar(){
         view.getLblRemover().setEnabled(true);
         view.getLblRemover().setVisible(true);
@@ -257,6 +330,12 @@ public class GerenciarUniversidadeController implements Cadastrar{
         view.getLblSalvarCadastro().setVisible(false);
     }
     
+    
+    /*
+        Método: regraBotoesEditar
+        Parâmetros: vazio
+        Descrição: Deixa apenas os botoes de salvar e cancelar ativos;
+    */ 
     public void regraBotoesEditar(){
         view.getLblRemover().setVisible(false);
         view.getLblEditar().setVisible(false);
@@ -267,6 +346,13 @@ public class GerenciarUniversidadeController implements Cadastrar{
         view.getLblSalvarCadastro().setVisible(false);
     }
     
+    
+    
+    /*
+        Método: regraBotoesBuscar
+        Parâmetros: vazio
+        Descrição: Segue a regra de negocio para salvar a turma
+    */
     public void regraBotoesCadastrar(){
         view.getLblRemover().setVisible(false);
         view.getLblEditar().setVisible(false);
@@ -278,7 +364,12 @@ public class GerenciarUniversidadeController implements Cadastrar{
         view.getTblUniversidade().setVisible(false);
     }
     
-    // Regra especial para ativar e desativar botoes
+    
+    /*
+        Método: configuracaoInicialBotoes
+        Parâmetros: vazio
+        Descrição: seta o padrão de botões para inicio da tela   
+    */
     public void configuracaoInicialBotoes(){
         view.getLblRemover().setEnabled(false);
         view.getLblRemover().setVisible(true);
@@ -295,7 +386,12 @@ public class GerenciarUniversidadeController implements Cadastrar{
         
     }
     
-    // Ativa todos os campos da tela
+    
+    /*
+        Método: ativarCampos
+        Parâmetros: vazio
+        Descrição: ativa todos os campos de inserção de dados   
+    */
     public void ativarCampos(){
         view.getTxtCampus().setEnabled(true);
         view.getTxtNome().setEnabled(true);
@@ -303,13 +399,25 @@ public class GerenciarUniversidadeController implements Cadastrar{
         
     }
     
-    // Desativa todos os campos da tela
+    /*
+        Método: desativarCampos
+        Parâmetros: vazio
+        Descrição: Desativa todos os campos de inserção de dados   
+    */
     public void desativarCampos(){
         view.getTxtCampus().setEnabled(false);
         view.getTxtNome().setEnabled(false);
         view.getCmbEstado().setEnabled(false);
     }
     
+    
+    
+        
+    /*
+        Método: inserirCampos
+        Parâmetros: vazio
+        Descrição: pega os dados do banco e insere na tela   
+    */ 
     public void inserirCampos() throws SQLException{
         ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
         int linha = view.getTblUniversidade().getSelectedRow();
@@ -329,7 +437,12 @@ public class GerenciarUniversidadeController implements Cadastrar{
     }
     
     
-    // Conecta-se com o banco de dados e retorna uma lista de universidades cadastradas
+    
+    /*
+        Método: carregarDadosUniversidades
+        Parâmetros: vazio
+        Descrição: retorna a lista de universidades que está persistido no banco de dados
+    */
     public ArrayList<Universidade> carregarDadosUniversidade() throws SQLException{
         Connection conexao;
         conexao = new Conexao().getConnection();
@@ -343,7 +456,11 @@ public class GerenciarUniversidadeController implements Cadastrar{
     }
     
     
-    //Insere todas as universidades na tabela
+    /*
+        Método: inserirDadosUniversidadeTabela
+        Parâmetros: vazio
+        Descrição: insere as informações da tabela universidade do banco de dados na tabela da tela
+    */
     public void inserirDadosUniversidadeTabela() throws SQLException{
         ArrayList<Universidade> universidadeBanco = carregarDadosUniversidade();
         
@@ -358,7 +475,14 @@ public class GerenciarUniversidadeController implements Cadastrar{
         view.getTblUniversidade().setModel(modelo);
         
     } 
-
+    
+    
+    
+    /*
+        Método: inserirDadosAluno
+        Parâmetros: inteiro
+        Descrição: insere os dados do aluno na tela
+    */
     private void inserirBuscarDadosUniversidade(Universidade universidade) {
         view.getTxtNome().setText(universidade.getNome());
         view.getTxtCampus().setText(universidade.getCampus());
