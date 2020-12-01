@@ -76,6 +76,7 @@ public class GerenciarUniversidade extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CyberTop - Universidade");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/icone.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

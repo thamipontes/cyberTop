@@ -19,8 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Professor;
 import model.Turmas;
-
-import telas.CadastroProfessor;
 import telas.GerenciarProfessor;
 
 public class GerenciarProfessorController implements Cadastrar{
@@ -77,7 +75,7 @@ public class GerenciarProfessorController implements Cadastrar{
                     //Seta a data no atributo data nascimento
                     dataNascimento.setTime(sdf.parse(dataNascimentoString));
                 } catch (ParseException ex) {
-                    Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GerenciarProfessorController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 /*Tratando o dado Genero*/
@@ -105,7 +103,7 @@ public class GerenciarProfessorController implements Cadastrar{
                     cancelar();
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(CadastroProfessor.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GerenciarProfessorController.class.getName()).log(Level.SEVERE, null, ex);
                     //Caso dê erro mostra essa tela
                     JOptionPane.showMessageDialog(null, "Falha ao cadastrar dado no banco");
                 }
@@ -257,7 +255,7 @@ public class GerenciarProfessorController implements Cadastrar{
                 //Seta a data no atributo data nascimento
                 dataNascimento.setTime(sdf.parse(dataNascimentoString));
             } catch (ParseException ex) {
-                Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GerenciarProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
 
@@ -281,7 +279,7 @@ public class GerenciarProfessorController implements Cadastrar{
                 JOptionPane.showMessageDialog(null, "Professor criado com sucesso");
 
             } catch (SQLException ex) {
-                Logger.getLogger(CadastroProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GerenciarProfessorController.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Falha ao criar professor!");
             }
             // Limpa os campos depois de salvar o aluno

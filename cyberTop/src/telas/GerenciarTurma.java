@@ -72,6 +72,7 @@ public class GerenciarTurma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cyber Top - Turma");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/icone.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

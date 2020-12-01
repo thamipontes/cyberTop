@@ -109,6 +109,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de aluno");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/icone.png")).getImage());
         setResizable(false);
         setSize(new java.awt.Dimension(1200, 620));
         addMouseListener(new java.awt.event.MouseAdapter() {
