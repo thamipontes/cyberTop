@@ -7,6 +7,8 @@ package telas;
 
 import controller.LoginController;
 import java.awt.Color;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -148,9 +150,19 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 370));
 
         mnAjuda.setText("Ajuda");
+        mnAjuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnAjudaMouseClicked(evt);
+            }
+        });
         mnbLogin.add(mnAjuda);
 
         mnSobre.setText("Sobre");
+        mnSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnSobreMouseClicked(evt);
+            }
+        });
         mnbLogin.add(mnSobre);
 
         mnSair.setText("Sair");
@@ -218,6 +230,26 @@ public class Login extends javax.swing.JFrame {
         // Encerra a execução
         System.exit(0);
     }//GEN-LAST:event_mntSairActionPerformed
+
+    private void mnAjudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnAjudaMouseClicked
+        try {
+            // TODO add your handling code here:
+
+            java.awt.Desktop.getDesktop().browse( new java.net.URI( "https://www.facebook.com/Suporte-CyberTop-104782918137245" ) );
+        } catch (URISyntaxException | IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnAjudaMouseClicked
+
+    private void mnSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSobreMouseClicked
+        try {
+            // TODO add your handling code here:
+
+            java.awt.Desktop.getDesktop().browse( new java.net.URI( "https://www.facebook.com/Suporte-CyberTop-104782918137245" ) );
+        } catch (URISyntaxException | IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnSobreMouseClicked
 
     //Getters    
     

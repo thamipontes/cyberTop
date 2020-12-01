@@ -150,6 +150,11 @@ public class Principal extends javax.swing.JFrame {
         mnbLogin.add(mnAjuda);
 
         mnSobre.setText("Sobre");
+        mnSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnSobreMouseClicked(evt);
+            }
+        });
         mnbLogin.add(mnSobre);
 
         mnSair.setText("Sair");
@@ -233,6 +238,16 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mnAjudaMouseClicked
+
+    private void mnSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSobreMouseClicked
+        try {
+            // TODO add your handling code here:
+
+            java.awt.Desktop.getDesktop().browse( new java.net.URI( "https://www.facebook.com/Suporte-CyberTop-104782918137245" ) );
+        } catch (URISyntaxException | IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnSobreMouseClicked
 
     /**
      * @param args the command line arguments
